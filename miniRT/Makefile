@@ -3,9 +3,9 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: suhshin <suhshin@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/26 15:07:00 by suhshin           #+#    #+#              #
+#    Created: 2021/03/26 15:07:00 by najlee            #+#    #+#              #
 #    Updated: 2021/04/06 22:19:27 by najlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -14,6 +14,7 @@ NAME	=	a.out
 
 SRCS	=	\
 			minirt.c
+			vec_operation.c
 
 #
 #

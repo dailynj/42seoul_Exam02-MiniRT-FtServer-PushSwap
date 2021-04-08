@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <mlx.h>
-#include "mlx/mlx.h"
-#include <unistd.h>
+#include "minirt.h"
 
 typedef struct s_data
 {
