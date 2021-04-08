@@ -1,10 +1,14 @@
 #include <stdarg.h>
 #include <unistd.h>
+
 #define BASE "0123456789"
 #define BASEX "0123456789abcdef"
+
 #define max(a, b) (((a) < (b)) ? (b) : (a))
 #define min(a, b) (((a) > (b)) ? (b) : (a))
+
 int print_size;
+
 int numlen(long long num, int base)
 {
     int i = 1;
@@ -97,7 +101,7 @@ int ft_printf(char *format, ...)
                     ft_putnbr(num, 16, BASEX);
             }
             else
-                —i;
+                —-i;
         }
         else
             print_size += write(1, &format[i], 1);
