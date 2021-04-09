@@ -10,17 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
 #include "minirt.h"
 
-typedef struct s_data
-{
-	void 	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;
-
+//원하는 좌표에 해당하는 주소에 color값을 넣는 함수
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -29,22 +22,64 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+// esc key press event
+int	key_hook(int keycode, t_vars *vars)
+{
+	if(keycode == KEY_ESC)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+	return (0);
+}
+
+// close button press event
+int exit_hook()
+{
+	exit(0);
+}
+
 int main()
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_data	image;
+	t_data	image; // 이미지의 정보를 나타내는 변수들을 저장한 구조체
+	t_vars	vars; // mlx포인터와 생성할 window 포인터를 가지는 구조체
+	
+	double aspect_ratio = 16.0 / 9.0;
+	int image_width = 400;
+	int image_height = (image_width / aspect_ratio);
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "Hellow World!");
-	image.img = mlx_new_image(mlx_ptr, 1920, 1080); // 이미지 객체 생성
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, image_width, image_height, "Hellow World!");
+	image.img = mlx_new_image(vars.mlx, image_width, image_height); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
-	for (int i = 0 ; i < 1000 ; i++)
+	
+	// Image
+
+	// Camera
+	double viewport_height = 2.0;
+	double viewport_width = aspect_ratio * viewport_height;
+	double focal_length = 1.0;
+
+	t_vector origin = vec3(0, 0, 0); 
+	t_vector horizontal = vec3(viewport_width, 0, 0);
+	t_vector vertical = vec3(0, viewport_height, 0);
+	t_vector lower_left_corner = minus_two_vector(minus_two_vector(minus_two_vector(origin, div_num_vector(2.0, horizontal)), div_num_vector(2, vertical)), vec3(0, 0, focal_length));
+	// Render
+	for (int j = image_height - 1; j >= 0; --j)
 	{
-		//mlx_pixel_put (mlx_ptr, win_ptr, i, i, 0x00FF0000);
-		my_mlx_pixel_put(&image, i, i, 0x00FF0000);
+		for (int i = 0; i < image_width; ++i)
+		{
+			double u = (double)i / (image_width - 1);
+			double v = (double)j / (image_height - 1);
+			t_ray r = ray(origin, (minus_two_vector(plus_two_vector(plus_two_vector(lower_left_corner, mul_num_vector(u, horizontal)), mul_num_vector(v, vertical)), origin)));
+			t_color pixel_color = ray_color(r);
+			// printf("color : %d\n", write_color(0, pixel_color));
+			my_mlx_pixel_put(&image, i, j, write_color(0, pixel_color));
+		}
 	}
-	mlx_put_image_to_window(mlx_ptr, win_ptr, image.img, 0, 0);
-	mlx_loop(mlx_ptr);
+	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
+	mlx_key_hook(vars.win, key_hook, &vars); // esc key press event
+	mlx_hook(vars.win, 17, 0, exit_hook, 0); // close button press event
+	mlx_loop(vars.mlx);
 	return (0);
 }

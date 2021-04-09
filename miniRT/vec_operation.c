@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
+#include "minirt.h"
+
+// 벡터 생성하기
+t_vector        vec3(double _x, double _y, double _z)
+{
+    t_vector    vector;
+
+    vector.x = _x;
+    vector.y = _y;
+    vector.z = _z;
+    return (vector);
+}
 
 // 벡터의 길이 구하기
 double          vec_length(t_vector vector)

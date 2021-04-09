@@ -13,8 +13,10 @@
 NAME	=	a.out
 
 SRCS	=	\
-			minirt.c
-			vec_operation.c
+			minirt.c \
+			vec_operation.c \
+			ray.c \
+			color.c \
 
 #
 #
