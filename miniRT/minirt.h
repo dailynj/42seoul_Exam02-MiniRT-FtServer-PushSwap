@@ -61,18 +61,18 @@ typedef struct			s_color
 
 // vector_operation.c
 t_vec		vec3(double _x, double _y, double _z);
-double          vec_length(t_vec vector);
-t_vec        plus_two_vector(t_vec vector1, t_vec vector2);
-t_vec        minus_two_vector(t_vec vector1, t_vec vector2);
-t_vec        mul_two_vector(t_vec vector1, t_vec vector2);
-t_vec        mul_num_vector(double t, t_vec vector1);
-t_vec        div_num_vector(double t, t_vec vector1);
-double          dot_product(t_vec vector1, t_vec vector2);
-t_vec        cross_product(t_vec vector1, t_vec vector2);
-t_vec        unit_vec(t_vec vector1);
+double		vec_length(t_vec vector);
+t_vec		plus_two_vector(t_vec vector1, t_vec vector2);
+t_vec		minus_two_vector(t_vec vector1, t_vec vector2);
+t_vec		mul_two_vector(t_vec vector1, t_vec vector2);
+t_vec		mul_num_vector(double t, t_vec vector1);
+t_vec		div_num_vector(double t, t_vec vector1);
+double		vec_dot(t_vec vector1, t_vec vector2);
+t_vec		vec_cross(t_vec vector1, t_vec vector2);
+t_vec		unit_vec(t_vec vector1);
 
 // ray.c
-t_ray			ray(t_vec _orig, t_vec _dir);
+t_ray		ray(t_vec _orig, t_vec _dir);
 t_vec		ray_at(t_ray ray, double t);
 
 //color.c
@@ -86,5 +86,8 @@ int				get_t(int trgb);
 int				get_r(int trgb);
 int				get_g(int trgb);
 int				get_b(int trgb);
+
+//sphere.c
+double			hit_sphere(t_vec center, double radius, t_ray ray);
 
 #endif

@@ -85,13 +85,13 @@ t_vec        div_num_vector(double t, t_vec vector1)
 }
 
 // 두 벡터 내적
-double          dot_product(t_vec vector1, t_vec vector2)
+double          vec_dot(t_vec vector1, t_vec vector2)
 {
     return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
 }
 
 // 두 벡터 외적
-t_vec        cross_product(t_vec vector1, t_vec vector2)
+t_vec        vec_cross(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
 
