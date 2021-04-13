@@ -60,10 +60,10 @@ int main()
 	double viewport_width = aspect_ratio * viewport_height;
 	double focal_length = 1.0;
 
-	t_vector origin = vec3(0, 0, 0); 
-	t_vector horizontal = vec3(viewport_width, 0, 0);
-	t_vector vertical = vec3(0, viewport_height, 0);
-	t_vector lower_left_corner = minus_two_vector(minus_two_vector(minus_two_vector(origin, div_num_vector(2.0, horizontal)), div_num_vector(2, vertical)), vec3(0, 0, focal_length));
+	t_vec origin = vec3(0, 0, 0); 
+	t_vec horizontal = vec3(viewport_width, 0, 0);
+	t_vec vertical = vec3(0, viewport_height, 0);
+	t_vec lower_left_corner = minus_two_vector(minus_two_vector(minus_two_vector(origin, div_num_vector(2.0, horizontal)), div_num_vector(2, vertical)), vec3(0, 0, focal_length));
 	// Render
 	for (int j = image_height - 1; j >= 0; --j)
 	{

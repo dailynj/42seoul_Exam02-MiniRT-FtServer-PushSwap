@@ -23,11 +23,11 @@
 // # include <fcntl.h>
 
 // 벡터 구조체
-typedef struct  s_vector {
+typedef struct  s_vec {
     double      x;
     double      y;
     double      z;
-}               t_vector;
+}               t_vec;
 
 // mlx 구조체
 typedef struct s_vars {
@@ -47,8 +47,8 @@ typedef struct s_data
 
 // ray 구조체
 typedef struct	s_ray{
-	t_vector	orig;
-	t_vector	dir;
+	t_vec	orig;
+	t_vec	dir;
 }				t_ray;
 
 // color 구조체
@@ -60,20 +60,20 @@ typedef struct			s_color
 }						t_color;
 
 // vector_operation.c
-t_vector		vec3(double _x, double _y, double _z);
-double          vec_length(t_vector vector);
-t_vector        plus_two_vector(t_vector vector1, t_vector vector2);
-t_vector        minus_two_vector(t_vector vector1, t_vector vector2);
-t_vector        mul_two_vector(t_vector vector1, t_vector vector2);
-t_vector        mul_num_vector(double t, t_vector vector1);
-t_vector        div_num_vector(double t, t_vector vector1);
-double          dot_product(t_vector vector1, t_vector vector2);
-t_vector        cross_product(t_vector vector1, t_vector vector2);
-t_vector        unit_vector(t_vector vector1);
+t_vec		vec3(double _x, double _y, double _z);
+double          vec_length(t_vec vector);
+t_vec        plus_two_vector(t_vec vector1, t_vec vector2);
+t_vec        minus_two_vector(t_vec vector1, t_vec vector2);
+t_vec        mul_two_vector(t_vec vector1, t_vec vector2);
+t_vec        mul_num_vector(double t, t_vec vector1);
+t_vec        div_num_vector(double t, t_vec vector1);
+double          dot_product(t_vec vector1, t_vec vector2);
+t_vec        cross_product(t_vec vector1, t_vec vector2);
+t_vec        unit_vec(t_vec vector1);
 
 // ray.c
-t_ray			ray(t_vector _orig, t_vector _dir);
-t_vector		ray_at(t_ray ray, double t);
+t_ray			ray(t_vec _orig, t_vec _dir);
+t_vec		ray_at(t_ray ray, double t);
 
 //color.c
 t_color			color(double r, double g, double b);

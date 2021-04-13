@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 20:04:39 by najlee            #+#    #+#             */
-/*   Updated: 2021/04/09 20:04:42 by najlee           ###   ########.fr       */
+/*   Created: 2021/04/13 14:39:58 by najlee            #+#    #+#             */
+/*   Updated: 2021/04/13 14:39:59 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// create ray
-t_ray	ray(t_vec _orig, t_vec _dir)
-{
-	t_ray r;
-
-	r.orig = _orig;
-	r.dir = _dir;
-	return (r);
-}
-
-// orig + t * dir 벡터를만들어주는 함수
-t_vec    ray_at(t_ray ray, double t)
-{
-	t_vec out;
-
-	out.x = ray.orig.x + ray.dir.x * t;
-	out.y = ray.orig.y + ray.dir.y * t;
-	out.z = ray.orig.z + ray.dir.z * t;
-	return (out);
+int hit_sphere(t_vec center, double radius, t_ray r) {
+    vec3 oc = vec(r.origin.x - center.x, r.origin.y - center.y, r.origin.z - center.z);
+    double a = vec_dot(r.dir(), r.dir());
+    double b = 2.0 * vec_dot(oc, r.dir());
+    double c = vec_dot(oc, oc) - radius * radius;
+    double discriminant = b * b - 4 * a * c;
+		if (discriminant > 0)
+				return (1);
+		return (0);
 }

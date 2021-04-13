@@ -31,7 +31,13 @@ int write_color(int t, t_color pixel_color)
 // Image의 크기 및 종횡비, Projection 공간에서 나타나는 Vector에 따른 색상을 결정
 t_color		ray_color(t_ray ray)
 {
-	t_vector unit_direction = unit_vector(ray.dir);
+	if (hit_sphere(point3(0,0,-1), 0.5, ray)) // 추가된 부분!!
+        return color(1, 0, 0);              // 추가된 부분!!
+    t_vec unit_direction = unit_vec(ray.dir());
+    double t = 0.5*(unit_direction.y() + 1.0);
+    return (1.0-t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
+
+	t_vec unit_direction = unit_vec(ray.dir);
     double t = (0.5 * (unit_direction.y + 1.0));
     return (plus_two_color(mul_num_color((1.0 - t), color(0.3, 0.4, 1.0)), mul_num_color(t, color(0.9, 0.9, 1.0))));
 }

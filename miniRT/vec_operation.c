@@ -13,9 +13,9 @@
 #include "minirt.h"
 
 // 벡터 생성하기
-t_vector        vec3(double _x, double _y, double _z)
+t_vec        vec3(double _x, double _y, double _z)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = _x;
     vector.y = _y;
@@ -24,15 +24,15 @@ t_vector        vec3(double _x, double _y, double _z)
 }
 
 // 벡터의 길이 구하기
-double          vec_length(t_vector vector)
+double          vec_length(t_vec vector)
 {
     return (sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2)));
 }
 
 // 두 벡터 더하기
-t_vector        plus_two_vector(t_vector vector1, t_vector vector2)
+t_vec        plus_two_vector(t_vec vector1, t_vec vector2)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x + vector2.x;
     vector.y = vector1.y + vector2.y;
@@ -41,9 +41,9 @@ t_vector        plus_two_vector(t_vector vector1, t_vector vector2)
 }
 
 // 두 벡터 빼기
-t_vector        minus_two_vector(t_vector vector1, t_vector vector2)
+t_vec        minus_two_vector(t_vec vector1, t_vec vector2)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x - vector2.x;
     vector.y = vector1.y - vector2.y;
@@ -52,9 +52,9 @@ t_vector        minus_two_vector(t_vector vector1, t_vector vector2)
 }
 
 // 두 벡터 곱하기
-t_vector        mul_two_vector(t_vector vector1, t_vector vector2)
+t_vec        mul_two_vector(t_vec vector1, t_vec vector2)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x * vector2.x;
     vector.y = vector1.y * vector2.y;
@@ -63,9 +63,9 @@ t_vector        mul_two_vector(t_vector vector1, t_vector vector2)
 }
 
 // 벡터에 상수 곱하기
-t_vector        mul_num_vector(double t, t_vector vector1)
+t_vec        mul_num_vector(double t, t_vec vector1)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x * t;
     vector.y = vector1.y * t;
@@ -74,9 +74,9 @@ t_vector        mul_num_vector(double t, t_vector vector1)
 }
 
 // 벡터에 상수 나누기
-t_vector        div_num_vector(double t, t_vector vector1)
+t_vec        div_num_vector(double t, t_vec vector1)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x * (1/t);
     vector.y = vector1.y * (1/t);
@@ -85,15 +85,15 @@ t_vector        div_num_vector(double t, t_vector vector1)
 }
 
 // 두 벡터 내적
-double          dot_product(t_vector vector1, t_vector vector2)
+double          dot_product(t_vec vector1, t_vec vector2)
 {
     return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
 }
 
 // 두 벡터 외적
-t_vector        cross_product(t_vector vector1, t_vector vector2)
+t_vec        cross_product(t_vec vector1, t_vec vector2)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.y * vector2.z - vector1.z * vector2.y;
     vector.y = vector1.x * vector2.z - vector1.z * vector2.x;
@@ -101,9 +101,9 @@ t_vector        cross_product(t_vector vector1, t_vector vector2)
     return (vector);
 }
 // 단위 벡터
-t_vector        unit_vector(t_vector vector1)
+t_vec        unit_vec(t_vec vector1)
 {
-    t_vector    vector;
+    t_vec    vector;
 
     vector.x = vector1.x / vec_length(vector1);
     vector.y = vector1.y / vec_length(vector1);
