@@ -81,7 +81,7 @@ int main()
 						 lower_left_corner.y + u * horizontal.y + v * vertical.y - origin.y,
 						 lower_left_corner.z + u * horizontal.z + v * vertical.z - origin.z);
 			// t_ray r = ray(origin, (minus_two_vector(plus_two_vector(plus_two_vector(lower_left_corner, mul_num_vector(u, horizontal)), mul_num_vector(v, vertical)), origin)));
-			t_color pixel_color = ray_color(r);
+			t_color pixel_color = color(ray_color(r).x, ray_color(r).y, ray_color(r).z);
 			// printf("color : %d\n", write_color(0, pixel_color));
 			my_mlx_pixel_put(&image, i, j, write_color(0, pixel_color));
 		}

@@ -29,28 +29,34 @@ int write_color(int t, t_color pixel_color)
 }
 
 // Image의 크기 및 종횡비, Projection 공간에서 나타나는 Vector에 따른 색상을 결정
-t_color		ray_color(t_ray ray)
+t_vec   	ray_color(t_ray ray)
 {
 	double	t;
-	t_vec	tmp;
-	t_vec	N;
+	// t_vec	tmp;
+	// t_vec	N;
 	t_vec	unit_direction;
+	t_hit_record	rec;
+
+	rec.tmin = 0;
+	rec.tmax = INFINITY;
 
 	t_vec center = vec3(0, 0, -1); 
-	t = hit_sphere(center, 0.5, ray);
-	if (t > 0.0) // 만약 해가 있다면!
-	{
-		tmp = ray_at(ray, t); // t를 활용해서 tmp 벡터를 구한다.
-		// 왜 -1을 곱해야하지...?
-		N = unit_vec(mul_num_vector(-1.0, vec3(tmp.x - 0, tmp.y - 0, tmp.z - (-1)))); // tmp 벡터의 unit벡터를 구한다!
-		return (mul_num_color(0.5, color(N.x + 1, N.y + 1, N.z + 1)) );
-	}
-	unit_direction = unit_vec(ray.dir);
+	if (hit_sphere(center, 0.5 ,ray, &rec))  //t_vec center, double radius, t_ray ray, t_hit_record rec)
+		return (vec_mul_num(0.5, vec_add(rec.normal, vec3(1.0, 1.0, 1.0))));
+	// t = hit_sphere(center, 0.5, ray, rec);
+	// if (t > 0.0) // 만약 해가 있다면!
+	// {
+	// 	tmp = ray_at(ray, t); // t를 활용해서 tmp 벡터를 구한다.
+	// 	// 왜 -1을 곱해야하지...?
+	// 	N = vec_unit(vec_mul_num(-1.0, vec3(tmp.x - 0, tmp.y - 0, tmp.z - (-1)))); // tmp 벡터의 unit벡터를 구한다!
+	// 	return (color_mul_num(0.5, color(N.x + 1, N.y + 1, N.z + 1)) );
+	// }
+	unit_direction = vec_unit(ray.dir);
 	t = 0.5 * (unit_direction.y + 1.0);
-	return (color(1.0 - 0.5 * t, 1.0 - 0.3 * t, 1.0));
+	return (vec3(1.0 - 0.5 * t, 1.0 - 0.3 * t, 1.0));
 }
 
-t_color     plus_two_color(t_color color1, t_color color2)
+t_color     color_add(t_color color1, t_color color2)
 {
     t_color c;
 
@@ -60,7 +66,7 @@ t_color     plus_two_color(t_color color1, t_color color2)
 	return (c);
 }
 
-t_color     mul_num_color(double t, t_color color)
+t_color     color_mul_num(double t, t_color color)
 {
     t_color c;
 

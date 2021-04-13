@@ -30,7 +30,7 @@ double          vec_length(t_vec vector)
 }
 
 // 두 벡터 더하기
-t_vec        plus_two_vector(t_vec vector1, t_vec vector2)
+t_vec        vec_add(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
 
@@ -41,7 +41,7 @@ t_vec        plus_two_vector(t_vec vector1, t_vec vector2)
 }
 
 // 두 벡터 빼기
-t_vec        minus_two_vector(t_vec vector1, t_vec vector2)
+t_vec        vec_minus(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
 
@@ -52,7 +52,7 @@ t_vec        minus_two_vector(t_vec vector1, t_vec vector2)
 }
 
 // 두 벡터 곱하기
-t_vec        mul_two_vector(t_vec vector1, t_vec vector2)
+t_vec        vec_mul(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
 
@@ -63,7 +63,7 @@ t_vec        mul_two_vector(t_vec vector1, t_vec vector2)
 }
 
 // 벡터에 상수 곱하기
-t_vec        mul_num_vector(double t, t_vec vector1)
+t_vec        vec_mul_num(double t, t_vec vector1)
 {
     t_vec    vector;
 
@@ -74,7 +74,7 @@ t_vec        mul_num_vector(double t, t_vec vector1)
 }
 
 // 벡터에 상수 나누기
-t_vec        div_num_vector(double t, t_vec vector1)
+t_vec        vec_div(double t, t_vec vector1)
 {
     t_vec    vector;
 
@@ -101,7 +101,7 @@ t_vec        vec_cross(t_vec vector1, t_vec vector2)
     return (vector);
 }
 // 단위 벡터
-t_vec        unit_vec(t_vec vector1)
+t_vec        vec_unit(t_vec vector1)
 {
     t_vec    vector;
 
