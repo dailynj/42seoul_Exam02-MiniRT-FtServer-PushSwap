@@ -63,7 +63,11 @@ int main()
 	t_vec origin = vec3(0, 0, 0); 
 	t_vec horizontal = vec3(viewport_width, 0, 0);
 	t_vec vertical = vec3(0, viewport_height, 0);
-	t_vec lower_left_corner = minus_two_vector(minus_two_vector(minus_two_vector(origin, div_num_vector(2.0, horizontal)), div_num_vector(2, vertical)), vec3(0, 0, focal_length));
+	t_vec lower_left_corner = vec3(origin.x + (- horizontal.x / 2.0) + (-vertical.x / 2.0) + (0)
+							       ,origin.y + (- horizontal.y / 2.0) + (-vertical.y / 2.0) + (0) 
+							       ,origin.z + (- horizontal.z / 2.0) + (-vertical.z / 2.0) + (-focal_length));
+	//t_vec lower_left_corner = minus_two_vector(minus_two_vector(minus_two_vector(origin, div_num_vector(2.0, horizontal)), div_num_vector(2, vertical)), vec3(0, 0, focal_length));
+	
 	// Render
 	for (int j = image_height - 1; j >= 0; --j)
 	{
@@ -71,7 +75,12 @@ int main()
 		{
 			double u = (double)i / (image_width - 1);
 			double v = (double)j / (image_height - 1);
-			t_ray r = ray(origin, (minus_two_vector(plus_two_vector(plus_two_vector(lower_left_corner, mul_num_vector(u, horizontal)), mul_num_vector(v, vertical)), origin)));
+			t_ray r;
+			r.orig = vec3(0, 0, 0); // 3차원상의 정점 좌표
+			r.dir = vec3(lower_left_corner.x + u * horizontal.x + v * vertical.x - origin.x,
+						 lower_left_corner.y + u * horizontal.y + v * vertical.y - origin.y,
+						 lower_left_corner.z + u * horizontal.z + v * vertical.z - origin.z);
+			// t_ray r = ray(origin, (minus_two_vector(plus_two_vector(plus_two_vector(lower_left_corner, mul_num_vector(u, horizontal)), mul_num_vector(v, vertical)), origin)));
 			t_color pixel_color = ray_color(r);
 			// printf("color : %d\n", write_color(0, pixel_color));
 			my_mlx_pixel_put(&image, i, j, write_color(0, pixel_color));
