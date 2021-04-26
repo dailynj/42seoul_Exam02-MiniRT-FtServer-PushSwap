@@ -95,7 +95,7 @@ int write_color(int t, t_color pixel_color);
 t_vec   	ray_color(t_ray r);
 
 // sphere.c
-int hit_sphere(t_vec center, double radius, t_ray r);
+double hit_sphere(t_vec center, double radius, t_ray r);
 
 //point.c
 t_vec point3(double x, double y, double z);

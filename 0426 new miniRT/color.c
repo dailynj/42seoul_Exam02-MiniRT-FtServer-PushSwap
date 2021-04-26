@@ -38,7 +38,7 @@ t_vec   	ray_color(t_ray r)
 	}  
 
 	// 해가 없다면~!
-	t_vec unit_direction = vec_unit(r.dir);   
+	t_vec unit_direction = vec_unit(r.dir);
 	t = 0.5 * (unit_direction.y + 1.0);
 	color = vec(1.0 - 0.5 * t, 1.0 - 0.3 * t, 1.0);
   return (color);
