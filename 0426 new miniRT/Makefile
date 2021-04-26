@@ -17,6 +17,9 @@ SRCS	=	\
 			color.c \
 			ray.c \
 			vec.c \
+			sphere.c \
+			point.c \
+
 
 #
 #

@@ -32,6 +32,7 @@
 
 typedef struct s_vec t_vec;
 typedef struct s_vec t_color;
+typedef struct s_vec t_point;
 
 // 벡터 구조체
 struct  s_vec {
@@ -92,4 +93,10 @@ t_vec        vec_unit(t_vec vector1);
 t_color		color(double r, double g, double b);
 int write_color(int t, t_color pixel_color);
 t_vec   	ray_color(t_ray r);
+
+// sphere.c
+int hit_sphere(t_vec center, double radius, t_ray r);
+
+//point.c
+t_vec point3(double x, double y, double z);
 #endif

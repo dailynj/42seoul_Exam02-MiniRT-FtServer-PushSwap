@@ -19,6 +19,10 @@ int write_color(int t, t_color pixel_color)
 // Image의 크기 및 종횡비, Projection 공간에서 나타나는 Vector에 따른 색상을 결정
 t_vec   	ray_color(t_ray r)
 {
+    // 빨간 구 그리기
+    if (hit_sphere(point3(0,0,-1), 0.5, r)) // 추가된 부분!!
+        return color(1, 0, 0);              // 추가된 부분!!
+
 	t_vec unit_direction = vec_unit(r.dir);
     double t = 0.5 * (unit_direction.y + 1.0);
     return vec_add(vec_mul_num(1.0 - t, color(1.0, 1.0, 1.0)), vec_mul_num(t, color(0.5, 0.7, 1.0)));
