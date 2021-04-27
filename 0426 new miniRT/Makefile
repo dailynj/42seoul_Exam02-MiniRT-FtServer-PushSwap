@@ -19,6 +19,7 @@ SRCS	=	\
 			vec.c \
 			sphere.c \
 			point.c \
+			object.c \
 
 
 #

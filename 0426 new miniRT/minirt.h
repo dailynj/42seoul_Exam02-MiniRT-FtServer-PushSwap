@@ -15,6 +15,7 @@
 
 # include "key_codes.h"
 # include "structures.h"
+
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -40,14 +41,21 @@ t_vec       vec_unit(t_vec vector1);
 //color.c
 t_color     color(double r, double g, double b);
 int         write_color(int t, t_color pixel_color);
-t_vec       ray_color(t_ray r, t_sphere *sphere);
+t_vec       ray_color(t_ray r, t_object *world);
 
 // sphere.c
-t_sphere	sphere(t_vec center, double radius);
-t_bool      hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec);
+t_sphere	*sphere(t_point center, double radius);
+t_bool      hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
+t_bool		hit(t_object *world, t_ray *ray, t_hit_record *rec);
+t_bool		hit_obj(t_object *world, t_ray *ray, t_hit_record *rec);
 void        set_face_normal(t_ray *ray, t_hit_record *rec);
 
 //point.c
 t_vec       point3(double x, double y, double z);
+
+//object.c
+t_object	*object(t_object_type type, void *element);
+void		oadd(t_object **list, t_object *new);
+t_object	*olast(t_object *list);
 
 #endif

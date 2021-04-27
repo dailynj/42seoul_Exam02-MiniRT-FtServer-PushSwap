@@ -17,6 +17,8 @@
 #include <mlx.h>
 #include <stdlib.h>
 
+#define SP 0 //지워야 할거...ㅠ
+
 //함수 선언부
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int prtimage();
@@ -59,7 +61,11 @@ int prtimage()
 	double viewport_width = aspect_ratio * viewport_height;
 	double focal_length = 1.0;
 
-	t_sphere sp = sphere(vec(0, 0, -1), 0.5);
+	t_object *world;
+	world = object(SP, sphere(point3(-2, 0, -5), 2)); // world 에 구1 추가
+	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2))); // world 에 구2 추가
+	oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990))); // world 에 구3 추가
+
 	t_vec origin = vec(0, 0, 0); 
 	t_vec horizontal = vec(viewport_width, 0, 0);
 	t_vec vertical = vec(0, viewport_height, 0);
@@ -76,7 +82,7 @@ int prtimage()
 			r.dir = vec(lower_left_corner.x + u*horizontal.x + v*vertical.x - origin.x,
 			lower_left_corner.y + u*horizontal.y + v*vertical.y - origin.y,
 			lower_left_corner.z + u*horizontal.z + v*vertical.z - origin.z);
-			color = ray_color(r, &sp);
+			color = ray_color(r, world);
 			my_mlx_pixel_put(&image, i, image_height - 1 - j, write_color(0, color));
 			//ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
 		}

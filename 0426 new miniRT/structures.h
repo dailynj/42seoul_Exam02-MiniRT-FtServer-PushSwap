@@ -12,13 +12,16 @@
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
 # define FALSE 0
 # define TRUE 1
+# define SP 0
 
 typedef struct s_vec t_vec;
 typedef struct s_vec t_color;
 typedef struct s_vec t_point;
 typedef int			 t_bool;
+typedef int			t_object_type;
 
 // 벡터 구조체
 struct					s_vec {
@@ -65,5 +68,12 @@ typedef struct			s_sphere{
 	double				radius;
 	double				radius2;
 }						t_sphere;
+
+typedef		struct s_object
+{
+	t_object_type	type;
+	void			*element;
+	void			*next;
+}					t_object;
 
 #endif

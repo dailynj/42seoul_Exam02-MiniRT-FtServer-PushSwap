@@ -78,10 +78,8 @@ double				square_hit(void *data, t_vec origin, t_vec u_dir)
 		return (-1.0);
 	lp = vec_plus(origin, vec_scala_multi(u_dir, t));
 	lp = vec_minus(lp, ((t_data_square *)data)->ll);
-	if (vec_dot(lp, vec_to_unit(hori)) <= vec_length(hori) &&
-			vec_dot(lp, hori) >= 0
-		&& vec_dot(lp, vec_to_unit(ver)) <= vec_length(ver) &&
-			vec_dot(lp, ver) >= 0)
+	if (vec_dot(lp, vec_to_unit(hori)) <= vec_length(hori) && vec_dot(lp, hori) >= 0
+		&& vec_dot(lp, vec_to_unit(ver)) <= vec_length(ver) && vec_dot(lp, ver) >= 0)
 		return (t);
 	return (-1.0);
 }
