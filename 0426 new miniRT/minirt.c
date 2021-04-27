@@ -46,7 +46,7 @@ int prtimage()
 
 	// Image
 	double aspect_ratio = 16.0 / 9.0;
-	int image_width = 400;
+	int image_width = 1080;
 	int image_height = (int)((double)image_width / aspect_ratio);
 
 	vars.mlx = mlx_init();
@@ -59,6 +59,7 @@ int prtimage()
 	double viewport_width = aspect_ratio * viewport_height;
 	double focal_length = 1.0;
 
+	t_sphere sp = sphere(vec(0, 0, -1), 0.5);
 	t_vec origin = vec(0, 0, 0); 
 	t_vec horizontal = vec(viewport_width, 0, 0);
 	t_vec vertical = vec(0, viewport_height, 0);
@@ -66,18 +67,6 @@ int prtimage()
 							       ,origin.y + (- horizontal.y / 2.0) + (-vertical.y / 2.0) + (0) 
 							       ,origin.z + (- horizontal.z / 2.0) + (-vertical.z / 2.0) + (-focal_length));
 	
-
-	// for (int i = 0 ; i < image_height - 1 ; ++i)
-	// {
-	// 	for (int j = 0 ; j < image_width - 1; ++j)
-	// 	{
-	// 		double r = (double)(image_width - j) / (image_width - 1);
-	// 		double g = (double)(i) / (image_height - 1);
-	// 		double b = 1;
-	// 		color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) + ((int)(255.999 * b));
-	// 		my_mlx_pixel_put(&image, j, i, color);
-	// 	}	
-	// }
 	for (int j = image_height-1; j >= 0; --j) {
 		for (int i = 0; i < image_width; ++i) {
 			double u = (double)(i) / (image_width-1);
@@ -87,7 +76,7 @@ int prtimage()
 			r.dir = vec(lower_left_corner.x + u*horizontal.x + v*vertical.x - origin.x,
 			lower_left_corner.y + u*horizontal.y + v*vertical.y - origin.y,
 			lower_left_corner.z + u*horizontal.z + v*vertical.z - origin.z);
-			color = ray_color(r);
+			color = ray_color(r, &sp);
 			my_mlx_pixel_put(&image, i, image_height - 1 - j, write_color(0, color));
 			//ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
 		}
