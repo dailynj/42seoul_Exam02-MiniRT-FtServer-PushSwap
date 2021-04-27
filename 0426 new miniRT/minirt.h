@@ -12,67 +12,15 @@
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# define FALSE 0
-# define TRUE 1
 
-#include "key_codes.h"
-#include <stdio.h>
+# include "key_codes.h"
+# include "structures.h"
+# include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-// # include <stdio.h>
 // # include <pthread.h>
 // # include <fcntl.h>
-
-// typedef enum	e_bool {
-// 	FALSE,
-// 	TRUE
-// }				t_bool;
-
-typedef struct s_vec t_vec;
-typedef struct s_vec t_color;
-typedef struct s_vec t_point;
-
-// 벡터 구조체
-struct  s_vec {
-    double      x;
-    double      y;
-    double      z;
-};
-
-// mlx 구조체
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-}				t_vars;
-
-// image data 구조체
-typedef struct s_data
-{
-	void 	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;
-
-// ray 구조체
-typedef struct	s_ray{
-	t_vec	origin;
-	t_vec	dir;
-}				t_ray;
-
-// hit_record 구조체
-typedef struct			s_hit_record
-{
-	t_vec				p;
-	t_vec				normal;
-	double				tmin;
-	double				tmax;
-	double				t;
-	int					front_face;
-}						t_hit_record;
 
 //ray.c
 t_vec	ray_at(t_ray *ray, double t);
@@ -95,7 +43,7 @@ int write_color(int t, t_color pixel_color);
 t_vec   	ray_color(t_ray r);
 
 // sphere.c
-double hit_sphere(t_vec center, double radius, t_ray r);
+t_bool hit_sphere(t_vec center, double radius, t_ray ray, t_hit_record rec);
 
 //point.c
 t_vec point3(double x, double y, double z);
