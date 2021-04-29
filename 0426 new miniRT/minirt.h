@@ -58,4 +58,7 @@ t_object	*object(t_object_type type, void *element);
 void		oadd(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
 
+//light.c
+t_light		*light_point(t_point light_origin, t_color light_color, double bright_ratio);
+
 #endif

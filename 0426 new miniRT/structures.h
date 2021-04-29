@@ -13,6 +13,7 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# define LIGHT_POINT 1
 # define FALSE 0
 # define TRUE 1
 # define SP 0
@@ -61,6 +62,7 @@ typedef struct			s_hit_record
 	double				tmax;
 	double				t;
 	int					front_face;
+	t_color				albedo;
 }						t_hit_record;
 
 typedef struct			s_sphere{
@@ -74,6 +76,14 @@ typedef		struct s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
+	t_color			albedo;
 }					t_object;
+
+typedef struct s_light
+{
+	t_vec		origin;
+	t_color		light_color; 
+	double		bright_ratio;
+}				t_light;
 
 #endif

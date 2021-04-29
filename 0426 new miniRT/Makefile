@@ -20,6 +20,7 @@ SRCS	=	\
 			sphere.c \
 			point.c \
 			object.c \
+			light.c \
 
 
 #
