@@ -1,5 +1,13 @@
 #include "minirt.h"
 
+t_ray   ray(t_point origin, t_vec dir)
+{
+    t_ray ray;
+    ray.origin = origin;
+    ray.dir = vec_unit(dir);
+    return (ray);
+}
+
 t_vec	ray_at(t_ray *ray, double t)
 {
 	t_vec out;
@@ -44,4 +52,3 @@ t_vec				ray_color(t_scene *scene)
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (vec(1.0 - 0.5 * t, 1.0 - 0.3 * t, 1.0));
 }
-

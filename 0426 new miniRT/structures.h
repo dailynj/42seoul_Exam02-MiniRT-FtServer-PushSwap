@@ -111,7 +111,7 @@ typedef struct		s_scene
 	t_camera		camera;
 	t_object		*world;
 	t_object		*light;
-	t_color			ambient; // 8.4에서 설명할 요소
+	t_color			ambient;
 	t_ray			ray;
 	t_hit_record	rec;
 }					t_scene;

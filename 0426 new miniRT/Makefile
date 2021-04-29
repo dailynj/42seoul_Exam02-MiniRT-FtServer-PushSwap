@@ -22,6 +22,7 @@ SRCS	=	\
 			object.c \
 			light.c \
 			scene.c \
+			shadow.c \
 
 #
 #

@@ -96,3 +96,13 @@ t_vec        vec_unit(t_vec vector1)
     vector.z = vector1.z / vec_length(vector1);
     return (vector);
 }
+
+t_vec vec_min(t_vec vec1, t_vec vec2)
+{
+    t_vec    vector;
+
+    vector.x = fmin(vec1.x , vec2.x);
+    vector.y = fmin(vec1.y , vec2.y);
+    vector.z = fmin(vec1.z , vec2.z);
+    return (vector);
+}

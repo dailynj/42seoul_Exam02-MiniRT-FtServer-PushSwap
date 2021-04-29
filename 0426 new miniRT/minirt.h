@@ -24,6 +24,7 @@
 // # include <fcntl.h>
 
 //ray.c
+t_ray   ray(t_point origin, t_vec dir);
 t_vec       ray_at(t_ray *ray, double t);
 t_ray		ray_primary(t_camera *cam, double u, double v);
 t_vec		ray_color(t_scene *scene);
@@ -39,6 +40,7 @@ t_vec       vec_div(double t, t_vec vector1);
 double      vec_dot(t_vec vector1, t_vec vector2);
 t_vec       vec_cross(t_vec vector1, t_vec vector2);
 t_vec       vec_unit(t_vec vector1);
+t_vec vec_min(t_vec vec1, t_vec vec2);
 
 //color.c
 t_color     color(double r, double g, double b);
@@ -70,4 +72,6 @@ t_camera	camera(t_canvas *canvas, t_point origin);
 t_canvas	canvas(int	width, int height);
 t_scene     *scene_init(void);
 
+//shadow.h
+t_bool			in_shadow(t_object *objs, t_ray light_ray, double light_len);
 #endif
