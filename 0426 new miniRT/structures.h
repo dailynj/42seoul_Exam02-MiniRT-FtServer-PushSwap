@@ -53,6 +53,24 @@ typedef struct			s_ray{
 	t_vec				dir;
 }						t_ray;
 
+typedef struct			s_camera
+{
+	t_point	orig;  // 카메라 원점(위치)
+	double		viewport_h; // 뷰포트 세로길이
+	double		viewport_w; // 뷰포트 가로길이
+	t_vec		horizontal; // 수평길이 벡터
+	t_vec		vertical; // 수직길이 벡터
+	double		focal_len; // focal length
+	t_point	left_bottom; // 왼쪽 아래 코너점
+}						t_camera;
+
+typedef struct			s_canvas
+{
+	int		width; //canvas width
+	int		height; //canvas height;
+	double	aspect_ratio; //종횡비
+}						t_canvas;
+
 // hit_record 구조체
 typedef struct			s_hit_record
 {

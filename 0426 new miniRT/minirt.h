@@ -25,6 +25,8 @@
 
 //ray.c
 t_vec       ray_at(t_ray *ray, double t);
+t_ray		ray_primary(t_camera *cam, double u, double v);
+t_vec       ray_color(t_ray r, t_object *world);
 
 //vec.c
 t_vec       vec(double x, double y, double z);
@@ -41,7 +43,6 @@ t_vec       vec_unit(t_vec vector1);
 //color.c
 t_color     color(double r, double g, double b);
 int         write_color(int t, t_color pixel_color);
-t_vec       ray_color(t_ray r, t_object *world);
 
 // sphere.c
 t_sphere	*sphere(t_point center, double radius);
@@ -61,4 +62,9 @@ t_object	*olast(t_object *list);
 //light.c
 t_light		*light_point(t_point light_origin, t_color light_color, double bright_ratio);
 
+//canvas.c
+t_canvas	canvas(int	width, int height);
+
+//camera.c
+t_camera	camera(t_canvas *canvas, t_point origin);
 #endif

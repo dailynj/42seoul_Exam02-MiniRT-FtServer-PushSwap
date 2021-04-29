@@ -21,7 +21,8 @@ SRCS	=	\
 			point.c \
 			object.c \
 			light.c \
-
+			canvas.c \
+			camera.c \
 
 #
 #
