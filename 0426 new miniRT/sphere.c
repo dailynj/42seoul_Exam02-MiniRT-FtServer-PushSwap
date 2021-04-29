@@ -20,6 +20,7 @@ t_bool hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec)
   double half_b = vec_dot(oc, ray->dir);
   double c = vec_dot(oc, oc) - sp->radius * sp->radius;
   double discriminant = half_b * half_b - a * c;
+  
 
   if (discriminant < 0)
     return (FALSE);
@@ -36,6 +37,7 @@ t_bool hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec)
   rec->t = root;
   rec->p = ray_at(ray, root);
   rec->normal = vec_div(sp->radius, vec_minus(rec->p, sp->center));
+  rec->albedo = world->albedo;
 
   set_face_normal(ray, rec);
 

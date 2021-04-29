@@ -48,16 +48,11 @@ int prtimage()
 	double u;
 	double v;
 
-	t_canvas	canv;
-	t_camera	cam;
-	t_ray		ray;
-
-	canv = canvas(1080, 900);
-	cam = camera(&canv, point3(0, 0, 0));
+	t_scene		*scene = scene_init();
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, canv.width, canv.height, "Hellow World!");
-	image.img = mlx_new_image(vars.mlx, canv.width, canv.height); // 이미지 객체 생성
+	vars.win = mlx_new_window(vars.mlx, scene->canvas.width, scene->canvas.height, "Hellow World!");
+	image.img = mlx_new_image(vars.mlx, scene->canvas.width, scene->canvas.height); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 	
 	// // Camera
@@ -65,30 +60,26 @@ int prtimage()
 	// double viewport_width = aspect_ratio * viewport_height;
 	// double focal_length = 1.0;
 
-	t_object *world;
-	world = object(SP, sphere(point3(-2, 0, -5), 2)); // world 에 구1 추가
-	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2))); // world 에 구2 추가
-	oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990))); // world 에 구3 추가
-
-	t_vec origin = vec(0, 0, 0); 
-	t_vec horizontal = vec(cam.viewport_w, 0, 0);
-	t_vec vertical = vec(0, cam.viewport_h, 0);
-	t_vec lower_left_corner = vec(origin.x + (- horizontal.x / 2.0) + (-vertical.x / 2.0) + (0)
-							       ,origin.y + (- horizontal.y / 2.0) + (-vertical.y / 2.0) + (0) 
-							       ,origin.z + (- horizontal.z / 2.0) + (-vertical.z / 2.0) + (-cam.focal_len));
+	// t_vec origin = vec(0, 0, 0); 
+	// t_vec horizontal = vec(scene->camera.viewport_w, 0, 0);
+	// t_vec vertical = vec(0, scene->camera.viewport_h, 0);
+	// t_vec lower_left_corner = vec(origin.x + (- horizontal.x / 2.0) + (-vertical.x / 2.0) + (0)
+	// 						       ,origin.y + (- horizontal.y / 2.0) + (-vertical.y / 2.0) + (0) 
+	// 						       ,origin.z + (- horizontal.z / 2.0) + (-vertical.z / 2.0) + (-scene->camera.focal_len));
 	
-	for (int j = canv.height-1; j >= 0; --j) {
-		for (int i = 0; i < canv.width; ++i) {
-			u = (double)(i) / (canv.width-1);
-			v = (double)(j) / (canv.height-1);
-			ray = ray_primary(&cam, u, v);
+	for (int j = scene->canvas.height-1; j >= 0; --j) {
+		for (int i = 0; i < scene->canvas.width; ++i) {
+			u = (double)(i) / (scene->canvas.width-1);
+			v = (double)(j) / (scene->canvas.height-1);
+			scene->ray = ray_primary(&scene->camera, u, v);
 
-			ray.dir = vec(lower_left_corner.x + u*horizontal.x + v*vertical.x - origin.x,
-			lower_left_corner.y + u*horizontal.y + v*vertical.y - origin.y,
-			lower_left_corner.z + u*horizontal.z + v*vertical.z - origin.z);
-			pixel_color = ray_color(ray, world);
+			// scene->ray.dir = vec(lower_left_corner.x + u*horizontal.x + v*vertical.x - origin.x,
+			// lower_left_corner.y + u*horizontal.y + v*vertical.y - origin.y,
+			// lower_left_corner.z + u*horizontal.z + v*vertical.z - origin.z);
+			pixel_color = ray_color(scene);
+
 			// write_color(pixel_color);
-			my_mlx_pixel_put(&image, i, canv.height - 1 - j, write_color(0, pixel_color));
+			my_mlx_pixel_put(&image, i, scene->canvas.height - 1 - j, write_color(0, pixel_color));
 			//ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
 		}
 	}

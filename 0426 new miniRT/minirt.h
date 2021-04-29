@@ -26,7 +26,7 @@
 //ray.c
 t_vec       ray_at(t_ray *ray, double t);
 t_ray		ray_primary(t_camera *cam, double u, double v);
-t_vec       ray_color(t_ray r, t_object *world);
+t_vec		ray_color(t_scene *scene);
 
 //vec.c
 t_vec       vec(double x, double y, double z);
@@ -55,16 +55,19 @@ void        set_face_normal(t_ray *ray, t_hit_record *rec);
 t_vec       point3(double x, double y, double z);
 
 //object.c
-t_object	*object(t_object_type type, void *element);
+t_object	*object(t_object_type type, void *element, t_color albedo);
 void		oadd(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
 
 //light.c
 t_light		*light_point(t_point light_origin, t_color light_color, double bright_ratio);
+t_color		phong_lighting(t_scene *scene);
+t_color		point_light_get(t_scene *scene, t_light *light);
+t_vec			reflect(t_vec v, t_vec n);
 
-//canvas.c
-t_canvas	canvas(int	width, int height);
-
-//camera.c
+//scene.c
 t_camera	camera(t_canvas *canvas, t_point origin);
+t_canvas	canvas(int	width, int height);
+t_scene     *scene_init(void);
+
 #endif

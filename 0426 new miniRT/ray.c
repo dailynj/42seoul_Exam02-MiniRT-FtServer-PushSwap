@@ -20,19 +20,28 @@ t_ray		ray_primary(t_camera *cam, double u, double v)
 	return (ray);
 }
 
+t_hit_record record_init(void)
+{
+	t_hit_record	record;
+
+	record.tmin = EPSILON;
+	record.tmax = INFINITY;
+	return (record);
+}
+
 // Image의 크기 및 종횡비, Projection 공간에서 나타나는 Vector에 따른 색상을 결정
-t_vec				ray_color(t_ray ray, t_object *world)
+t_vec				ray_color(t_scene *scene)
 {
 	double			t;
-	t_hit_record	rec;
 	
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
+	scene->rec = record_init();
 
-	if (hit(world, &ray, &rec))
-		return (vec_mul_num(0.5, vec_add(rec.normal, color(1, 1, 1))));
+	if (hit(scene->world, &scene->ray, &scene->rec))
+		return (phong_lighting(scene));
+		// return (vec_mul_num(0.5, vec_add(scene->rec.normal, color(1, 1, 1))));
 
-	t_vec unit_direction = vec_unit(ray.dir);
+	t_vec unit_direction = vec_unit(scene->ray.dir);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (vec(1.0 - 0.5 * t, 1.0 - 0.3 * t, 1.0));
 }
+

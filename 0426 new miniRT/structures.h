@@ -14,6 +14,7 @@
 # define STRUCTURES_H
 
 # define LIGHT_POINT 1
+# define EPSILON 1e-6
 # define FALSE 0
 # define TRUE 1
 # define SP 0
@@ -104,4 +105,14 @@ typedef struct s_light
 	double		bright_ratio;
 }				t_light;
 
+typedef struct		s_scene
+{
+	t_canvas		canvas;
+	t_camera		camera;
+	t_object		*world;
+	t_object		*light;
+	t_color			ambient; // 8.4에서 설명할 요소
+	t_ray			ray;
+	t_hit_record	rec;
+}					t_scene;
 #endif
