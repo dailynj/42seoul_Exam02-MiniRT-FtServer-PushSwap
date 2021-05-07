@@ -21,14 +21,7 @@
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int prtimage();
 int exit_hook();
-int	key_hook(int keycode, t_vars *vars);
-
-// main function!
-int main()
-{
-	prtimage();
-	return (0);
-}
+int	key_hook(int keycode, t_cntl *cntl);
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -38,19 +31,19 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int prtimage()
+int main()
 {
 	t_color		pixel_color;
-	t_vars vars;
-	t_data image;
-	double u;
-	double v;
+	t_cntl 		cntl;
+	t_data 		image;
+	double 		u;
+	double 		v;
 
 	t_scene		*scene = scene_init();
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, scene->canvas.width, scene->canvas.height, "Hellow World!");
-	image.img = mlx_new_image(vars.mlx, scene->canvas.width, scene->canvas.height); // 이미지 객체 생성
+	cntl.mlx = mlx_init();
+	cntl.win = mlx_new_window(cntl.mlx, scene->canvas.width, scene->canvas.height, "Hellow World!");
+	image.img = mlx_new_image(cntl.mlx, scene->canvas.width, scene->canvas.height); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 	
 	for (int j = scene->canvas.height-1; j >= 0; --j) {
@@ -63,20 +56,20 @@ int prtimage()
 		}
 	}
 
-	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
-	mlx_key_hook(vars.win, key_hook, &vars); // esc key press event
-	mlx_hook(vars.win, 17, 0, exit_hook, 0); // close button press event
-	mlx_loop(vars.mlx);
+	mlx_put_image_to_window(cntl.mlx, cntl.win, image.img, 0, 0);
+	mlx_key_hook(cntl.win, key_hook, &cntl); // esc key press event
+	mlx_hook(cntl.win, 17, 0, exit_hook, 0); // close button press event
+	mlx_loop(cntl.mlx);
 	return (0);
 }
 
 
 // esc key press event
-int	key_hook(int keycode, t_vars *vars)
+int	key_hook(int keycode, t_cntl *cntl)
 {
 	if(keycode == 53)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(cntl->mlx, cntl->win);
 		exit(0);
 	}
 	return (0);

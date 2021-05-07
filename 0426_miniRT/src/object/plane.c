@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_plane	*plane(t_point point, t_vec normal)
 {

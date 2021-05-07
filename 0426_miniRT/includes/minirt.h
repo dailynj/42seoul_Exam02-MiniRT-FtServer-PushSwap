@@ -13,8 +13,11 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define BUFFER_SIZE 1000
+
 # include "key_codes.h"
 # include "structures.h"
+# include "get_next_line.h"
 
 # include <stdio.h>
 # include <math.h>
@@ -98,4 +101,14 @@ t_bool hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
 t_cylinder  *cylinder(t_point point, t_vec normal, double radius, double height);
 t_bool      hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool      cylinder_discriminant(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
+
+// gnl
+ssize_t	ft_strlen(char *s);
+char	*ft_strdup(char *s1);
+char	*ft_strjoin(char *s1, char *s2);
+ssize_t	ft_nl_index(char *backup);
+void	ft_fill_line(char **backup, char **line, ssize_t nl_line);
+int		ft_final(char **backup, char **line, ssize_t read_len);
+int		get_next_line(int fd, char **line);
+
 #endif

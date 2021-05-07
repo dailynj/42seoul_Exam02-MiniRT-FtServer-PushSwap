@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_square	*square(t_point point, t_vec normal, double length)
 {

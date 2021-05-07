@@ -37,10 +37,10 @@ struct					s_vec {
 };
 
 // mlx 구조체
-typedef struct			s_vars {
+typedef struct			s_cntl {
 	void				*mlx;
 	void				*win;
-}						t_vars;
+}						t_cntl;
 
 // image data 구조체
 typedef struct			s_data

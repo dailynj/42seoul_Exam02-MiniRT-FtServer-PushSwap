@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_triangle	*triangle(t_vec p1, t_vec p2, t_vec p3)
 {

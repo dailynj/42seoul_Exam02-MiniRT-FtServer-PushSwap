@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_cylinder	*cylinder(t_point point, t_vec normal, double radius, double height)
 {

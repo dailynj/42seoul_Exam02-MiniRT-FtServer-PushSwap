@@ -17,17 +17,19 @@ SRCS	=	\
 			src/color.c \
 			src/ray.c \
 			src/vec.c \
-			src/sphere.c \
+			src/object/sphere.c \
 			src/point.c \
 			src/object.c \
 			src/light.c \
 			src/scene.c \
 			src/shadow.c \
-			src/plane.c \
+			src/object/plane.c \
 			src/hit.c \
-			src/square.c \
-			src/triangle.c \
-			src/cylinder.c \
+			src/object/square.c \
+			src/object/triangle.c \
+			src/object/cylinder.c \
+			src/gnl/get_next_line_utils.c \
+			src/gnl/get_next_line.c \
 
 #	
 #
@@ -63,3 +65,6 @@ fclean	: clean
 	rm -rf	$(NAME)
 
 re		: fclean all
+
+test	: re
+		./a.out

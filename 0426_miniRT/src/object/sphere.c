@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_sphere	*sphere(t_point center, double radius)
 {
