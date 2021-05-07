@@ -23,6 +23,9 @@
 # define TR 3
 # define CY 4
 
+# define O_RDONLY 0x0000
+# define BUFFER_SIZE 1000
+
 typedef struct s_vec t_vec;
 typedef struct s_vec t_color;
 typedef struct s_vec t_point;
@@ -40,6 +43,7 @@ struct					s_vec {
 typedef struct			s_cntl {
 	void				*mlx;
 	void				*win;
+	t_scene				*scene;
 }						t_cntl;
 
 // image data 구조체

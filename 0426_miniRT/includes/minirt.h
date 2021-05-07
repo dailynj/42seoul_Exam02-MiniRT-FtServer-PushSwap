@@ -13,8 +13,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define BUFFER_SIZE 1000
-
 # include "key_codes.h"
 # include "structures.h"
 # include "get_next_line.h"
@@ -23,8 +21,14 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
+// #include <mlx.h>
 // # include <pthread.h>
 // # include <fcntl.h>
+
+//minirt.c
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int exit_hook();
+int	key_hook(int keycode, t_cntl *cntl);
 
 //ray.c
 t_ray   ray(t_point origin, t_vec dir);
@@ -111,4 +115,17 @@ void	ft_fill_line(char **backup, char **line, ssize_t nl_line);
 int		ft_final(char **backup, char **line, ssize_t read_len);
 int		get_next_line(int fd, char **line);
 
+
+//parse.c
+int		parsing(t_cntl *cntl, char *rtname);
+int		check_itoa(char **line, int num);
+void	check_dtoa_sub(char **line, double *result, double dec);
+double	check_dtoa(char **line, int num);
+
+//parsing_check.c
+int		parsing_check(t_cntl *cntl, char **line);
+t_bool	parsing_check1(t_cntl *cntl, char **line);
+t_bool	parsing_check2(t_cntl *cntl, char **line);
+t_bool	parsing_check3(t_cntl *cntl, char **line);
+t_bool	parsing_check4(t_cntl *cntl, char **line);
 #endif

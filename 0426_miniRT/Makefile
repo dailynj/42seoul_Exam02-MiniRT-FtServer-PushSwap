@@ -13,7 +13,9 @@
 NAME	=	a.out
 
 SRCS	=	\
-			src/minirt.c \
+			src/mlx.c \
+			src/key_hook.c \
+			src/main.c \
 			src/color.c \
 			src/ray.c \
 			src/vec.c \
@@ -30,6 +32,8 @@ SRCS	=	\
 			src/object/cylinder.c \
 			src/gnl/get_next_line_utils.c \
 			src/gnl/get_next_line.c \
+			src/parsing/parse.c \
+			src/parsing/parsing_check.c \
 
 #	
 #

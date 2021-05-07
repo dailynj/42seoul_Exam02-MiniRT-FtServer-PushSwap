@@ -65,6 +65,7 @@ int		main(int ac, char **av)
 	cntl.mlx = mlx_init();
 	scene_init(&cntl);
 	parsing(&cntl, av[1]);
+
 	cntl_display_resolution(&cntl);
 	set_cntl_win(&cntl);
 	cntl.scene->cam_onair = cntl.scene->cam_list->data;
