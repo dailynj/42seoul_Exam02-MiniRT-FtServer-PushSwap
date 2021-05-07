@@ -133,4 +133,23 @@ typedef struct	s_square
 	double		length;
 }				t_square;
 
+typedef struct	s_triangle
+{
+	t_point	p1;
+	t_point	p2;
+	t_point	p3;
+	t_vec		normal;
+	// t_texture	*texture;
+}		t_triangle;
+
+
+typedef struct      s_cylinder
+{
+    t_point        point;
+    t_vec          normal;
+    double          radius;
+    double          height;
+}                   t_cylinder;
+
+
 #endif

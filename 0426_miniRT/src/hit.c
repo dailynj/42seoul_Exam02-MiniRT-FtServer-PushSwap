@@ -32,13 +32,15 @@ t_bool		hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 		hit_result = hit_plane(world, ray, rec);
 	else if (world->type == SQ)
 		hit_result = hit_square(world, ray, rec);
+	else if (world->type == TR)
+		hit_result = hit_triangle(world, ray, rec);
+	else if (world->type == CY)
+		hit_result = hit_cylinder(world, ray, rec);
 	return (hit_result);
 }
 
 void	set_face_normal(t_ray *ray, t_hit_record *rec)
 {
-	// 광선의 방향벡터와 교점의 법선벡터의 내적이 음수이면 광선은 앞면(객체의)에 hit 한 것이다
 	rec->front_face = vec_dot(ray->dir, rec->normal) < 0;
-	// 광선의 앞면에 hit 면 그대로 아니면 법선을 반대로 뒤집는다. (항상 광선 방향벡터와 법선 벡터를 반대인 상태로 사용하기위해)
 	rec->normal = (rec->front_face) ? rec->normal : vec_mul_num(-1, rec->normal);
 }

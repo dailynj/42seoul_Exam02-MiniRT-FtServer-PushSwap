@@ -9,13 +9,11 @@ t_vec vec(double x, double y, double z)
 		return (out);
 }
 
-// 벡터의 길이 구하기
 double          vec_length(t_vec vector)
 {
     return (sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2)));
 }
 
-// 두 벡터 더하기
 t_vec        vec_add(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
@@ -26,7 +24,6 @@ t_vec        vec_add(t_vec vector1, t_vec vector2)
     return (vector);
 }
 
-// 두 벡터 빼기
 t_vec        vec_minus(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
@@ -37,7 +34,6 @@ t_vec        vec_minus(t_vec vector1, t_vec vector2)
     return (vector);
 }
 
-// 두 벡터 곱하기
 t_vec        vec_mul(t_vec vector1, t_vec vector2)
 {
     t_vec    vector;
@@ -48,7 +44,6 @@ t_vec        vec_mul(t_vec vector1, t_vec vector2)
     return (vector);
 }
 
-// 벡터에 상수 곱하기
 t_vec        vec_mul_num(double t, t_vec vector1)
 {
     t_vec    vector;
@@ -59,7 +54,6 @@ t_vec        vec_mul_num(double t, t_vec vector1)
     return (vector);
 }
 
-// 벡터에 상수 나누기
 t_vec        vec_div(double t, t_vec vector1)
 {
     t_vec    vector;
@@ -70,23 +64,21 @@ t_vec        vec_div(double t, t_vec vector1)
     return (vector);
 }
 
-// 두 벡터 내적
 double          vec_dot(t_vec vector1, t_vec vector2)
 {
     return (vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z);
 }
 
-// 두 벡터 외적
-t_vec        vec_cross(t_vec vector1, t_vec vector2)
+t_vec	vec_cross(t_vec vec, t_vec vec2)
 {
-    t_vec    vector;
+	t_vec	vector;
 
-    vector.x = vector1.y * vector2.z - vector1.z * vector2.y;
-    vector.y = vector1.x * vector2.z - vector1.z * vector2.x;
-    vector.z = vector1.x * vector2.y - vector1.y * vector2.x;
-    return (vector);
+	vector.x = vec.y * vec2.z - vec.z * vec2.y;
+	vector.y = vec.z * vec2.x - vec.x * vec2.z;
+	vector.z = vec.x * vec2.y - vec.y * vec2.x;
+	return (vector);
 }
-// 단위 벡터
+
 t_vec        vec_unit(t_vec vector1)
 {
     t_vec    vector;

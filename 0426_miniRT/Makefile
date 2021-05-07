@@ -26,10 +26,10 @@ SRCS	=	\
 			src/plane.c \
 			src/hit.c \
 			src/square.c \
-			
+			src/triangle.c \
+			src/cylinder.c \
 
-
-#
+#	
 #
 #
 

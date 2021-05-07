@@ -38,7 +38,7 @@ t_vec       vec_mul(t_vec vector1, t_vec vector2);
 t_vec       vec_mul_num(double t, t_vec vector1);
 t_vec       vec_div(double t, t_vec vector1);
 double      vec_dot(t_vec vector1, t_vec vector2);
-t_vec       vec_cross(t_vec vector1, t_vec vector2);
+t_vec	    vec_cross(t_vec vec, t_vec vec2);
 t_vec       vec_unit(t_vec vector1);
 t_vec vec_min(t_vec vec1, t_vec vec2);
 t_vec		vsymmetric(t_point p1, t_point stan);
@@ -79,22 +79,23 @@ void        set_face_normal(t_ray *ray, t_hit_record *rec);
 // sphere.c
 t_sphere	*sphere(t_point center, double radius);
 t_bool      hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
-
+t_bool      sphere_discriminant(t_sphere* sp, t_ray *ray, t_hit_record *rec);
 
 //plane.c
 t_plane	*plane(t_point point, t_vec normal);
 t_bool hit_plane(t_object *world, t_ray *ray, t_hit_record *rec);
 
 //triangle.c
+t_triangle	*triangle(t_vec p1, t_vec p2, t_vec p3);
+t_bool hit_triangle(t_object *world, t_ray *ray, t_hit_record *rec);
+t_bool check_tri(t_vec a, t_vec b, t_vec c, t_vec point);
 
 //square.c
 t_square	*square(t_point point, t_vec normal, double length);
 t_bool hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
-void	hit_square_sub(t_object *world, t_point *p);
-t_bool	is_inside_(t_point p1, t_point p2, t_point p3, t_point p);
-
 
 //cylider.c
-
-
+t_cylinder  *cylinder(t_point point, t_vec normal, double radius, double height);
+t_bool      hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
+t_bool      cylinder_discriminant(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
 #endif

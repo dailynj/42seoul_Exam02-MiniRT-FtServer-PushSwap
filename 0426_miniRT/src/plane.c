@@ -7,7 +7,7 @@ t_plane	*plane(t_point point, t_vec normal)
 	if(!(pl = (t_plane *)malloc(sizeof(t_plane))))
 		return (NULL);
 	pl->point = point;
-	pl->normal = normal;;
+	pl->normal = normal;
 	return (pl);
 }
 
