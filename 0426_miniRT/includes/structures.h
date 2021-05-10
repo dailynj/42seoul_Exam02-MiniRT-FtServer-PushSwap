@@ -39,12 +39,7 @@ struct					s_vec {
     double				z;
 };
 
-// mlx 구조체
-typedef struct			s_cntl {
-	void				*mlx;
-	void				*win;
-	t_scene				*scene;
-}						t_cntl;
+
 
 // image data 구조체
 typedef struct			s_data
@@ -117,6 +112,13 @@ typedef struct		s_scene
 	t_ray			ray;
 	t_hit_record	rec;
 }					t_scene;
+
+// mlx 구조체
+typedef struct			s_cntl {
+	void				*mlx;
+	void				*win;
+	t_scene				*scene;
+}						t_cntl;
 
 typedef struct			s_sphere{
 	t_vec				center;

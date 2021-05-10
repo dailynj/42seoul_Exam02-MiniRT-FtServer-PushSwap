@@ -1,6 +1,6 @@
 #include "../../includes/minirt.h"
 
-static size_t		ft_wordcnt_char(char *s, char d)
+size_t		ft_wordcnt_char(char *s, char d)
 {
 	size_t			cnt;
 	size_t			i;
@@ -21,7 +21,7 @@ static size_t		ft_wordcnt_char(char *s, char d)
 	return (cnt);
 }
 
-static char			*ft_worddup_char(char *s, char d)
+char			*ft_worddup_char(char *s, char d)
 {
 	size_t			len;
 	char			*ptr;

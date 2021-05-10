@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <mlx.h>
 // # include <pthread.h>
 
 // minirt.c
@@ -70,7 +71,8 @@ t_color		point_light_get(t_scene *scene, t_light *light);
 t_vec			reflect(t_vec v, t_vec n);
 
 //scene.c
-t_camera	camera(t_canvas *canvas, t_point origin);
+// t_camera	camera(t_canvas *canvas, t_point origin);
+t_camera	camera(t_point origin);
 t_canvas	canvas(int	width, int height);
 t_scene     *scene_init(void);
 
@@ -121,25 +123,25 @@ int		parsing(t_cntl *cntl, char *rtname);
 int     parsing_all(t_cntl *cntl, char **line);
 
 //parse_RAcl
-int        R_parse(t_cntl *cntl, char **line);
-int        A_parse(t_cntl *cntl, char **line);
-int        c_parse(t_cntl *cntl, char **line);
-int        l_parse(t_cntl *cntl, char **line);
+int        R_parse(t_cntl *cntl, char **one_line);
+int        A_parse(t_cntl *cntl, char **one_line);
+int        c_parse(t_cntl *cntl, char **one_line);
+int        l_parse(t_cntl *cntl, char **one_line);
 
 //parse_object
-int        sp_parse(t_cntl *cntl, char **line);
-int        pl_parse(t_cntl *cntl, char **line);
-int        sq_parse(t_cntl *cntl, char **line);
-int        cy_parse(t_cntl *cntl, char **line);
-int        tr_parse(t_cntl *cntl, char **line);
+int        sp_parse(t_cntl *cntl, char **one_line);
+int        pl_parse(t_cntl *cntl, char **one_line);
+int        sq_parse(t_cntl *cntl, char **one_line);
+int        cy_parse(t_cntl *cntl, char **one_line);
+int        tr_parse(t_cntl *cntl, char **one_line);
 
 // split_char
-static size_t		ft_wordcnt_char(char *s, char d);
-static char			*ft_worddup_char(char *s, char d);
+size_t		        ft_wordcnt_char(char *s, char d);
+char			    *ft_worddup_char(char *s, char d);
 char				**ft_split_char(char *s, char d);
 
 //libft_1.c
-static char			**ft_freeall(char **s);
+char			**ft_freeall(char **s);
 void                *ft_calloc(size_t count, size_t size);
 void                *ft_memset(void *s, int c, size_t n);
 size_t		        ft_strlcpy(char *dst, char *src, size_t dstsize);
@@ -150,7 +152,7 @@ double		        ft_atof(char *str);
 double              ft_pow(double num, int len);
 
 //split_whitespace.c
-static size_t		ft_wordcnt_whitespace(char *s);
-static char			*ft_worddup_whitespace(char *s);
+size_t		        ft_wordcnt_whitespace(char *s);
+char		    	*ft_worddup_whitespace(char *s);
 char				**ft_split_whitespace(char *s);
 #endif

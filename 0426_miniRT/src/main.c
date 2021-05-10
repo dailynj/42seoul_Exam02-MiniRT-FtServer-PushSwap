@@ -1,4 +1,4 @@
-// #include "mlx.h"
+#include "mlx.h"
 #include "../includes/minirt.h"
 
 int	main(int argc, char **argv)
@@ -13,11 +13,13 @@ int	main(int argc, char **argv)
 	}
 	
 	cntl.mlx = mlx_init();
-	if ((cntl.scene = scene_init()) == NULL)
-	{
-		printf("Error : scene_init 에러!\n");
-		return (0);
-	}
+	cntl.scene = scene_init();
+	argv[1] = 0; // 지우기
+	// if ((cntl.scene = scene_init()) == NULL)
+	// {
+	// 	printf("Error : scene_init 에러!\n");
+	// 	return (0);
+	// }
 	// if (parsing(&cntl, argv[1]) == 0)
 	// {
 	// 	printf("Error : Parsing Error!\n");

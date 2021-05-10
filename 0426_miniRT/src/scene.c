@@ -9,7 +9,8 @@ t_canvas	canvas(int	width, int height)
 	return (canvas);
 }
 
-t_camera	camera(t_canvas *canvas, t_point orig)
+// t_camera	camera(t_canvas *canvas, t_point orig)
+t_camera	camera(t_point orig)
 {
 	t_camera	cam;
 	double		focal_len;
@@ -43,7 +44,7 @@ t_scene	*scene_init(void)
 		return (NULL);
 	}
 	scene->canvas = canvas(800, 450);
-	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
+	scene->camera = camera(point3(0, 0, 0));
 	world = object(SP, sphere(point3(-2, 0, -5), 1), color(228.0/256, 60.0/256, 77.0/256));
 	oadd(&world, object(SQ, square(point3(-3, 0, -3), vec(1, 1, 1), 1), color(0, 0, 0)));
 	oadd(&world, object(CY, cylinder(point3(2, 0, -10), vec(0, 1, 0), 1, 3), color(73.0/256, 217.0/256, 220.0/256)));

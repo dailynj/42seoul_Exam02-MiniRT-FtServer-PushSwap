@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	a.out
+NAME	=	a.out  # 최종!! minirt 로 바꾸기!!
 
 SRCS	=	\
 			src/mlx.c \
@@ -19,7 +19,6 @@ SRCS	=	\
 			src/color.c \
 			src/ray.c \
 			src/vec.c \
-			src/object/sphere.c \
 			src/point.c \
 			src/object.c \
 			src/light.c \
@@ -28,21 +27,21 @@ SRCS	=	\
 			src/hit.c \
 			src/libft_1.c \
 			src/libft_2.c \
-
+			\
+			src/object/sphere.c \
 			src/object/plane.c \
 			src/object/square.c \
 			src/object/triangle.c \
 			src/object/cylinder.c \
-
+			\
 			src/gnl/get_next_line_utils.c \
 			src/gnl/get_next_line.c \
-
+			\
 			src/parsing/parse.c \
 			src/parsing/parse_RAcl.c \
 			src/parsing/parse_object.c \
 			src/parsing/split_char.c \
 			src/parsing/split_whitespace.c \
-
 
 #	
 #

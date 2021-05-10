@@ -38,7 +38,7 @@ int		parsing(t_cntl *cntl, char *rtname)
 		return (0);
 	}
 
-	if (parsing_all(&cntl, tmp) == 0)
+	if (parsing_all(cntl, tmp) == 0)
 	{
 		printf("Error : parsing_all error\n");
 		return (0);
@@ -60,33 +60,41 @@ int		parsing(t_cntl *cntl, char *rtname)
 	{
 		if ((one_line = ft_split_whitespace(line[i])) == NULL)
 			return (0);
-		if (one_line[0] == 'R')
-			if (R_parse(&cntl, one_line) == 0)
+		if (one_line[0][0] == 'R'){
+			if (R_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0] == 'A')
-			if (A_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 'A'){
+			if (A_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0] == 'c')
-			if (c_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 'c'){
+			if (c_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0] == 'l')
-			if (l_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 'l'){
+			if (l_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0][0] == 's' && one_line[0][1] == 'p')
-			if (sp_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 's' && one_line[0][1] == 'p'){
+			if (sp_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
-			if (pl_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l'){
+			if (pl_parse(cntl, one_line) == 0)
 				return (0);
 		else if (one_line[0][0] == 's' && one_line[0][1] == 'q')
-			if (sq_parse(&cntl, one_line) == 0)
+			if (sq_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y')
-			if (cy_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y'){
+			if (cy_parse(cntl, one_line) == 0)
 				return (0);
-		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
-			if (tr_parse(&cntl, one_line) == 0)
+		}
+		else if (one_line[0][0] == 't' && one_line[0][1] == 'r'){
+			if (tr_parse(cntl, one_line) == 0)
 				return (0);
+		}
 		else
 		{
 			printf("Error : 존재하지 않는 단어(?) 입니다!\n");

@@ -1,13 +1,6 @@
 #include "../includes/minirt.h"
 
-size_t ft_strlen(char *str){
-	int i = 0;
-	while(str[i])
-		i++;
-	return i;
-}
-
-static char			**ft_freeall(char **s)
+char			**ft_freeall(char **s)
 {
 	unsigned int	i;
 

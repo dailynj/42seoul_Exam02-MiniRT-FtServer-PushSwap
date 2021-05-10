@@ -1,6 +1,6 @@
 #include "../../includes/minirt.h"
 
-static size_t		ft_wordcnt_whitespace(const char *s)
+size_t		ft_wordcnt_whitespace(char *s)
 {
 	size_t			cnt;
 	size_t			i;
@@ -9,10 +9,10 @@ static size_t		ft_wordcnt_whitespace(const char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] != 9 || s[i] != 10 || s[i] != 11|| s[i] != 13|| s[i] != 32)
+		if (s[i] != 9 && s[i] != 10 && s[i] != 11 && s[i] != 12 && s[i] != 13 && s[i] != 32)
 		{
 			cnt++;
-			while (s[i] && (s[i] != 9 || s[i] != 10 || s[i] != 11|| s[i] != 13|| s[i] != 32))
+			while (s[i] && (s[i] != 9 && s[i] != 10 && s[i] != 11 && s[i] != 12 && s[i] != 13 && s[i] != 32))
 				i++;
 		}
 		else
@@ -21,13 +21,13 @@ static size_t		ft_wordcnt_whitespace(const char *s)
 	return (cnt);
 }
 
-static char			*ft_worddup_whitespace(const char *s)
+char			*ft_worddup_whitespace(char *s)
 {
 	size_t			len;
 	char			*ptr;
 
 	len = 0;
-	while (s[len] && (s[len] != 9 || s[len] != 10 || s[len] != 11|| s[len] != 13|| s[len] != 32))
+	while (s[len] && (s[len] != 9 && s[len] != 10 && s[len] != 11&& s[len] != 13&& s[len] != 32))
 		len++;
 	if (!(ptr = (char *)ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
@@ -35,7 +35,7 @@ static char			*ft_worddup_whitespace(const char *s)
 	return (ptr);
 }
 
-char				**ft_split_whitespace(const char *s)
+char				**ft_split_whitespace(char *s)
 {
 	char			**ptr;
 	size_t			len;
@@ -51,11 +51,11 @@ char				**ft_split_whitespace(const char *s)
 	j = 0;
 	while (i < len && s[j])
 	{
-		if (s[j] != 9 || s[j] != 10 || s[j] != 11|| s[j] != 13|| s[j] != 32)
+		if (s[j] != 9 && s[j] != 10 && s[j] != 11&& s[j] != 13&& s[j] != 32)
 		{
 			if (!(ptr[i++] = ft_worddup_whitespace(&(s[j]))))
 				return (ft_freeall(ptr));
-			while (s[j] && ((s[j] != 9 || s[j] != 10 || s[j] != 11|| s[j] != 13|| s[j] != 32)))
+			while (s[j] && ((s[j] != 9 && s[j] != 10 && s[j] != 11&& s[j] != 13&& s[j] != 32)))
 				j++;
 		}
 		else
