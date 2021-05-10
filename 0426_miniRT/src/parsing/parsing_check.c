@@ -18,12 +18,12 @@ int		parsing_check(t_cntl *cntl, char **line)
 int		parsing_check1(t_cntl *cntl, char **line)
 {
 	if (**line == 's' && *(*line + 1) == 'p')
-		obj_add_back(&cntl->scene->world, set_object(SP, set_sphere(point3(
+		oadd(&cntl->scene->world, set_object(SP, set_sphere(point3(
 			check_dtoa(line, 2), check_dtoa(line, 0), check_dtoa(line, 0)),
 			check_dtoa(line, 0), vdivide(color(check_itoa(line, 0), check_itoa(
 			line, 0), check_itoa(line, 0)), 255.0), check_itoa(line, 0))));
 	else if (**line == 'p' && *(*line + 1) == 'l')
-		obj_add_back(&cntl->scene->world, set_object(PL, set_plane(point3(
+		oadd(&cntl->scene->world, set_object(PL, set_plane(point3(
 			check_dtoa(line, 2), check_dtoa(line, 0), check_dtoa(line, 0)),
 			vec3(check_dtoa(line, 0), check_dtoa(line, 0), check_dtoa(line, 0))
 			, vdivide(color(check_itoa(line, 0), check_itoa(line, 0)
@@ -38,7 +38,7 @@ t_bool	parsing_check2(t_cntl *cntl, char **line)
 	t_square	*sq;
 
 	if (**line == 't' && *(*line + 1) == 'r')
-		obj_add_back(&cntl->scene->world, set_object(TR, set_triangle(point3(
+		oadd(&cntl->scene->world, set_object(TR, set_triangle(point3(
 			check_dtoa(line, 2), check_dtoa(line, 0), check_dtoa(line, 0)),
 			point3(check_dtoa(line, 0), check_dtoa(line, 0), check_dtoa(
 			line, 0)), point3(check_dtoa(line, 0), check_dtoa(line, 0),
@@ -53,7 +53,7 @@ t_bool	parsing_check2(t_cntl *cntl, char **line)
 			, 255.0));
 		sq->texture = set_texture(check_itoa(line, 0), sq->color,
 			color(0, 0, 0), 0);
-		obj_add_back(&cntl->scene->world, set_object(SQ, sq));
+		oadd(&cntl->scene->world, set_object(SQ, sq));
 	}
 	else
 		return (0);
@@ -73,7 +73,7 @@ t_bool	parsing_check3(t_cntl *cntl, char **line)
 		cy->color = vdivide(color(check_itoa(line, 0), check_itoa(line, 0)
 			, check_itoa(line, 0)), 255.0);
 		cy->texture = set_texture(SOLID, cy->color, color(0, 0, 0), 0);
-		obj_add_back(&cntl->scene->world, set_object(CY, cy));
+		oadd(&cntl->scene->world, set_object(CY, cy));
 	}
 	else if (**line == 'R')
 		set_viewport(&cntl->scene->canv, check_itoa(line, 1), check_itoa(
@@ -90,12 +90,12 @@ t_bool	parsing_check3(t_cntl *cntl, char **line)
 t_bool	parsing_check4(t_cntl *cntl, char **line)
 {
 	if (**line == 'c')
-		obj_add_back(&cntl->scene->cam_list, set_object(CAM, init_camera(
+		oadd(&cntl->scene->cam_list, set_object(CAM, init_camera(
 			point3(check_dtoa(line, 1), check_dtoa(line, 0), check_dtoa(
 			line, 0)), vec3(check_dtoa(line, 0), check_dtoa(line, 0)
 			, check_dtoa(line, 0)), check_itoa(line, 0))));
 	else if (**line == 'l')
-		obj_add_back(&cntl->scene->world, set_object(LI, set_light(point3(
+		oadd(&cntl->scene->world, set_object(LI, set_light(point3(
 			check_dtoa(line, 1), check_dtoa(line, 0), check_dtoa(line, 0))
 			, check_dtoa(line, 0), vdivide(color(check_itoa(line, 0)
 			, check_itoa(line, 0), check_itoa(line, 0)), 255.0))));
