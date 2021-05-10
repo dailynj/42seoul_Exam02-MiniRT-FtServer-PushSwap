@@ -25,15 +25,24 @@ SRCS	=	\
 			src/light.c \
 			src/scene.c \
 			src/shadow.c \
-			src/object/plane.c \
 			src/hit.c \
+			src/libft_1.c \
+			src/libft_2.c \
+
+			src/object/plane.c \
 			src/object/square.c \
 			src/object/triangle.c \
 			src/object/cylinder.c \
+
 			src/gnl/get_next_line_utils.c \
 			src/gnl/get_next_line.c \
+
 			src/parsing/parse.c \
-			src/parsing/parsing_check.c \
+			src/parsing/parse_RAcl.c \
+			src/parsing/parse_object.c \
+			src/parsing/split_char.c \
+			src/parsing/split_whitespace.c \
+
 
 #	
 #

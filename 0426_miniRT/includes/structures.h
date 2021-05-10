@@ -24,7 +24,7 @@
 # define CY 4
 
 # define O_RDONLY 0x0000
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 4000000
 
 typedef struct s_vec t_vec;
 typedef struct s_vec t_color;
@@ -70,14 +70,14 @@ typedef struct			s_camera
 	t_vec		horizontal; // 수평길이 벡터
 	t_vec		vertical; // 수직길이 벡터
 	double		focal_len; // focal length
-	t_point	left_bottom; // 왼쪽 아래 코너점
+	t_point		left_bottom; // 왼쪽 아래 코너점
 }						t_camera;
 
 typedef struct			s_canvas
 {
 	int		width; //canvas width
 	int		height; //canvas height;
-	double	aspect_ratio; //종횡비
+	// double	aspect_ratio; //종횡비
 }						t_canvas;
 
 // hit_record 구조체

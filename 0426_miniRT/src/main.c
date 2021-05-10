@@ -1,4 +1,4 @@
-#include "mlx.h"
+// #include "mlx.h"
 #include "../includes/minirt.h"
 
 int	main(int argc, char **argv)
@@ -7,12 +7,23 @@ int	main(int argc, char **argv)
 	t_data		image;
 
 	if (argc != 2 && argc != 3)
-		eeroor("인수의 개수가 잘못 들어왔습니다!\n");
+	{
+		printf("Error : Argument Error!\n");
+		return (0);
+	}
+	
 	cntl.mlx = mlx_init();
-	cntl.scene = scene_init();
-	parsing(&cntl, argv[1]);
-
-	//파싱한 이후
+	if ((cntl.scene = scene_init()) == NULL)
+	{
+		printf("Error : scene_init 에러!\n");
+		return (0);
+	}
+	// if (parsing(&cntl, argv[1]) == 0)
+	// {
+	// 	printf("Error : Parsing Error!\n");
+	//	return (0);
+	// }
+	
 	cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "Najeong World!");
 	image.img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
@@ -31,5 +42,6 @@ int	main(int argc, char **argv)
 	mlx_key_hook(cntl.win, key_hook, &cntl); // esc key press event
 	mlx_hook(cntl.win, 17, 0, exit_hook, 0); // close button press event
 	mlx_loop(cntl.mlx);
+	
 	return (0);
 }

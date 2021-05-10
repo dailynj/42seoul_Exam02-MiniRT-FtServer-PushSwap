@@ -1,99 +1,99 @@
 #include "../../includes/minirt.h"
 
+int	cal_cmd_len(char **tmp)
+{
+	int i;
+
+	i = 0;
+	while (tmp[i])
+		i++;
+	return (i);
+}
+
 int		parsing(t_cntl *cntl, char *rtname)
 {
 	int		fd;
-	char	*line;
-	char	*temp;
+	char	line[BUFFER_SIZE];
+	char	**tmp;
+	int		read_len;
 
 	fd = open(rtname, O_RDONLY);
 	if (fd == -1)
-		eerror("Error\nParsing fail\n");
-	while (get_next_line(fd, &line))
 	{
-		temp = line;
-		while (*line == ' ' || *line == '\t')
-			line++;
-		parsing_check(cntl, &line);
-		free(temp);
+		printf("Error : open 에러입니다!\n");
+		return (0);
 	}
-	temp = line;
-	parsing_check(cntl, &line);
-	free(temp);
+	
+	read_len = read(fd, line, BUFFER_SIZE);
+
+	if (read_len == 0)
+	{
+		printf("Error : read_len 에러\n");
+		return (0);
+	}
+
+	if ((tmp = ft_split_char(line, '\n')) == NULL)
+	{
+		printf("Error : split 에러입니다!\n");
+		return (0);
+	}
+
+	if (parsing_all(&cntl, tmp) == 0)
+	{
+		printf("Error : parsing_all error\n");
+		return (0);
+	}
+
+	free(tmp);
 	return (1);
 }
 
-int		check_itoa(char **line, int num)
+ int parsing_all(t_cntl *cntl, char **line)
 {
-	int	result;
-	int	key;
+	int i;
+	int cmd_len;
+	char **one_line;
 
-	result = 0;
-	key = 0;
-	*line = *line + num;
-	while (**line == ' ' || **line == '\t' || **line == '\n' || **line == ',')
-		(*line)++;
-	if (**line == '-')
+	i = 0;
+	cmd_len = cal_cmd_len(line);
+	while (i < cmd_len)
 	{
-		key = 1;
-		(*line)++;
+		if ((one_line = ft_split_whitespace(line[i])) == NULL)
+			return (0);
+		if (one_line[0] == 'R')
+			if (R_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0] == 'A')
+			if (A_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0] == 'c')
+			if (c_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0] == 'l')
+			if (l_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0][0] == 's' && one_line[0][1] == 'p')
+			if (sp_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
+			if (pl_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0][0] == 's' && one_line[0][1] == 'q')
+			if (sq_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y')
+			if (cy_parse(&cntl, one_line) == 0)
+				return (0);
+		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
+			if (tr_parse(&cntl, one_line) == 0)
+				return (0);
+		else
+		{
+			printf("Error : 존재하지 않는 단어(?) 입니다!\n");
+			return (0);
+		}
+		free(one_line);
+		i++;
 	}
-	if (!(**line >= '0' && **line <= '9'))
-		eerror("Error\n파일의 구조가 틀립니다.\n");
-	while (**line >= '0' && **line <= '9')
-	{
-		result = result * 10 + **line - '0';
-		(*line)++;
-	}
-	if (key)
-		return (-result);
-	return (result);
-}
-
-void	check_dtoa_sub(char **line, double *result, double dec)
-{
-	if (!(**line >= '0' && **line <= '9'))
-		eerror("Error\n파일의 구조가 틀립니다.\n");
-	while (**line >= '0' && **line <= '9')
-	{
-		*result = *result * 10 + **line - '0';
-		(*line)++;
-	}
-	if (**line == '.')
-	{
-		if (!(*(*line - 1) >= '0' && *(*line - 1) <= '9'))
-			eerror("Error\n파일의 구조가 틀립니다.\n");
-		(*line)++;
-		if (!(**line >= '0' && **line <= '9'))
-			eerror("Error\n파일의 구조가 틀립니다.\n");
-	}
-	while (**line >= '0' && **line <= '9')
-	{
-		dec *= 10;
-		*result += (**line - '0') / dec;
-		(*line)++;
-	}
-}
-
-double	check_dtoa(char **line, int num)
-{
-	double	result;
-	double	dec;
-	int		key;
-
-	key = 0;
-	result = 0;
-	dec = 1;
-	*line = *line + num;
-	while (**line == ' ' || **line == '\t' || **line == '\n' || **line == ',')
-		(*line)++;
-	if (**line == '-')
-	{
-		(*line)++;
-		key = 1;
-	}
-	check_dtoa_sub(line, &result, dec);
-	if (key)
-		return (-result);
-	return (result);
+	return (1);
 }

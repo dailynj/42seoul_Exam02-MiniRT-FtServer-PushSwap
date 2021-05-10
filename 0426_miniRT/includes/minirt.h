@@ -21,11 +21,10 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-// #include <mlx.h>
+# include <fcntl.h>
 // # include <pthread.h>
-// # include <fcntl.h>
 
-//minirt.c
+// minirt.c
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int exit_hook();
 int	key_hook(int keycode, t_cntl *cntl);
@@ -117,15 +116,41 @@ int		get_next_line(int fd, char **line);
 
 
 //parse.c
+int	    cal_cmd_len(char **tmp);
 int		parsing(t_cntl *cntl, char *rtname);
-int		check_itoa(char **line, int num);
-void	check_dtoa_sub(char **line, double *result, double dec);
-double	check_dtoa(char **line, int num);
+int     parsing_all(t_cntl *cntl, char **line);
 
-//parsing_check.c
-int		parsing_check(t_cntl *cntl, char **line);
-t_bool	parsing_check1(t_cntl *cntl, char **line);
-t_bool	parsing_check2(t_cntl *cntl, char **line);
-t_bool	parsing_check3(t_cntl *cntl, char **line);
-t_bool	parsing_check4(t_cntl *cntl, char **line);
+//parse_RAcl
+int        R_parse(t_cntl *cntl, char **line);
+int        A_parse(t_cntl *cntl, char **line);
+int        c_parse(t_cntl *cntl, char **line);
+int        l_parse(t_cntl *cntl, char **line);
+
+//parse_object
+int        sp_parse(t_cntl *cntl, char **line);
+int        pl_parse(t_cntl *cntl, char **line);
+int        sq_parse(t_cntl *cntl, char **line);
+int        cy_parse(t_cntl *cntl, char **line);
+int        tr_parse(t_cntl *cntl, char **line);
+
+// split_char
+static size_t		ft_wordcnt_char(char *s, char d);
+static char			*ft_worddup_char(char *s, char d);
+char				**ft_split_char(char *s, char d);
+
+//libft_1.c
+static char			**ft_freeall(char **s);
+void                *ft_calloc(size_t count, size_t size);
+void                *ft_memset(void *s, int c, size_t n);
+size_t		        ft_strlcpy(char *dst, char *src, size_t dstsize);
+
+//libft_2.c
+int                 ft_atoi(char *str);
+double		        ft_atof(char *str);
+double              ft_pow(double num, int len);
+
+//split_whitespace.c
+static size_t		ft_wordcnt_whitespace(char *s);
+static char			*ft_worddup_whitespace(char *s);
+char				**ft_split_whitespace(char *s);
 #endif
