@@ -25,8 +25,6 @@ SRCS	=	\
 			src/scene.c \
 			src/shadow.c \
 			src/hit.c \
-			src/libft_1.c \
-			src/libft_2.c \
 			\
 			src/object/sphere.c \
 			src/object/plane.c \
@@ -40,8 +38,11 @@ SRCS	=	\
 			src/parsing/parse.c \
 			src/parsing/parse_RAcl.c \
 			src/parsing/parse_object.c \
-			src/parsing/split_char.c \
-			src/parsing/split_whitespace.c \
+			\
+			src/libft/split_char.c \
+			src/libft/split_whitespace.c \
+			src/libft/libft_1.c \
+			src/libft/libft_2.c \
 
 #	
 #
@@ -79,4 +80,4 @@ fclean	: clean
 re		: fclean all
 
 test	: re
-		./a.out
+		./a.out subject.rt
