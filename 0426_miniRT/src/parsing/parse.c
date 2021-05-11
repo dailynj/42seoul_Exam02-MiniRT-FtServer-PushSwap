@@ -44,7 +44,6 @@ int		parsing(t_cntl *cntl, char *rtname)
 		printf("Error : read_len 에러\n");
 		return (0);
 	}
-
 	if ((tmp = ft_split_char(line, '\n')) == NULL)
 	{
 		printf("Error : split 에러입니다!\n");
@@ -63,6 +62,7 @@ int		parsing(t_cntl *cntl, char *rtname)
 
 int check_parse_num(t_cntl *cntl, char **line)
 {
+	
 	int i;
 	int cmd_len;
 	char **one_line;
@@ -119,29 +119,12 @@ int parsing_all(t_cntl *cntl, char **line, int cmd_len)
 	char **one_line;
 
 	i = 0;
+	
 	while (i < cmd_len)
 	{
 		if ((one_line = ft_split_whitespace(line[i])) == NULL)
 			return (0);
-		if (one_line[0][0] == 'R'){
-			if (R_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 'A'){
-			if (A_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 'c'){
-			if (c_parse(cntl, one_line, _cam) == 0){
-				return (0);
-			}
-			_cam++;
-		}
-		else if (one_line[0][0] == 'l'){
-			if (l_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 's' && one_line[0][1] == 'p'){
+		if (one_line[0][0] == 's' && one_line[0][1] == 'p'){
 			if (sp_parse(cntl, one_line) == 0)
 				return (0);
 		}
@@ -161,6 +144,25 @@ int parsing_all(t_cntl *cntl, char **line, int cmd_len)
 			if (tr_parse(cntl, one_line) == 0)
 				return (0);
 		}
+		else if (one_line[0][0] == 'R'){
+			if (R_parse(cntl, one_line) == 0)
+				return (0);
+		}
+		else if (one_line[0][0] == 'A'){
+			if (A_parse(cntl, one_line) == 0)
+				return (0);
+		}
+		else if (one_line[0][0] == 'c'){
+			if (c_parse(cntl, one_line, _cam) == 0){
+				return (0);
+			}
+			_cam++;
+		}
+		else if (one_line[0][0] == 'l'){
+			if (l_parse(cntl, one_line) == 0)
+				return (0);
+		}
+		
 		free(one_line);
 		i++;
 	}

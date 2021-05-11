@@ -79,5 +79,5 @@ fclean	: clean
 
 re		: fclean all
 
-test	: re
+test	: clean re
 		./a.out subject.rt

@@ -18,7 +18,7 @@ int        A_parse(t_cntl *cntl, char **one_line)
 {
     char **amb;
     double ratio;
-
+    
     if (cal_cmd_len(one_line) != 3)
     {
         printf("Error: A 인수 개수 오류\n");
@@ -45,7 +45,6 @@ int        A_parse(t_cntl *cntl, char **one_line)
 int        c_parse(t_cntl *cntl, char **one_line, int idx)
 {
     char **tmp;
-
     if (cal_cmd_len(one_line) != 4)
     {
         printf("Error: camera 인수 개수 오류\n");
@@ -58,12 +57,10 @@ int        c_parse(t_cntl *cntl, char **one_line, int idx)
     }
     if (ft_atoi(tmp[0]) == -1 || ft_atoi(tmp[1]) == -1 || ft_atoi(tmp[2]) == -1)
     {
-        printf("Error: atoi error!\n");
         return (0);
     }
     cntl->scene->camera_arr[idx].orig = vec(ft_atoi(tmp[0]), ft_atoi(tmp[1]),ft_atoi(tmp[2]));
     free(tmp);
-
     if ((tmp = ft_split_char(one_line[2], ',')) == NULL)
     {
         printf("Error: split 오류!\n");
@@ -76,9 +73,7 @@ int        c_parse(t_cntl *cntl, char **one_line, int idx)
     }
     cntl->scene->camera_arr[idx].normal = vec(ft_atof(tmp[0]), ft_atof(tmp[1]),ft_atof(tmp[2]));
     free(tmp);
-
-    cntl->scene->camera_arr[idx].fov = ft_atoi(tmp[3]);
-
+    cntl->scene->camera_arr[idx].fov = ft_atoi(one_line[3]);
     return (1);
 }
 

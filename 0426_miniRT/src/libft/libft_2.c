@@ -9,17 +9,14 @@ int		ft_atoi(char *str)
 	i = 0;
 	minus = 1;
 	answer = 0;
-	while (ft_isblank(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-')
 	{
-		if (str[i] == '-')
-			minus *= -1;
+		minus *= -1;
 		i++;
 	}
 	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == 1)
+		if (str[i] >= '0' && str[i] <= '9')
 			answer = answer * 10 + str[i] - '0';
 		else
 			break ;
