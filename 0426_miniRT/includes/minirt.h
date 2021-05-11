@@ -13,6 +13,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+// # include "mlx.h"
 # include "key_codes.h"
 # include "structures.h"
 # include "get_next_line.h"
@@ -60,6 +61,7 @@ t_vec       point3(double x, double y, double z);
 //object.c
 t_object	*object(t_object_type type, void *element, t_color albedo);
 void		oadd(t_object **list, t_object *new);
+void		obj_add_back(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
 
 //light.c

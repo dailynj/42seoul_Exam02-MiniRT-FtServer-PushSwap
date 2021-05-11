@@ -61,7 +61,6 @@ int		parsing(t_cntl *cntl, char *rtname)
 
 int check_parse_num(t_cntl *cntl, char **line)
 {
-	
 	int i;
 	int cmd_len;
 	char **one_line;
@@ -109,6 +108,7 @@ int check_parse_num(t_cntl *cntl, char **line)
 	}
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
 		return (0);
+	
 	parsing_all(cntl, line, cmd_len);
 	return (1);
 }
@@ -120,9 +120,9 @@ int parsing_all(t_cntl *cntl, char **line, int cmd_len)
 	char **one_line;
 
 	i = 0;
-	
 	while (i < cmd_len)
 	{
+		
 		if ((one_line = ft_split_whitespace(line[i])) == NULL)
 			return (0);
 		if (one_line[0][0] == 's' && one_line[0][1] == 'p'){
@@ -163,7 +163,6 @@ int parsing_all(t_cntl *cntl, char **line, int cmd_len)
 			if (l_parse(cntl, one_line) == 0)
 				return (0);
 		}
-
 		free(one_line);
 		i++;
 	}

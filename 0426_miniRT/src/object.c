@@ -28,6 +28,16 @@ void		oadd(t_object **list, t_object *new)
 	cur->next = new;
 }
 
+void		obj_add_back(t_object **list, t_object *new)
+{
+	if (*list == 0)
+	{
+		*list = new;
+		return ;
+	}
+	olast(*list)->next = new;
+}
+
 t_object	*olast(t_object *list)
 {
 	if (list == NULL)

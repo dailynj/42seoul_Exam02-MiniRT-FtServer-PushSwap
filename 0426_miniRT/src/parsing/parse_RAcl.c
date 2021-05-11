@@ -117,8 +117,9 @@ int        l_parse(t_cntl *cntl, char **one_line)
     {
         return (0);
     }
-    oadd(&cntl->scene->light, object(LIGHT_POINT, light_point(point3(ft_atoi(tmp[0]), ft_atoi(tmp[1]),ft_atoi(tmp[2])), 
-                color(ft_atoi(tmp2[0])/255.999, ft_atoi(tmp2[1])/255.999,ft_atoi(tmp2[2])/255.999), ft_atof(one_line[2])), color(0, 0, 0)));
+    
+    obj_add_back(&cntl->scene->light, object(LIGHT_POINT, light_point(point3(ft_atoi(tmp[0]), ft_atoi(tmp[1]),ft_atoi(tmp[2])), 
+                color(ft_atoi(tmp2[0])/255.0, ft_atoi(tmp2[1])/255.0,ft_atoi(tmp2[2])/255.0), ft_atof(one_line[2])), color(0, 0, 0)));
 
     free(tmp);
     free(tmp2);
