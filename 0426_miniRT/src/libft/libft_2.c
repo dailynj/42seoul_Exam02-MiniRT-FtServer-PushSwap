@@ -17,7 +17,7 @@ int		ft_atoi(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
-			answer = answer * 10 + str[i] - '0';
+			answer = answer * 10 + (str[i] - '0');
 		else
 			break ;
 		i++;

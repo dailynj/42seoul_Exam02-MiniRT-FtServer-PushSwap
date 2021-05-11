@@ -76,11 +76,9 @@ int        pl_parse(t_cntl *cntl, char **one_line)
     }
     oadd(&cntl->scene->world, object(PL, plane(point3(ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2])), 
             vec(ft_atoi(tmp2[0]), ft_atoi(tmp2[1]), ft_atoi(tmp2[2]))), color(ft_atoi(tmp3[0])/255.99, ft_atoi(tmp3[1])/255.99, ft_atoi(tmp3[2])/255.99)));
-
     free(tmp);
     free(tmp2);
     free(tmp3);
-
     return (1);
 }
 
