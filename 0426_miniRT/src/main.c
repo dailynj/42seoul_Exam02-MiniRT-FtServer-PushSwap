@@ -31,6 +31,12 @@ int	main(int argc, char **argv)
 	printf("\n    width = %lf", cntl.scene->camera_arr[0].viewport_w);
 	printf("\n    height = %lf", cntl.scene->camera_arr[0].viewport_h);
 	printf("\n    focal_len = %lf\n", cntl.scene->camera_arr[0].focal_len);
+
+	cntl.scene->light = cntl.scene->light->next;
+	printf("\nl = xyz(%f, %f, %f)", ((t_light *)(cntl.scene->light->element))->origin.x, ((t_light *)(cntl.scene->light->element))->origin.y, ((t_light *)(cntl.scene->light->element))->origin.z);
+	printf("\n    light_color = (%lf, %lf, %lf)", ((t_light *)(cntl.scene->light->element))->light_color.x, ((t_light *)(cntl.scene->light->element))->light_color.y, ((t_light *)(cntl.scene->light->element))->light_color.z);
+	printf("\n    bright_ratio = %f", ((t_light *)(cntl.scene->light->element))->bright_ratio);
+
 	printf("\n------------------------------------\n");
 	/*
 	cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "Najeong World!");

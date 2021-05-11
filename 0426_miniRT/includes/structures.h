@@ -115,7 +115,7 @@ typedef struct		s_scene
 }					t_scene;
 
 // mlx 구조체
-typedef struct			s_cntl {
+typedef struct			s_cntl { 
 	void				*mlx;
 	void				*win;
 	t_scene				*scene;

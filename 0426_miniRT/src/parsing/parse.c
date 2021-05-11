@@ -55,7 +55,6 @@ int		parsing(t_cntl *cntl, char *rtname)
 		return (0);
 	}
 
-	cntl->scene->rec.tmax = 0;
 	free(tmp);
 	return (1);
 }
@@ -103,9 +102,9 @@ int check_parse_num(t_cntl *cntl, char **line)
 		free(one_line);
 		i++;
 	}
-	if (check[0] != 1 || check[1] != 1)
+	if (check[0] != 1 || check[1] != 1 || check[2] == 0)
 	{
-		printf("Error : R과 A의 개수가 틀립니다!\n");
+		printf("Error : R이나 A이나 c의 개수가 틀립니다!\n");
 		return (0);
 	}
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
@@ -164,7 +163,7 @@ int parsing_all(t_cntl *cntl, char **line, int cmd_len)
 			if (l_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		
+
 		free(one_line);
 		i++;
 	}
