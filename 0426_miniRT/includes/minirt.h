@@ -70,7 +70,7 @@ t_vec		reflect(t_vec v, t_vec n);
 
 //scene.c
 // t_camera	camera(t_canvas *canvas, t_point origin);
-t_camera	camera(t_point origin);
+t_camera	*camera(t_point orig, double aspect_ratio);
 t_canvas	canvas(int	width, int height);
 t_scene     *scene_init(void);
 
@@ -117,13 +117,15 @@ int		    get_next_line(int fd, char **line);
 
 //parse.c
 int	        cal_cmd_len(char **tmp);
+t_bool          check_rt(char *rtname);
 int		    parsing(t_cntl *cntl, char *rtname);
-int         parsing_all(t_cntl *cntl, char **line);
+int check_parse_num(t_cntl *cntl, char **line);
+int parsing_all(t_cntl *cntl, char **line, int cmd_len);
 
 //parse_RAcl
 int         R_parse(t_cntl *cntl, char **one_line);
 int         A_parse(t_cntl *cntl, char **one_line);
-int         c_parse(t_cntl *cntl, char **one_line);
+int         c_parse(t_cntl *cntl, char **one_line, int idx);
 int         l_parse(t_cntl *cntl, char **one_line);
 
 //parse_object

@@ -44,7 +44,7 @@ struct					s_vec {
 // image data 구조체
 typedef struct			s_data
 {
-	void				*img;
+	void				*img; // image 포인터의 배열 **img 로 바꾸기 (시간이 빠르게 걸림)
 	char				*addr;
 	int					bits_per_pixel;
 	int					line_length;
@@ -59,7 +59,9 @@ typedef struct			s_ray{
 
 typedef struct			s_camera
 {
-	t_point	orig;  // 카메라 원점(위치)
+	t_point		orig;  // 카메라 원점(위치)
+	int			fov;
+	t_vec		normal;
 	double		viewport_h; // 뷰포트 세로길이
 	double		viewport_w; // 뷰포트 가로길이
 	t_vec		horizontal; // 수평길이 벡터
@@ -72,7 +74,7 @@ typedef struct			s_canvas
 {
 	int		width; //canvas width
 	int		height; //canvas height;
-	// double	aspect_ratio; //종횡비
+	double	aspect_ratio; //종횡비
 }						t_canvas;
 
 // hit_record 구조체
@@ -105,7 +107,7 @@ typedef struct s_light
 typedef struct		s_scene
 {
 	t_canvas		canvas;
-	t_camera		camera;
+	t_camera		*camera_arr;
 	t_object		*world;
 	t_object		*light;
 	t_color			ambient;

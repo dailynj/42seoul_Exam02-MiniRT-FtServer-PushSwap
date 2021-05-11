@@ -2,20 +2,30 @@
 
 int		ft_atoi(char *str)
 {
+	int	minus;
 	int	answer;
 	int	i;
 
 	i = 0;
+	minus = 1;
 	answer = 0;
-	while (str[i] != '\0')
+	while (ft_isblank(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			answer = answer * 10 + str[i] - '0';
-		else
-			return (-1);
+		if (str[i] == '-')
+			minus *= -1;
 		i++;
 	}
-	return (answer);
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]) == 1)
+			answer = answer * 10 + str[i] - '0';
+		else
+			break ;
+		i++;
+	}
+	return (minus * answer);
 }
 
 double		ft_atof(char *str)
@@ -35,7 +45,7 @@ double		ft_atof(char *str)
 			answer = answer * 10 + str[i] - '0';
         else if (str[i] >= '0' && str[i] <= '9' && dot > 0)
         {
-			answer = answer + (str[i] - '0') / ft_pow(10.0, dot); // 틀림!!
+			answer = answer + (str[i] - '0') / ft_pow(10.0, dot);
             dot++;
         }
 		else

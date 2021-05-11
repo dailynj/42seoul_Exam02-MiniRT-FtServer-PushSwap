@@ -63,4 +63,3 @@ char				**ft_split_char(char *s, char d)
 	}
 	return (ptr);
 }
-
