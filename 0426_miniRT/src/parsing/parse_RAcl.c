@@ -45,6 +45,7 @@ int        A_parse(t_cntl *cntl, char **one_line)
 int        c_parse(t_cntl *cntl, char **one_line, int idx)
 {
     char **tmp;
+
     if (cal_cmd_len(one_line) != 4)
     {
         printf("Error: camera 인수 개수 오류\n");
@@ -73,7 +74,15 @@ int        c_parse(t_cntl *cntl, char **one_line, int idx)
     }
     cntl->scene->camera_arr[idx].normal = vec(ft_atof(tmp[0]), ft_atof(tmp[1]),ft_atof(tmp[2]));
     free(tmp);
-    cntl->scene->camera_arr[idx].fov = ft_atoi(one_line[3]);
+    int fov = ft_atoi(one_line[3]);
+    cntl->scene->camera_arr[idx].viewport_w = 2 * tan(fov/360.0);
+	cntl->scene->camera_arr[idx].viewport_h = cntl->scene->camera_arr[idx].viewport_w / cntl->scene->canvas.aspect_ratio;
+	cntl->scene->camera_arr[idx].focal_len = 1.0; //고정
+	cntl->scene->camera_arr[idx].horizontal = vec_mul_num(1, vec_unit(vec_cross(cntl->scene->camera_arr[idx].normal, vec(0, 1, 0))));
+	cntl->scene->camera_arr[idx].vertical = vec_mul_num(1, vec_unit(vec_cross(cntl->scene->camera_arr[idx].horizontal, cntl->scene->camera_arr[idx].normal)));
+	cntl->scene->camera_arr[idx].left_bottom = vec_minus(vec_minus(vec_minus(cntl->scene->camera_arr[idx].orig, vec_div(2, cntl->scene->camera_arr[idx].horizontal)),
+								vec_div(2, cntl->scene->camera_arr[idx].vertical)), vec(0, 0, 1.0)); //1.0 은 focal len
+	
     return (1);
 }
 

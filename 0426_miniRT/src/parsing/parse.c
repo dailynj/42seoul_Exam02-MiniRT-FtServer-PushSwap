@@ -49,13 +49,13 @@ int		parsing(t_cntl *cntl, char *rtname)
 		printf("Error : split 에러입니다!\n");
 		return (0);
 	}
-
 	if (check_parse_num(cntl, tmp) == 0)
 	{
 		printf("Error : parsing_all error\n");
 		return (0);
 	}
 
+	cntl->scene->rec.tmax = 0;
 	free(tmp);
 	return (1);
 }
@@ -93,6 +93,8 @@ int check_parse_num(t_cntl *cntl, char **line)
 			check[7]++;
 		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
 			check[8]++;
+		else if (one_line[0][0] == '#')
+			;
 		else
 		{
 			printf("Error : 존재하지 않는 단어(?) 입니다!\n");

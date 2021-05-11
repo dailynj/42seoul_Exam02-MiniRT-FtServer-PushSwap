@@ -51,7 +51,7 @@ char				**ft_split_char(char *s, char d)
 	j = 0;
 	while (i < len && s[j])
 	{
-		if (s[j] != d)
+		if (s[j] != d && s[j] != 32 && !(s[j] <= 9 && s[j] <= 13))
 		{
 			if (!(ptr[i++] = ft_worddup_char(&(s[j]), d)))
 				return (ft_freeall(ptr));

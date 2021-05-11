@@ -60,7 +60,6 @@ typedef struct			s_ray{
 typedef struct			s_camera
 {
 	t_point		orig;  // 카메라 원점(위치)
-	int			fov;
 	t_vec		normal;
 	double		viewport_h; // 뷰포트 세로길이
 	double		viewport_w; // 뷰포트 가로길이

@@ -1,35 +1,32 @@
 #include "../includes/minirt.h"
 
-t_canvas	canvas(int	width, int height)
-{
-	t_canvas canvas;
+// t_canvas	canvas(int	width, int height)
+// {
+// 	t_canvas canvas;
 
-	canvas.width = width;
-	canvas.height = height;
-	canvas.aspect_ratio = (double)width / height;
-	return (canvas);
-}
+// 	canvas.width = width;
+// 	canvas.height = height;
+// 	canvas.aspect_ratio = (double)width / height;
+// 	return (canvas);
+// }
 
 // t_camera	camera(t_canvas *canvas, t_point orig)
 t_camera	*camera(t_point orig, double aspect_ratio)
 {
 	t_camera	*cam;
-	double		focal_len;
-	double		viewport_height;
+	// double		viewport_height;
 
 	if(!(cam = (t_camera *)malloc(sizeof(t_camera))))
 		return (NULL);
-	viewport_height = 2.0;
-	focal_len = 1.0; // 고정
+
 	cam->orig = orig;
-	cam->viewport_h = viewport_height;
-	cam->viewport_w = viewport_height * aspect_ratio;
-	cam->focal_len = focal_len;
-	
+	cam->viewport_w = 2.0;
+	cam->viewport_h = cam->viewport_w / aspect_ratio;
+	cam->focal_len = 1.0; //고정
 	cam->horizontal = vec(cam->viewport_w, 0, 0);
 	cam->vertical = vec(0, cam->viewport_h, 0);
 	cam->left_bottom = vec_minus(vec_minus(vec_minus(cam->orig, vec_div(2, cam->horizontal)),
-								vec_div(2, cam->vertical)), vec(0, 0, focal_len));
+								vec_div(2, cam->vertical)), vec(0, 0, 1.0)); //1.0 은 focal len
 	return (cam);
 }
 

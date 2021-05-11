@@ -22,12 +22,16 @@ int	main(int argc, char **argv)
 		printf("Error : Parsing Error!\n");
 		return (0);
 	}
+	printf("------------------------------------\n");
 	printf("\nR = %d, %d, %lf", cntl.scene->canvas.width, cntl.scene->canvas.height, cntl.scene->canvas.aspect_ratio);
 	printf("\nA = color(%lf, %lf, %lf)", cntl.scene->ambient.x, cntl.scene->ambient.y, cntl.scene->ambient.z);
-	printf("\nc = xyz(%lf, %lf, %lf)", cntl.scene->camera_arr[1].orig.x, cntl.scene->camera_arr[1].orig.y, cntl.scene->camera_arr[1].orig.z);
-	printf("\n  = nor(%lf, %lf, %lf)", cntl.scene->camera_arr[1].normal.x, cntl.scene->camera_arr[1].normal.y, cntl.scene->camera_arr[1].normal.z);
-	printf("\n  fov = %d\n", cntl.scene->camera_arr[1].fov);
-	
+	//카메라 0번 만 출력
+	printf("\nc = xyz(%lf, %lf, %lf)", cntl.scene->camera_arr[0].orig.x, cntl.scene->camera_arr[0].orig.y, cntl.scene->camera_arr[0].orig.z);
+	printf("\n  = nor(%lf, %lf, %lf)", cntl.scene->camera_arr[0].normal.x, cntl.scene->camera_arr[0].normal.y, cntl.scene->camera_arr[0].normal.z);
+	printf("\n    width = %lf", cntl.scene->camera_arr[0].viewport_w);
+	printf("\n    height = %lf", cntl.scene->camera_arr[0].viewport_h);
+	printf("\n    focal_len = %lf\n", cntl.scene->camera_arr[0].focal_len);
+	printf("\n------------------------------------\n");
 	/*
 	cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "Najeong World!");
 	image.img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height); // 이미지 객체 생성
