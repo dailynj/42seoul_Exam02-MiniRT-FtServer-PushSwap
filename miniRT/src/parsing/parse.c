@@ -138,12 +138,12 @@ int	parsing_all(t_cntl *cntl, char **line, int cmd_len)
 		}
 		else if (one_line[0][0] == 'R')
 		{
-			if (R_parse(cntl, one_line) == 0)
+			if (r_parse(cntl, one_line) == 0)
 				return (0);
 		}
 		else if (one_line[0][0] == 'A')
 		{
-			if (A_parse(cntl, one_line) == 0)
+			if (a_parse(cntl, one_line) == 0)
 				return (0);
 		}
 		else if (one_line[0][0] == 'c')

@@ -22,7 +22,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 // # include <pthread.h>
 
 // minirt.c
@@ -64,7 +63,8 @@ void		obj_add_back(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
 
 // light.c
-t_light		*light_point(t_point light_origin, t_color light_color, double bright_ratio);
+t_light		*light_point(t_point light_origin, t_color light_color,
+													double bright_ratio);
 t_color		phong_lighting(t_scene *scene);
 t_color		point_light_get(t_scene *scene, t_light *light);
 t_vec		reflect(t_vec v, t_vec n);
@@ -100,7 +100,8 @@ t_square	*square(t_point point, t_vec normal, double length);
 t_bool		hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
 
 // cylider.c
-t_cylinder	*cylinder(t_point point, t_vec normal, double radius, double height);
+t_cylinder	*cylinder(t_point point, t_vec normal, double radius,
+														double height);
 t_bool		hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool		cylinder_dis(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
 
@@ -124,8 +125,8 @@ int			print_error(char *str);
 t_bool		check_rt(char *rtname);
 
 // parse_RAcl
-int			R_parse(t_cntl *cntl, char **one_line);
-int			A_parse(t_cntl *cntl, char **one_line);
+int			r_parse(t_cntl *cntl, char **one_line);
+int			a_parse(t_cntl *cntl, char **one_line);
 int			c_parse(t_cntl *cntl, char **one_line, int idx);
 int			l_parse(t_cntl *cntl, char **one_line);
 

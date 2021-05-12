@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-int	R_parse(t_cntl *cntl, char **one_line)
+int	r_parse(t_cntl *cntl, char **one_line)
 {
 	if (cal_cmd_len(one_line) != 3)
 	{
@@ -26,7 +26,7 @@ int	R_parse(t_cntl *cntl, char **one_line)
 	return (1);
 }
 
-int	A_parse(t_cntl *cntl, char **one_line)
+int	a_parse(t_cntl *cntl, char **one_line)
 {
 	char	**amb;
 	double	ratio;

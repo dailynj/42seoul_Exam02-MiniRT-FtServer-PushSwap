@@ -32,7 +32,6 @@ typedef struct s_vec	t_point;
 typedef int				t_bool;
 typedef int				t_object_type;
 
-// 벡터 구조체
 struct					s_vec
 {
 	double					x;
@@ -40,17 +39,15 @@ struct					s_vec
 	double					z;
 };
 
-// image data 구조체
 typedef struct			s_data
 {
-	void 				*img; // image 포인터의 배열 **img 로 바꾸기 (시간이 빠르게 걸림)
+	void				*img;
 	char				*addr;
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
 }						t_data;
 
-// ray 구조체
 typedef struct			s_ray
 {
 	t_vec				origin;
@@ -59,24 +56,23 @@ typedef struct			s_ray
 
 typedef struct			s_camera
 {
-	t_point 				orig; // 카메라 원점(위치)
+	t_point					orig;
 	t_vec					normal;
-	double 					viewport_h;   // 뷰포트 세로길이
-	double 					viewport_w;   // 뷰포트 가로길이
-	t_vec					horizontal;    // 수평길이 벡터
-	t_vec					vertical;      // 수직길이 벡터
-	double 					focal_len;    // focal length
-	t_point 				left_bottom; // 왼쪽 아래 코너점
+	double					viewport_h;
+	double					viewport_w;
+	t_vec					horizontal;
+	t_vec					vertical;
+	double					focal_len;
+	t_point					left_bottom;
 }						t_camera;
 
 typedef struct			s_canvas
 {
-	int 	width;           // canvas width
-	int 	height;          // canvas height;
-	double	aspect_ratio; //종횡비
+	int		width;
+	int		height;
+	double	aspect_ratio;
 }						t_canvas;
 
-// hit_record 구조체
 typedef struct			s_hit_record
 {
 	t_vec					p;
@@ -114,7 +110,6 @@ typedef struct			s_scene
 	t_hit_record			rec;
 }						t_scene;
 
-// mlx 구조체
 typedef struct			s_cntl
 {
 	void					*mlx;
@@ -148,7 +143,6 @@ typedef struct			s_triangle
 	t_point				p2;
 	t_point				p3;
 	t_vec				normal;
-	// t_texture	*texture;
 }						t_triangle;
 
 typedef struct			s_cylinder
