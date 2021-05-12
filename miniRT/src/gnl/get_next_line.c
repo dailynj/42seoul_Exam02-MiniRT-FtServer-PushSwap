@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 20:53:34 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:52:50 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:43:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int		ft_final(char **backup, char **line, ssize_t read_len)
 
 int		get_next_line(int fd, char **line)
 {
-	char		buf[BUFFER_SIZE + 1];
 	static char	*backup[OPEN_MAX];
 	ssize_t		read_len;
 	ssize_t		nl_line;
 
+	char buf[BUFFER_SIZE + 1];
 	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	while ((read_len = read(fd, buf, BUFFER_SIZE)) > 0)

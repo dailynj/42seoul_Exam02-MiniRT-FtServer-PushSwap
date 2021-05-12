@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:05 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:55:30 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:44:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_freeall(char **s)
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char *ptr;
+	unsigned char	*ptr;
 
 	ptr = s;
 	while (n-- > 0)
@@ -38,7 +38,7 @@ void	*ft_memset(void *s, int c, size_t n)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = malloc(count * size);
 	if (!tmp)

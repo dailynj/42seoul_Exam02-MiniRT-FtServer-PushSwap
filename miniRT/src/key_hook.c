@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:50:12 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:50:12 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:44:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // esc key press event
 int	key_hook(int keycode, t_cntl *cntl)
 {
-	if(keycode == 53)
+	if (keycode == 53)
 	{
 		mlx_destroy_window(cntl->mlx, cntl->win);
 		exit(0);
@@ -24,7 +24,7 @@ int	key_hook(int keycode, t_cntl *cntl)
 }
 
 // close button press event
-int exit_hook()
+int	exit_hook()
 {
 	exit(0);
 }

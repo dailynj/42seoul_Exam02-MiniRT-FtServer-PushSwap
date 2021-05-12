@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:50:36 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:50:37 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:46:11 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ t_object	*olast(t_object *list)
 		list = list->next;
 	return (list);
 }
-

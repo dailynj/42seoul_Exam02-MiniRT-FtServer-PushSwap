@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:09 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 01:09:15 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:44:50 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int		ft_atoi(char *str)
 	return (minus * answer);
 }
 
-double		ft_atof(char *str)
+double	ft_atof(char *str)
 {
 	double	answer;
-	int	i;
-	int	dot;
+	int		i;
+	int		dot;
 
 	i = 0;
 	dot = 0;
@@ -64,7 +64,7 @@ double		ft_atof(char *str)
 	return (answer);
 }
 
-double		ft_pow(double num, int len)
+double	ft_pow(double num, int len)
 {
 	double	answer;
 

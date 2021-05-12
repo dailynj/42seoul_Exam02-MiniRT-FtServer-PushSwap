@@ -6,13 +6,13 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:52:09 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:52:10 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:46:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int		parsing(t_cntl *cntl, char *rtname)
+int	parsing(t_cntl *cntl, char *rtname)
 {
 	int		fd;
 	char	line[BUFFER_SIZE];
@@ -21,16 +21,13 @@ int		parsing(t_cntl *cntl, char *rtname)
 
 	if (check_rt(rtname) == FALSE) // 파일이 .rt로 끝나는것 확인
 		return (0);
-
 	fd = open(rtname, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error : open 에러입니다!\n");
 		return (0);
 	}
-	
 	read_len = read(fd, line, BUFFER_SIZE);
-
 	if (read_len == 0)
 	{
 		printf("Error : read_len 에러\n");
@@ -46,17 +43,16 @@ int		parsing(t_cntl *cntl, char *rtname)
 		printf("Error : parsing_all error\n");
 		return (0);
 	}
-
 	free(tmp);
 	return (1);
 }
 
-int check_parse_num(t_cntl *cntl, char **line)
+int	check_parse_num(t_cntl *cntl, char **line)
 {
-	int i;
-	int cmd_len;
-	char **one_line;
-	int	check[10];
+	int		i;
+	int		cmd_len;
+	char	**one_line;
+	int		check[10];
 
 	i = 0;
 	ft_memset(check, 0, 10);
@@ -100,58 +96,66 @@ int check_parse_num(t_cntl *cntl, char **line)
 	}
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
 		return (0);
-	
 	parsing_all(cntl, line, cmd_len);
 	return (1);
 }
 
-int parsing_all(t_cntl *cntl, char **line, int cmd_len)
+int	parsing_all(t_cntl *cntl, char **line, int cmd_len)
 {
-	int i;
-	int _cam = 0;
-	char **one_line;
+	int		i;
+	char	**one_line;
 
+	int _cam = 0;
 	i = 0;
 	while (i < cmd_len)
 	{
-		
 		if ((one_line = ft_split_whitespace(line[i])) == NULL)
 			return (0);
-		if (one_line[0][0] == 's' && one_line[0][1] == 'p'){
+		if (one_line[0][0] == 's' && one_line[0][1] == 'p')
+		{
 			if (sp_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l'){
+		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
+		{
 			if (pl_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 's' && one_line[0][1] == 'q'){
+		else if (one_line[0][0] == 's' && one_line[0][1] == 'q')
+		{
 			if (sq_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y'){
+		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y')
+		{
 			if (cy_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 't' && one_line[0][1] == 'r'){
+		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
+		{
 			if (tr_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'R'){
+		else if (one_line[0][0] == 'R')
+		{
 			if (R_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'A'){
+		else if (one_line[0][0] == 'A')
+		{
 			if (A_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'c'){
-			if (c_parse(cntl, one_line, _cam) == 0){
+		else if (one_line[0][0] == 'c')
+		{
+			if (c_parse(cntl, one_line, _cam) == 0)
+			{
 				return (0);
 			}
 			_cam++;
 		}
-		else if (one_line[0][0] == 'l'){
+		else if (one_line[0][0] == 'l')
+		{
 			if (l_parse(cntl, one_line) == 0)
 				return (0);
 		}

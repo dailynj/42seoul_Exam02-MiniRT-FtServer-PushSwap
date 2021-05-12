@@ -6,27 +6,27 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:23 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 01:03:03 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:45:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-size_t		ft_wordcnt_whitespace(char *s)
+size_t	ft_wordcnt_whitespace(char *s)
 {
-	size_t			cnt;
-	size_t			i;
+	size_t	cnt;
+	size_t	i;
 
 	cnt = 0;
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] != 9 && s[i] != 10 && s[i] != 11 && s[i] != 12
-				&& s[i] != 13 && s[i] != 32)
+		if (s[i] != 9 && s[i] != 10 && s[i] != 11 && s[i] != 12 && s[i] != 13 && s[i] != 32)
 		{
 			cnt++;
-			while (s[i] && (s[i] != 9 && s[i] != 10 && s[i] != 11
-				&& s[i] != 12 && s[i] != 13 && s[i] != 32))
+			while (s[i] &&
+					(s[i] != 9 && s[i] != 10 && s[i] != 11 && s[i] != 12 &&
+					s[i] != 13 && s[i] != 32))
 				i++;
 		}
 		else
@@ -35,14 +35,14 @@ size_t		ft_wordcnt_whitespace(char *s)
 	return (cnt);
 }
 
-char		*ft_worddup_whitespace(char *s)
+char	*ft_worddup_whitespace(char *s)
 {
-	size_t			len;
-	char			*ptr;
+	size_t	len;
+	char	*ptr;
 
 	len = 0;
-	while (s[len] && (s[len] != 9 && s[len] != 10 && s[len] != 11
-					&& s[len] != 13 && s[len] != 32))
+	while (s[len] &&
+			(s[len] != 9 && s[len] != 10 && s[len] != 11 && s[len] != 13 && s[len] != 32))
 		len++;
 	if (!(ptr = (char *)ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
@@ -50,12 +50,12 @@ char		*ft_worddup_whitespace(char *s)
 	return (ptr);
 }
 
-char		**ft_split_whitespace(char *s)
+char	**ft_split_whitespace(char *s)
 {
-	char			**ptr;
-	size_t			len;
-	size_t			i;
-	size_t			j;
+	char	**ptr;
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
 	if (!s)
 		return (NULL);

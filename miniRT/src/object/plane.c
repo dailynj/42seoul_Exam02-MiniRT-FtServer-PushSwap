@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:36 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:51:36 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:45:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 t_plane	*plane(t_point point, t_vec normal)
 {
-	t_plane *pl;
+	t_plane	*pl;
 
-	if(!(pl = (t_plane *)malloc(sizeof(t_plane))))
+	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
 		return (NULL);
 	pl->point = point;
 	pl->normal = normal;
 	return (pl);
 }
 
-t_bool hit_plane(t_object *world, t_ray *ray, t_hit_record *rec)
+t_bool	hit_plane(t_object *world, t_ray *ray, t_hit_record *rec)
 {
-  t_plane *pl;
-  double	denom;
-	double root;
+	t_plane	*pl;
+	double	denom;
+	double	root;
 	t_vec	to_hit;
 
 	pl = world->element;
@@ -38,13 +38,10 @@ t_bool hit_plane(t_object *world, t_ray *ray, t_hit_record *rec)
 	root = vec_dot(to_hit, pl->normal) / denom;
 	if (root < rec->tmin || root > rec->tmax)
 		return (FALSE);
-
-  rec->t = root;
-  rec->p = ray_at(ray, root);
-  rec->albedo = world->albedo;
-  rec->normal = pl->normal;
-
+	rec->t = root;
+	rec->p = ray_at(ray, root);
+	rec->albedo = world->albedo;
+	rec->normal = pl->normal;
 	set_face_normal(ray, rec);
-  
 	return (TRUE);
 }

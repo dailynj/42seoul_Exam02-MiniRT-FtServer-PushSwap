@@ -6,13 +6,13 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:18 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 00:54:19 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/12 21:44:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-size_t		ft_wordcnt_char(char *s, char d)
+size_t	ft_wordcnt_char(char *s, char d)
 {
 	size_t	cnt;
 	size_t	i;
@@ -33,7 +33,7 @@ size_t		ft_wordcnt_char(char *s, char d)
 	return (cnt);
 }
 
-char		*ft_worddup_char(char *s, char d)
+char	*ft_worddup_char(char *s, char d)
 {
 	size_t	len;
 	char	*ptr;
@@ -47,7 +47,7 @@ char		*ft_worddup_char(char *s, char d)
 	return (ptr);
 }
 
-char		**ft_split_char(char *s, char d)
+char	**ft_split_char(char *s, char d)
 {
 	char	**ptr;
 	size_t	len;
