@@ -68,8 +68,8 @@ typedef struct			s_camera
 
 typedef struct			s_canvas
 {
-	int		width;
-	int		height;
+	double		width;
+	double		height;
 	double	aspect_ratio;
 }						t_canvas;
 

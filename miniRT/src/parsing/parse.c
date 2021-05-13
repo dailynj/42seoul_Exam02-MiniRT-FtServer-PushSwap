@@ -31,7 +31,7 @@ int	parsing(t_cntl *cntl, char *rtname)
 		print_error("Error : split 에러입니다!\n");
 	if (check_parse_num(cntl, tmp) == 0)
 		print_error("Error : parsing_all error\n");
-	free(tmp);
+	ft_freeall(tmp);
 	return (1);
 }
 
@@ -71,7 +71,7 @@ int	check_parse_num(t_cntl *cntl, char **line)
 			;
 		else
 			print_error("Error : 존재하지 않는 단어(?) 입니다!\n");
-		free(one_line);
+		ft_freeall(one_line);
 		i++;
 	}
 	if (check[0] != 1 || check[1] != 1 || check[2] == 0)
@@ -142,7 +142,7 @@ int	parsing_all(t_cntl *cntl, char **line, int cmd_len)
 			if (l_parse(cntl, one_line) == 0)
 				return (0);
 		}
-		free(one_line);
+		ft_freeall(one_line);
 		i++;
 	}
 	return (1);

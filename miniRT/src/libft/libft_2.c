@@ -17,10 +17,12 @@ int		ft_atoi(char *str)
 	int	minus;
 	int	answer;
 	int	i;
+	char *str_t;
 
 	i = 0;
 	minus = 1;
 	answer = 0;
+	str_t = str;
 	if (str[i] == '-')
 	{
 		minus *= -1;
@@ -31,7 +33,10 @@ int		ft_atoi(char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			answer = answer * 10 + (str[i] - '0');
 		else
-			print_error("Error : ft_atoi 에러\n");
+		{
+			printf("Error : %s ft_atoi 에러\n", str_t);
+			exit(1);
+		}
 		i++;
 	}
 	return (minus * answer);
@@ -41,11 +46,21 @@ double	ft_atof(char *str)
 {
 	double	answer;
 	int		i;
+	int		minus;
 	int		dot;
 
 	i = 0;
+	minus = 1;
 	dot = 0;
 	answer = 0.0;
+	char *str_t;
+
+	str_t = str;
+	if (str[i] == '-')
+	{
+		minus *= -1;
+		i++;
+	}
 	while (str[i] != '\0')
 	{
 		if (str[i] == '.')
@@ -58,10 +73,13 @@ double	ft_atof(char *str)
 			dot++;
 		}
 		else
-			print_error("Error : ft_atoi 에러\n");
+		{
+			printf("Error : %s ft_atof 에러\n", str_t);
+			exit(1);
+		}
 		i++;
 	}
-	return (answer);
+	return (minus * answer);
 }
 
 double	ft_pow(double num, int len)
