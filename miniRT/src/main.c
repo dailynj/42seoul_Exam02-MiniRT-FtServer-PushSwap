@@ -38,15 +38,18 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	printf("------------------------------------\n");
+	printf("<resolution>\n");
 	printf("\nR = %d, %d, %lf",
 			cntl.scene->canvas.width,
 			cntl.scene->canvas.height,
 			cntl.scene->canvas.aspect_ratio);
+	printf("<ambient>\n");
 	printf("\nA = color(%lf, %lf, %lf)",
 			cntl.scene->ambient.x,
 			cntl.scene->ambient.y,
 			cntl.scene->ambient.z);
 	//카메라 0번 만 출력
+	printf("<camera>\n");
 	printf("\nc = xyz(%lf, %lf, %lf)",
 			cntl.scene->camera_arr[0].orig.x,
 			cntl.scene->camera_arr[0].orig.y,
@@ -59,15 +62,16 @@ int	main(int argc, char **argv)
 	printf("\n    height = %lf", cntl.scene->camera_arr[0].viewport_h);
 	printf("\n    focal_len = %lf\n", cntl.scene->camera_arr[0].focal_len);
 	// cntl.scene->light = cntl.scene->light->next;
-	printf("\nl = xyz(%f, %f, %f)",
-			((t_light *)(cntl.scene->light->element))->origin.x,
-			((t_light *)(cntl.scene->light->element))->origin.y,
-			((t_light *)(cntl.scene->light->element))->origin.z);
-	printf("\n    light_color = (%lf, %lf, %lf)",
-			((t_light *)(cntl.scene->light->element))->light_color.x,
-			((t_light *)(cntl.scene->light->element))->light_color.y,
-			((t_light *)(cntl.scene->light->element))->light_color.z);
-	printf("\n    bright_ratio = %f", ((t_light *)(cntl.scene->light->element))->bright_ratio);
+	// printf("<light>\n");
+	// printf("\nl = xyz(%f, %f, %f)",
+	// 		((t_light *)(cntl.scene->light->element))->origin.x,
+	// 		((t_light *)(cntl.scene->light->element))->origin.y,
+	// 		((t_light *)(cntl.scene->light->element))->origin.z);
+	// printf("\n    light_color = (%lf, %lf, %lf)",
+	// 		((t_light *)(cntl.scene->light->element))->light_color.x,
+	// 		((t_light *)(cntl.scene->light->element))->light_color.y,
+	// 		((t_light *)(cntl.scene->light->element))->light_color.z);
+	// printf("\n    bright_ratio = %f", ((t_light *)(cntl.scene->light->element))->bright_ratio);
 	// cntl.scene->world = cntl.scene->world->next;
 	// printf("\npoint = %f", ((t_sphere*)(cntl.scene->world->element))->center.x);
 	// cntl.scene->world = cntl.scene->world->next;
