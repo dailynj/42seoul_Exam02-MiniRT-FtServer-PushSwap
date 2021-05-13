@@ -32,7 +32,7 @@ t_bool		hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec)
 	cy = (t_cylinder *)world->element;
 	if (cylinder_dis(cy, ray, rec) == FALSE)
 		return (FALSE);
-	rec->p = ray_at(ray, rec->t);
+	
 	rec->normal = vec_unit(vec_minus(
 		vec_minus(rec->p, cy->point),
 		vec_mul_num(vec_dot(cy->normal, vec_minus(rec->p, cy->point)), cy->normal)));
@@ -62,6 +62,22 @@ t_bool		cylinder_dis(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	rec->t = (-b - sqrt(d)) / (2 * a);
 	if (rec->t < rec->tmin || rec->t > rec->tmax)
-		return (FALSE);
+	{
+		rec->t = (-b + sqrt(d)) / (2 * a);
+		if (rec->t < rec->tmin || rec->t > rec->tmax)
+			return (FALSE);
+	}
+	rec->p = ray_at(ray, rec->t);
+	double pc2 = vec_length(vec_minus(rec->p, cylinder->point));
+	double r2 = cylinder->radius * cylinder->radius;
+	double hh = sqrt(pc2-r2);
+	if (hh > cylinder->height){
+		rec->t = (-b + sqrt(d)) / (2 * a);
+		rec->p = ray_at(ray, rec->t);
+		pc2 = vec_length(vec_minus(rec->p, cylinder->point));
+		hh = sqrt(pc2-r2);
+		if (hh > cylinder->height)
+			return (FALSE);
+	}
 	return (TRUE);
 }

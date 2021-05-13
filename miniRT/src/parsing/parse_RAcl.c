@@ -64,7 +64,10 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	ft_freeall(tmp2);
 
 	fov = ft_atof(one_line[3]);
-	tmp_c->viewport_w = 2 * tan(fov / 360.0);
+	printf("cccc parsing");
+	if (fov >= 180.0)
+		return (print_error("Error: fov값은 180도 보다 작아야합니다!\n"));
+	tmp_c->viewport_w = 2 * tan((fov * 3.141592) / 360.0);
 	tmp_c->viewport_h = tmp_c->viewport_w / cntl->scene->canvas.aspect_ratio;
 	tmp_c->focal_len = 1.0; //고정
 	tmp_c->horizontal =
