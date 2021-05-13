@@ -37,7 +37,7 @@ int	a_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: split 오류!\n");
 	ratio = ft_atof(one_line[1]);
 	cntl->scene->ambient = color(
-		ratio * ft_atof(amb[0]), ratio * ft_atof(amb[1]), ratio * ft_atof(amb[2]));
+		ratio * ft_atof(amb[0])/255.0, ratio * ft_atof(amb[1])/255.0, ratio * ft_atof(amb[2])/255.0);
 	ft_freeall(amb);
 	return (1);
 }
@@ -64,7 +64,7 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	ft_freeall(tmp2);
 
 	fov = ft_atof(one_line[3]);
-	printf("cccc parsing");
+	// printf("cccc parsing");
 	if (fov >= 180.0)
 		return (print_error("Error: fov값은 180도 보다 작아야합니다!\n"));
 	tmp_c->viewport_w = 2 * tan((fov * 3.141592) / 360.0);
@@ -85,13 +85,14 @@ int	l_parse(t_cntl *cntl, char **one_line)
 {
 	char	**tmp;
 	char	**tmp2;
-
+	// printf("llllll parsing");
 	if (cal_cmd_len(one_line) != 4)
 		print_error("Error: camera 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
 	if ((tmp2 = ft_split_char(one_line[3], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	// printf("llllll parsing");
 	obj_add_back(
 		&cntl->scene->light,
 		object(LIGHT_POINT,

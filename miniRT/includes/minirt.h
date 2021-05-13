@@ -48,6 +48,7 @@ t_vec		vec_cross(t_vec vec, t_vec vec2);
 t_vec		vec_unit(t_vec vector1);
 t_vec		vec_min(t_vec vec1, t_vec vec2);
 t_vec		vsymmetric(t_point p1, t_point stan);
+double	vec_length_2(t_vec vector);
 
 // color.c
 t_color		color(double r, double g, double b);
@@ -100,8 +101,8 @@ t_square	*square(t_point point, t_vec normal, double length);
 t_bool		hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
 
 // cylider.c
-t_cylinder	*cylinder(t_point point, t_vec normal, double radius,
-														double height);
+t_cylinder	*cylinder(t_point point, double radius, double height,
+															t_vec normal);
 t_bool		hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool		cylinder_dis(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
 

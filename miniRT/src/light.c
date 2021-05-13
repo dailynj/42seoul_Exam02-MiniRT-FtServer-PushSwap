@@ -26,20 +26,24 @@ t_light	*light_point(t_vec light_origin, t_color light_color, double bright_rati
 
 t_color	phong_lighting(t_scene *scene)
 {
-	// t_color		light_color;
+	t_color		light_color;
 	t_object	*lights;
 
-	// light_color = color(0, 0, 0); //광원이 하나도 없다면, 빛의 양은 (0, 0, 0)일 것이다.
+	light_color = color(0.0, 0.0, 0.0); //광원이 하나도 없다면, 빛의 양은 (0, 0, 0)일 것이다.
 	lights = scene->light;
-	t_light *light2 = (t_light *)lights->element;
 	while (lights) //여러 광원에서 나오는 모든 빛에 대해 각각 diffuse, specular 값을 모두 구해줘야 한다
 	{
 		if (lights->type == LIGHT_POINT)
-			light2->light_color = vec_add(light2->light_color, point_light_get(scene, lights->element));
+			light_color = vec_add(light_color, point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
-	light2->light_color = vec_add(light2->light_color, scene->ambient);
-	return (vec_min(vec_mul(light2->light_color, scene->rec.albedo), color(1, 1, 1)));
+	light_color = vec_add(light_color, scene->ambient);
+	// printf("\nlight_color = %f, %f, %f\n", light_color.x, light_color.y, light_color.z);
+
+	// printf("vec_mul(light_color, scene->rec.albedo) = %f, %f, %f\n", vec_mul(light_color, scene->rec.albedo).x, vec_mul(light_color, scene->rec.albedo).y, vec_mul(light_color, scene->rec.albedo).z);
+
+	return (vec_min(vec_mul(light_color, scene->rec.albedo), color(1.0, 1.0, 1.0)));
+
 	//모든 광원에 의한 빛의 양을 구한 후, 오브젝트의 반사율과 곱해준다. 그 값이 (1, 1, 1)을 넘으면 (1, 1, 1)을 반환한다.
 }
 
@@ -61,7 +65,7 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	light_len = vec_length(light_dir);
 	light_ray = ray(vec_add(scene->rec.p, vec_mul_num(EPSILON, scene->rec.normal)), light_dir);
 	if (in_shadow(scene->world, light_ray, light_len))
-		return (color(0, 0, 0));
+		return (color(0.0, 0.0, 0.0));
 	light_dir = vec_unit(light_dir);
 	// light_dir = vec_unit(vec_minus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
 	// cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
@@ -70,12 +74,15 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	diffuse = vec_mul_num(kd, light->light_color);
 	view_dir = vec_unit(vec_mul_num(-1, scene->ray.dir));
 	reflect_dir = reflect(vec_mul_num(-1, light_dir), scene->rec.normal);
-	ksn = 64; // shininess value
-	ks = 0.5; // specular strength
+	ksn = 20; // shininess value
+	ks = 0.9; // specular strength
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
+	// printf("spec = %lf\n", spec);
 	specular = vec_mul_num(spec, vec_mul_num(ks, light->light_color));
+	// printf("light->ligth_color = %f, %f, %f\n", light->light_color.x, light->light_color.y, light->light_color.z);
+	// printf("diffuse = %f, %f, %f\n", diffuse.x, diffuse.y, diffuse.z);
+	// printf("specular = %f, %f, %f\n\n", specular.x, specular.y, specular.z);
 	return (vec_add(diffuse, specular));
-	return (diffuse);
 }
 
 t_vec	reflect(t_vec v, t_vec n)

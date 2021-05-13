@@ -27,6 +27,11 @@ double	vec_length(t_vec vector)
 	return (sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2)));
 }
 
+double	vec_length_2(t_vec vector)
+{
+	return (pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
+}
+
 t_vec	vec_add(t_vec vector1, t_vec vector2)
 {
 	t_vec	vector;

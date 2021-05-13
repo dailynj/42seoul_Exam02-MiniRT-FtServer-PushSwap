@@ -58,10 +58,13 @@ t_vec			ray_color(t_scene *scene)
 {
 	double	t;
 	t_vec	unit_direction;
-
+	//printf("@@@");
 	scene->rec = record_init();
-	if (hit(scene->world, &scene->ray, &scene->rec))
+	if (hit(scene->world, &scene->ray, &scene->rec)){
+		// printf("%f %f %f", phong_lighting(scene).x, phong_lighting(scene).y, phong_lighting(scene).z);
 		return (phong_lighting(scene));
+	}
+	//printf(" $$$");
 	// return (vec_mul_num(0.5, vec_add(scene->rec.normal, color(1, 1, 1))));
 	unit_direction = vec_unit(scene->ray.dir);
 	t = 0.5 * (unit_direction.y + 1.0);

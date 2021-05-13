@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-t_cylinder	*cylinder(t_point point, t_vec normal, double radius, double height)
+t_cylinder	*cylinder(t_point point, double radius, double height, t_vec normal)
 {
 	t_cylinder	*cy;
 
@@ -67,16 +67,16 @@ t_bool		cylinder_dis(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 		if (rec->t < rec->tmin || rec->t > rec->tmax)
 			return (FALSE);
 	}
+
+	rec->t = (-b - sqrt(d)) / (2 * a);
 	rec->p = ray_at(ray, rec->t);
-	double pc2 = vec_length(vec_minus(rec->p, cylinder->point));
-	double r2 = cylinder->radius * cylinder->radius;
-	double hh = sqrt(pc2-r2);
-	if (hh > cylinder->height){
+	double pc2 = vec_length_2(vec_minus(rec->p, cylinder->point));
+	double r2 = (cylinder->radius) * (cylinder->radius);
+	if (sqrt(pc2 - r2) > cylinder->height){
 		rec->t = (-b + sqrt(d)) / (2 * a);
 		rec->p = ray_at(ray, rec->t);
-		pc2 = vec_length(vec_minus(rec->p, cylinder->point));
-		hh = sqrt(pc2-r2);
-		if (hh > cylinder->height)
+		pc2 = vec_length_2(vec_minus(rec->p, cylinder->point));
+		if (sqrt(pc2 - r2) > cylinder->height)
 			return (FALSE);
 	}
 	return (TRUE);

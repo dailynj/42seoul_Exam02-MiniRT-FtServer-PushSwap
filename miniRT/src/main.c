@@ -30,53 +30,53 @@ int	main(int argc, char **argv)
 		return (print_error("Error : scene_init 에러!\n"));
 	if (parsing(&cntl, argv[1]) == 0)
 		return (print_error("Error : Parsing Error!\n"));
-	printf("------------------------------------\n");
-	printf("\n<resolution>");
-	printf("\nR = %lf, %lf, %lf",
-			cntl.scene->canvas.width,
-			cntl.scene->canvas.height,
-			cntl.scene->canvas.aspect_ratio);
-	printf("\n\n<ambient>");
-	printf("\nA = color(%lf, %lf, %lf)",
-			cntl.scene->ambient.x,
-			cntl.scene->ambient.y,
-			cntl.scene->ambient.z);
-	//카메라 0번 만 출력
-	printf("\n\n<camera>");
-	printf("\nc = xyz(%lf, %lf, %lf)",
-			cntl.scene->camera_arr[0].orig.x,
-			cntl.scene->camera_arr[0].orig.y,
-			cntl.scene->camera_arr[0].orig.z);
-	printf("\n  = nor(%lf, %lf, %lf)",
-			cntl.scene->camera_arr[0].normal.x,
-			cntl.scene->camera_arr[0].normal.y,
-			cntl.scene->camera_arr[0].normal.z);
-	printf("\n    width = %lf", cntl.scene->camera_arr[0].viewport_w);
-	printf("\n    height = %lf", cntl.scene->camera_arr[0].viewport_h);
-	printf("\n    focal_len = %lf\n", cntl.scene->camera_arr[0].focal_len);
+	// printf("------------------------------------\n");
+	// printf("\n<resolution>");
+	// printf("\nR = %lf, %lf, %lf",
+	// 		cntl.scene->canvas.width,
+	// 		cntl.scene->canvas.height,
+	// 		cntl.scene->canvas.aspect_ratio);
+	// printf("\n\n<ambient>");
+	// printf("\nA = color(%lf, %lf, %lf)",
+	// 		cntl.scene->ambient.x,
+	// 		cntl.scene->ambient.y,
+	// 		cntl.scene->ambient.z);
+	// //카메라 0번 만 출력
+	// printf("\n\n<camera>");
+	// printf("\nc = xyz(%lf, %lf, %lf)",
+	// 		cntl.scene->camera_arr[0].orig.x,
+	// 		cntl.scene->camera_arr[0].orig.y,
+	// 		cntl.scene->camera_arr[0].orig.z);
+	// printf("\n  = nor(%lf, %lf, %lf)",
+	// 		cntl.scene->camera_arr[0].normal.x,
+	// 		cntl.scene->camera_arr[0].normal.y,
+	// 		cntl.scene->camera_arr[0].normal.z);
+	// printf("\n    width = %lf", cntl.scene->camera_arr[0].viewport_w);
+	// printf("\n    height = %lf", cntl.scene->camera_arr[0].viewport_h);
+	// printf("\n    focal_len = %lf\n", cntl.scene->camera_arr[0].focal_len);
 	
-	// cntl.scene->light = cntl.scene->light->next;
+	// // cntl.scene->light = cntl.scene->light->next;
 
-	write(1, "\n\n<light>", 9);
-	printf("\nl = xyz(%f, %f, %f)",
-			((t_light *)(cntl.scene->light->element))->origin.x,
-			((t_light *)(cntl.scene->light->element))->origin.y,
-			((t_light *)(cntl.scene->light->element))->origin.z);
-	printf("\n    light_color = (%lf, %lf, %lf)",
-			((t_light *)(cntl.scene->light->element))->light_color.x,
-			((t_light *)(cntl.scene->light->element))->light_color.y,
-			((t_light *)(cntl.scene->light->element))->light_color.z);
-	printf("\n    bright_ratio = %f", ((t_light *)(cntl.scene->light->element))->bright_ratio);
+	// write(1, "\n\n<light>", 9);
+	// printf("\nl = xyz(%f, %f, %f)",
+	// 		((t_light *)(cntl.scene->light->element))->origin.x,
+	// 		((t_light *)(cntl.scene->light->element))->origin.y,
+	// 		((t_light *)(cntl.scene->light->element))->origin.z);
+	// printf("\n    light_color = (%lf, %lf, %lf)",
+	// 		((t_light *)(cntl.scene->light->element))->light_color.x,
+	// 		((t_light *)(cntl.scene->light->element))->light_color.y,
+	// 		((t_light *)(cntl.scene->light->element))->light_color.z);
+	// printf("\n    bright_ratio = %f", ((t_light *)(cntl.scene->light->element))->bright_ratio);
 
-	// // write(1, "hi\n", 3);
-	// // while (1)
-	// // 	;
-	// cntl.scene->world = cntl.scene->world->next;
-	// printf("\npoint = %f", ((t_sphere*)(cntl.scene->world->element))->center.x);
-	// cntl.scene->world = cntl.scene->world->next;
-	// printf("\npoint = %f", ((t_sphere*)(cntl.scene->world->element))->center.x);
-	printf("\n------------------------------------\n");
-	write(1, "@@@@here@@@\n", 13);
+	// // // write(1, "hi\n", 3);
+	// // // while (1)
+	// // // 	;
+	// // cntl.scene->world = cntl.scene->world->next;
+	// // printf("\npoint = %f", ((t_sphere*)(cntl.scene->world->element))->center.x);
+	// // cntl.scene->world = cntl.scene->world->next;
+	// // printf("\npoint = %f", ((t_sphere*)(cntl.scene->world->element))->center.x);
+	// printf("\n------------------------------------\n");
+	// write(1, "@@@@here@@@\n", 13);
 
 	
     cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "NAJEONG World!");
@@ -88,15 +88,20 @@ int	main(int argc, char **argv)
 		i = 0;
 		while (i < cntl.scene->canvas.width)
 		{
+			///printf("\ni, j = %d, %d", i, j);
 			u = (double)i / (cntl.scene->canvas.width - 1);
 			v = (double)j / (cntl.scene->canvas.height - 1);
+			
 			cntl.scene->ray = ray_primary(&cntl.scene->camera_arr[0], u, v);
 			pixel_color = ray_color(cntl.scene);
+			//printf("pixel_color = %f, %f, %f", pixel_color.x, pixel_color.y, pixel_color.z);
 			my_mlx_pixel_put(&image, i, cntl.scene->canvas.height - 1 - j, write_color(0, pixel_color));
 			++i;
 		}
 		--j;
+		
 	}
+	// printf("ppppppppp\n");
     mlx_put_image_to_window(cntl.mlx, cntl.win, image.img, 0, 0);
     mlx_key_hook(cntl.win, key_hook, &cntl);
     mlx_loop(cntl.mlx);

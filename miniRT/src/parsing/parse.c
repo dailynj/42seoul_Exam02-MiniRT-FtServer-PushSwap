@@ -85,7 +85,7 @@ int	check_parse_num(t_cntl *cntl, char **line)
 		return (print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n"));
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
 		return (print_error("Error : camera 할당이 제대로 되지 않았습니다\n"));
-	return (parsing_all(cntl, line, cmd_len));
+	return(parsing_all(cntl, line, cmd_len));
 	return (1);
 }
 

@@ -33,6 +33,8 @@ t_bool		hit_triangle(t_object *world, t_ray *ray, t_hit_record *rec)
 	rec->t = -vec_dot(vec_minus(ray->origin, tr->p1), tr->normal) /
 		vec_dot(tr->normal, ray->dir);
 	rec->p = ray_at(ray, rec->t);
+	if (rec->t < EPSILON || rec->t > rec->tmax)
+		return (FALSE);
 	if (check_tri(tr->p2, tr->p1, tr->p3, rec->p) == FALSE)
 		return (FALSE);
 	if (check_tri(tr->p3, tr->p2, tr->p1, rec->p) == FALSE)
