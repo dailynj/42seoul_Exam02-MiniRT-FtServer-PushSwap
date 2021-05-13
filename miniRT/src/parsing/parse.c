@@ -23,14 +23,16 @@ int	parsing(t_cntl *cntl, char *rtname)
 		return (0);
 	fd = open(rtname, O_RDONLY);
 	if (fd == -1)
-		print_error("Error : open 에러입니다!\n");
+		return (print_error("Error : open 에러입니다!\n"));
 	read_len = read(fd, line, BUFFER_SIZE);
 	if (read_len == 0)
-		print_error("Error : read_len 에러\n");
-	if ((tmp = ft_split_char(line, '\n')) == NULL)
-		print_error("Error : split 에러입니다!\n");
+		return (print_error("Error : read_len 에러\n"));
+	if ((tmp = ft_split_char(line, '\n')) == NULL){
+		ft_freeall(tmp);
+		return (print_error("Error : split 에러입니다!\n"));
+	}
 	if (check_parse_num(cntl, tmp) == 0)
-		print_error("Error : parsing_all error\n");
+		return (print_error("Error : parsing_all error\n"));
 	ft_freeall(tmp);
 	return (1);
 }
@@ -47,8 +49,10 @@ int	check_parse_num(t_cntl *cntl, char **line)
 	cmd_len = cal_cmd_len(line);
 	while (i < cmd_len)
 	{
-		if ((one_line = ft_split_whitespace(line[i])) == NULL)
-			return (0);
+		if ((one_line = ft_split_whitespace(line[i])) == NULL){
+			ft_freeall(one_line);
+			return (print_error("Error : white_space split이 잘못 됬습니다.\n"));
+		}
 		if (one_line[0][0] == 's' && one_line[0][1] == 'p')
 			check[4]++;
 		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
@@ -70,14 +74,17 @@ int	check_parse_num(t_cntl *cntl, char **line)
 		else if (one_line[0][0] == '#')
 			;
 		else
-			print_error("Error : 존재하지 않는 단어(?) 입니다!\n");
+		{
+			ft_freeall(one_line);
+			return (print_error("Error : 존재하지 않는 단어(?) 입니다!\n"));
+		}
 		ft_freeall(one_line);
 		i++;
 	}
 	if (check[0] != 1 || check[1] != 1 || check[2] == 0)
-		print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n");
+		return (print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n"));
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
-		return (0);
+		return (print_error("Error : camera 할당이 제대로 되지 않았습니다\n"));
 	parsing_all(cntl, line, cmd_len);
 	return (1);
 }
