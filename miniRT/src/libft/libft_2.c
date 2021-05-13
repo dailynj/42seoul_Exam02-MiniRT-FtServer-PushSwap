@@ -31,7 +31,7 @@ int		ft_atoi(char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			answer = answer * 10 + (str[i] - '0');
 		else
-			break ;
+			print_error("Error : ft_atoi 에러\n");
 		i++;
 	}
 	return (minus * answer);
@@ -58,7 +58,7 @@ double	ft_atof(char *str)
 			dot++;
 		}
 		else
-			return (-1);
+			print_error("Error : ft_atoi 에러\n");
 		i++;
 	}
 	return (answer);

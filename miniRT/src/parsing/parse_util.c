@@ -25,7 +25,7 @@ int		cal_cmd_len(char **tmp)
 int		print_error(char *str)
 {
 	printf("%s", str);
-	return (0);
+	exit(1);
 }
 
 t_bool	check_rt(char *rtname)

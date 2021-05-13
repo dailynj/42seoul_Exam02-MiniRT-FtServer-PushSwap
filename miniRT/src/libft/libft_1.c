@@ -31,8 +31,11 @@ void	*ft_memset(void *s, int c, size_t n)
 	unsigned char	*ptr;
 
 	ptr = s;
-	while (n-- > 0)
-		*ptr++ = c;
+	while (n-- > 0){
+		*ptr = c;
+		write(1, ptr, 1);
+		ptr++;
+	}
 	return (s);
 }
 

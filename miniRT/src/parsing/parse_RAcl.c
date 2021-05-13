@@ -53,6 +53,7 @@ int	a_parse(t_cntl *cntl, char **one_line)
 int	c_parse(t_cntl *cntl, char **one_line, int idx)
 {
 	char		**tmp;
+	char		**tmp2;
 	t_camera	*tmp_c;
 	int			fov;
 
@@ -62,6 +63,7 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 		printf("Error: camera 인수 개수 오류\n");
 		return (0);
 	}
+	printf("$$$$$$ ----------- %s\n", one_line[1]);
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 	{
 		printf("Error: split 오류!\n");
@@ -71,20 +73,27 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	{
 		return (0);
 	}
+	write(1, "##########################", 15);
 	tmp_c->orig = vec(ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	free(tmp);
-	if ((tmp = ft_split_char(one_line[2], ',')) == NULL)
+	write(1, "##########################", 15);
+	write(1, &tmp_c->orig.x, 1);
+	// printf("orig.x = %f, orig.y = %f, orig.z = %f", tmp_c->orig.x, tmp_c->orig.y, tmp_c->orig.z);
+	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 	{
 		printf("Error: split 오류!\n");
 		return (0);
 	}
-	if (ft_atof(tmp[0]) == -1 || ft_atof(tmp[1]) == -1 || ft_atof(tmp[2]) == -1)
+	if (ft_atof(tmp2[0]) == -1 || ft_atof(tmp2[1]) == -1 || ft_atof(tmp2[2]) == -1)
 	{
 		printf("Error: atoi error!\n");
 		return (0);
 	}
-	tmp_c->normal = vec(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
+
+	tmp_c->normal = vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2]));
+
 	free(tmp);
+	free(tmp2);
+
 	fov = ft_atoi(one_line[3]);
 	tmp_c->viewport_w = 2 * tan(fov / 360.0);
 	tmp_c->viewport_h = tmp_c->viewport_w / cntl->scene->canvas.aspect_ratio;
