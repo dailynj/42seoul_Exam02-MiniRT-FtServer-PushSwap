@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 00:50:12 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:44:13 by hyson            ###   ########.fr       */
+/*   Created: 2021/04/06 12:25:15 by najlee            #+#    #+#             */
+/*   Updated: 2021/04/06 13:03:59 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-// esc key press event
-int	key_hook(int keycode, t_cntl *cntl)
-{
-	(void) keycode;
-	(void) cntl;
-	// if (keycode == 53)
-	// {
-	// 	mlx_destroy_window(cntl->mlx, cntl->win);
-	// 	exit(0);
-	// }
-	return (0);
-}
+# include <unistd.h>
+# include <stdlib.h>
 
-// close button press event
-int	exit_hook()
-{
-	exit(0);
-}
+int	get_next_line(char **line);
+
+#endif
