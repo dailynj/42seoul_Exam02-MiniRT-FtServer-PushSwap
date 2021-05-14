@@ -63,18 +63,19 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	double kd; // diffuse의 강도
 	light_dir = vec_minus(light->origin, scene->rec.p);
 	light_len = vec_length(light_dir);
-	light_ray = ray(vec_add(scene->rec.p, vec_mul_num(EPSILON, scene->rec.normal)), light_dir);
+	light_dir = vec_unit(light_dir);
+	light_ray = ray(vec_add(scene->rec.p, vec_mul_num(EPSILON, vec_unit(scene->rec.normal))), light_dir);
 	if (in_shadow(scene->world, light_ray, light_len))
 		return (color(0.0, 0.0, 0.0));
-	light_dir = vec_unit(light_dir);
 	// light_dir = vec_unit(vec_minus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
 	// cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
 	kd = fmax(vec_dot(scene->rec.normal, light_dir),
 				0.0); // (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
 	diffuse = vec_mul_num(kd, light->light_color);
+
 	view_dir = vec_unit(vec_mul_num(-1, scene->ray.dir));
-	reflect_dir = reflect(vec_mul_num(-1, light_dir), scene->rec.normal);
-	ksn = 20; // shininess value
+	reflect_dir = vec_unit(reflect(vec_mul_num(-1, light_dir), vec_unit(scene->rec.normal)));
+	ksn = 60; // shininess value
 	ks = 0.9; // specular strength
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
 	// printf("spec = %lf\n", spec);

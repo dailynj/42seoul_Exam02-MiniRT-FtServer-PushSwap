@@ -17,11 +17,11 @@ int	key_hook(int keycode, t_cntl *cntl)
 {
 	(void) keycode;
 	(void) cntl;
-	// if (keycode == 53)
-	// {
-	// 	mlx_destroy_window(cntl->mlx, cntl->win);
-	// 	exit(0);
-	// }
+	if (keycode == 53)
+	{
+		mlx_destroy_window(cntl->mlx, cntl->win);
+		exit(0);
+	}
 	return (0);
 }
 

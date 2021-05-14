@@ -71,9 +71,9 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	tmp_c->viewport_h = tmp_c->viewport_w / cntl->scene->canvas.aspect_ratio;
 	tmp_c->focal_len = 1.0; //고정
 	tmp_c->horizontal =
-		vec_mul_num(1, vec_unit(vec_cross(tmp_c->normal, vec(0, 1, 0))));
+		vec_mul_num(tmp_c->viewport_w, vec_unit(vec_cross(tmp_c->normal, vec(0, 1, 0))));
 	tmp_c->vertical =
-		vec_mul_num(1, vec_unit(vec_cross(tmp_c->horizontal, tmp_c->normal)));
+		vec_mul_num(tmp_c->viewport_h, vec_unit(vec_cross(tmp_c->horizontal, tmp_c->normal)));
 	tmp_c->left_bottom =
 		vec_minus(vec_minus(vec_minus(tmp_c->orig, vec_div(2, tmp_c->horizontal)),
 							vec_div(2, tmp_c->vertical)),
