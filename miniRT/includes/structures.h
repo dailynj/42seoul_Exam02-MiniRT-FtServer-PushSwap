@@ -80,6 +80,7 @@ typedef struct			s_hit_record
 	double					tmin;
 	double					tmax;
 	double					t;
+	double					t2;
 	int						front_face;
 	t_color					albedo;
 }						t_hit_record;

@@ -19,7 +19,7 @@ t_light	*light_point(t_vec light_origin, t_color light_color, double bright_rati
 	if (!(light = (t_light *)malloc(sizeof(t_light))))
 		return (NULL);
 	light->origin = light_origin;
-	light->light_color = light_color;
+	light->light_color = vec_mul_num(bright_ratio, light_color);
 	light->bright_ratio = bright_ratio;
 	return (light);
 }
@@ -29,7 +29,8 @@ t_color	phong_lighting(t_scene *scene)
 	t_color		light_color;
 	t_object	*lights;
 
-	light_color = color(0.0, 0.0, 0.0); //광원이 하나도 없다면, 빛의 양은 (0, 0, 0)일 것이다.
+	// light_color = color(0.0, 0.0, 0.0); //광원이 하나도 없다면, 빛의 양은 (0, 0, 0)일 것이다.
+	light_color = scene->ambient;
 	lights = scene->light;
 	while (lights) //여러 광원에서 나오는 모든 빛에 대해 각각 diffuse, specular 값을 모두 구해줘야 한다
 	{
@@ -37,11 +38,6 @@ t_color	phong_lighting(t_scene *scene)
 			light_color = vec_add(light_color, point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
-	light_color = vec_add(light_color, scene->ambient);
-	// printf("\nlight_color = %f, %f, %f\n", light_color.x, light_color.y, light_color.z);
-
-	// printf("vec_mul(light_color, scene->rec.albedo) = %f, %f, %f\n", vec_mul(light_color, scene->rec.albedo).x, vec_mul(light_color, scene->rec.albedo).y, vec_mul(light_color, scene->rec.albedo).z);
-
 	return (vec_min(vec_mul(light_color, scene->rec.albedo), color(1.0, 1.0, 1.0)));
 
 	//모든 광원에 의한 빛의 양을 구한 후, 오브젝트의 반사율과 곱해준다. 그 값이 (1, 1, 1)을 넘으면 (1, 1, 1)을 반환한다.
@@ -72,18 +68,23 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	kd = fmax(vec_dot(scene->rec.normal, light_dir),
 				0.0); // (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
 	diffuse = vec_mul_num(kd, light->light_color);
-
+	
 	view_dir = vec_unit(vec_mul_num(-1, scene->ray.dir));
 	reflect_dir = vec_unit(reflect(vec_mul_num(-1, light_dir), vec_unit(scene->rec.normal)));
-	ksn = 60; // shininess value
-	ks = 0.9; // specular strength
+	ksn = 100; // shininess value
+	ks = 0.7; // specular strength
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
 	// printf("spec = %lf\n", spec);
 	specular = vec_mul_num(spec, vec_mul_num(ks, light->light_color));
+	// return (vec(0, 0, 0));
+	// printf("specular = %f %f %f\n", specular.x, specular.y, specular.z);
+	// printf("diffuse = %f %f %f\n\n", diffuse.x, diffuse.y, diffuse.z);
+	// specular = vec_mul_num(spec, vec_mul_num(ks, light->light_color));
 	// printf("light->ligth_color = %f, %f, %f\n", light->light_color.x, light->light_color.y, light->light_color.z);
 	// printf("diffuse = %f, %f, %f\n", diffuse.x, diffuse.y, diffuse.z);
 	// printf("specular = %f, %f, %f\n\n", specular.x, specular.y, specular.z);
-	return (vec_add(diffuse, specular));
+	// return (specular);
+	return (vec_min(vec(1.0, 1.0, 1.0), vec_add(diffuse, specular)));
 }
 
 t_vec	reflect(t_vec v, t_vec n)

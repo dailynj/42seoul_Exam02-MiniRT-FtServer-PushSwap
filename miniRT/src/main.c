@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 	// 		cntl.scene->canvas.height,
 	// 		cntl.scene->canvas.aspect_ratio);
 	// printf("\n\n<ambient>");
+	// write(1, "##\n", 3);
 	// printf("\nA = color(%lf, %lf, %lf)",
 	// 		cntl.scene->ambient.x,
 	// 		cntl.scene->ambient.y,
@@ -78,7 +79,14 @@ int	main(int argc, char **argv)
 	// printf("\n------------------------------------\n");
 	// write(1, "@@@@here@@@\n", 13);
 
-	
+	// printf("height = %f\n", ((t_cylinder *)(cntl.scene->world->element))->height);
+	// printf("radius = %f\n", ((t_cylinder *)(cntl.scene->world->element))->radius);
+	// printf("normal = %f %f %f\n", ((t_cylinder *)(cntl.scene->world->element))->normal.x
+	// , ((t_cylinder *)(cntl.scene->world->element))->normal.y, ((t_cylinder *)(cntl.scene->world->element))->normal.z);
+	// printf("point = %f %f %f\n", ((t_cylinder *)(cntl.scene->world->element))->point.x
+	// , ((t_cylinder *)(cntl.scene->world->element))->point.y, ((t_cylinder *)(cntl.scene->world->element))->point.z);
+
+
     cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "NAJEONG World!");
     image.img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height);
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);

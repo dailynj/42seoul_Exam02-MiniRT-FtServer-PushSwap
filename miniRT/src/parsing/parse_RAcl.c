@@ -38,6 +38,7 @@ int	a_parse(t_cntl *cntl, char **one_line)
 	ratio = ft_atof(one_line[1]);
 	cntl->scene->ambient = color(
 		ratio * ft_atof(amb[0])/255.0, ratio * ft_atof(amb[1])/255.0, ratio * ft_atof(amb[2])/255.0);
+	
 	ft_freeall(amb);
 	return (1);
 }
@@ -59,7 +60,7 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	// printf("orig.x = %f, orig.y = %f, orig.z = %f", tmp_c->orig.x, tmp_c->orig.y, tmp_c->orig.z);
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		print_error("Error: split 오류!\n");
-	tmp_c->normal = vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2]));
+	tmp_c->normal = vec_unit(vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2])));
 	ft_freeall(tmp);
 	ft_freeall(tmp2);
 

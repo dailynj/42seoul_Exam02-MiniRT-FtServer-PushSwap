@@ -51,7 +51,7 @@ int	pl_parse(t_cntl *cntl, char **one_line)
 		&cntl->scene->world,
 		object(PL,
 				plane(point3(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])),
-						vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2]))),
+						vec_unit(vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2])))),
 				color(ft_atof(tmp3[0]) / 255.0, ft_atof(tmp3[1]) / 255.0, ft_atof(tmp3[2]) / 255.0)));
 	ft_freeall(tmp);
 	ft_freeall(tmp2);
@@ -78,7 +78,7 @@ int	sq_parse(t_cntl *cntl, char **one_line)
 		&cntl->scene->world,
 		object(SQ,
 				square(point3(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])),
-						vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2])),
+						vec_unit(vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2]))),
 						ft_atof(one_line[3])),
 				color(ft_atof(tmp3[0]) / 255.0, ft_atof(tmp3[1]) / 255.0, ft_atof(tmp3[2]) / 255.0)));
 	ft_freeall(tmp);
@@ -103,10 +103,9 @@ int	cy_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: split 오류!\n");
 	obj_add_back(
 		&cntl->scene->world,
-		object(CY,
-				cylinder(point3(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])),
+		object(CY, cylinder(point3(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])),
 						ft_atof(one_line[3]), ft_atof(one_line[4]), 
-						vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2]))), 
+						vec_unit(vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2])))), 
 						color(ft_atof(tmp3[0]) / 255.0, ft_atof(tmp3[1]) / 255.0, ft_atof(tmp3[2]) / 255.0)));
 	ft_freeall(tmp);
 	ft_freeall(tmp2);
