@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:20:32 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:42:02 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 01:08:34 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # pragma pack(push, 1)
 
-typedef struct		s_fileheader
+typedef	struct		s_fileheader
 {
 	unsigned char	sign1;
 	unsigned char	sign2;
@@ -32,9 +32,9 @@ typedef struct		s_fileheader
 	unsigned short	reserved1;
 	unsigned short	reserved2;
 	unsigned int	start_bmp;
-}					t_fileheader;
+}				t_fileheader;
 
-typedef struct		s_infoheader
+typedef	struct		s_infoheader
 {
 	unsigned int	size;
 	unsigned int	witdh;
@@ -47,30 +47,27 @@ typedef struct		s_infoheader
 	unsigned int	y_pelspermeter;
 	unsigned int	color_used;
 	unsigned int	color_important;
-}					t_infoheader;
+}				t_infoheader;
 
-typedef struct		s_bmp
+typedef	struct		s_bmp
 {
 	t_fileheader	file_h;
 	t_infoheader	info_h;
-}					t_bmp;
+}				t_bmp;
+
 # pragma pack(pop)
 
-int	mlx_show_window(t_cntl *cntl);
-int	mlx_save_image(t_cntl *cntl);
-t_bmp	bmp_set_header(t_scene *scene);
-int mlx_put_pixel_to_window(t_cntl *cntl);
-
+int		mlx_show_window(t_cntl *cntl);
+int		mlx_save_image(t_cntl *cntl);
+t_bmp		bmp_set_header(t_scene *scene);
+int		mlx_put_pixel_to_window(t_cntl *cntl);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int			exit_hook();
-int			key_hook(int keycode, t_cntl *cntl);
-
+int		exit_hook();
+int		key_hook(int keycode, t_cntl *cntl);
 t_ray		ray(t_point origin, t_vec dir);
 t_vec		ray_at(t_ray *ray, double t);
 t_ray		ray_primary(t_camera *cam, double u, double v);
 t_vec		ray_color(t_scene *scene);
-
-// vec.c
 t_vec		vec(double x, double y, double z);
 double		vec_length(t_vec vector);
 t_vec		vec_add(t_vec vector1, t_vec vector2);
@@ -83,120 +80,76 @@ t_vec		vec_cross(t_vec vec, t_vec vec2);
 t_vec		vec_unit(t_vec vector1);
 t_vec		vec_min(t_vec vec1, t_vec vec2);
 t_vec		vsymmetric(t_point p1, t_point stan);
-double	vec_length_2(t_vec vector);
-
-// color.c
+double		vec_length_2(t_vec vector);
 t_color		color(double r, double g, double b);
-int			write_color(int t, t_color pixel_color);
-
-// point.c
+int		write_color(int t, t_color pixel_color);
 t_vec		point3(double x, double y, double z);
-
-// object.c
 t_object	*object(t_object_type type, void *element, t_color albedo);
 void		oadd(t_object **list, t_object *new);
 void		obj_add_back(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
-
-// light.c
 t_light		*light_point(t_point light_origin, t_color light_color,
-													double bright_ratio);
+							double bright_ratio);
 t_color		phong_lighting(t_scene *scene);
 t_color		point_light_get(t_scene *scene, t_light *light);
 t_vec		reflect(t_vec v, t_vec n);
-
-// scene.c
 t_camera	*camera(t_point orig, double aspect_ratio);
 t_scene		*scene_init(void);
-
-// shadow.h
 t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);
-
-// hit.c
 t_bool		hit(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool		hit_obj(t_object *world, t_ray *ray, t_hit_record *rec);
 void		set_face_normal(t_ray *ray, t_hit_record *rec);
-
-// sphere.c
 t_sphere	*sphere(t_point center, double radius);
 t_bool		hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
-t_bool		sphere_discriminant(t_sphere *sp, t_ray *ray, t_hit_record *rec);
-
-// plane.c
+t_bool		sphere_discriminant(t_sphere *sp, t_ray *ray,
+							t_hit_record *rec);
 t_plane		*plane(t_point point, t_vec normal);
 t_bool		hit_plane(t_object *world, t_ray *ray, t_hit_record *rec);
-
-// triangle.c
 t_triangle	*triangle(t_vec p1, t_vec p2, t_vec p3);
 t_bool		hit_triangle(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool		check_tri(t_vec a, t_vec b, t_vec c, t_vec point);
-
-// square.c
 t_square	*square(t_point point, t_vec normal, double length);
 t_bool		hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
-
-// cylider.c
-// t_cylinder	*cylinder(t_point point, double radius, double height,
-// 															t_vec normal);
-// t_bool		hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
-// t_bool		cylinder_dis(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
-t_cylinder	*cylinder(t_point point, double radius, double height, t_vec normal);
-t_bool              cylinder_height_check(t_cylinder *cylinder,
-                                                t_ray *ray, t_hit_record *rec);
-t_bool              cylinder_discriminant(t_cylinder *cylinder,
-                                            t_ray *ray, t_hit_record *rec);
-t_bool              hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
-
-// gnl
+t_cylinder	*cylinder(t_point point, double radius, double height,
+								t_vec normal);
+t_bool		cylinder_height_check(t_cylinder *cylinder,
+					t_ray *ray, t_hit_record *rec);
+t_bool		cylinder_discriminant(t_cylinder *cylinder,
+					t_ray *ray, t_hit_record *rec);
+t_bool		hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec);
 ssize_t		ft_strlen(char *s);
 char		*ft_strdup(char *s1);
 char		*ft_strjoin(char *s1, char *s2);
 ssize_t		ft_nl_index(char *backup);
 void		ft_fill_line(char **backup, char **line, ssize_t nl_line);
-int			ft_final(char **backup, char **line, ssize_t read_len);
-int			get_next_line(int fd, char **line);
-
-// parse.c
-int			parsing(t_cntl *cntl, char *rtname);
-int			check_parse_num(t_cntl *cntl, char **line);
-int			parsing_all(t_cntl *cntl, char **line, int cmd_len);
-
-// parse_util.c
-int			cal_cmd_len(char **tmp);
-int			print_error(char *str);
+int		ft_final(char **backup, char **line, ssize_t read_len);
+int		get_next_line(int fd, char **line);
+int		parsing(t_cntl *cntl, char *rtname);
+int		check_parse_num(t_cntl *cntl, char **line);
+int		parsing_all(t_cntl *cntl, char **line, int cmd_len);
+int		cal_cmd_len(char **tmp);
+int		print_error(char *str);
 t_bool		check_rt(char *rtname);
-
-// parse_RAcl
-int			r_parse(t_cntl *cntl, char **one_line);
-int			a_parse(t_cntl *cntl, char **one_line);
-int			c_parse(t_cntl *cntl, char **one_line, int idx);
-int			l_parse(t_cntl *cntl, char **one_line);
-
-// parse_object
-int			sp_parse(t_cntl *cntl, char **one_line);
-int			pl_parse(t_cntl *cntl, char **one_line);
-int			sq_parse(t_cntl *cntl, char **one_line);
-int			cy_parse(t_cntl *cntl, char **one_line);
-int			tr_parse(t_cntl *cntl, char **one_line);
-
-// split_char
+int		r_parse(t_cntl *cntl, char **one_line);
+int		a_parse(t_cntl *cntl, char **one_line);
+int		c_parse(t_cntl *cntl, char **one_line, int idx);
+int		l_parse(t_cntl *cntl, char **one_line);
+int		sp_parse(t_cntl *cntl, char **one_line);
+int		pl_parse(t_cntl *cntl, char **one_line);
+int		sq_parse(t_cntl *cntl, char **one_line);
+int		cy_parse(t_cntl *cntl, char **one_line);
+int		tr_parse(t_cntl *cntl, char **one_line);
 size_t		ft_wordcnt_char(char *s, char d);
 char		*ft_worddup_char(char *s, char d);
 char		**ft_split_char(char *s, char d);
-
-// libft_1.c
 char		**ft_freeall(char **s);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memset(void *s, int c, size_t n);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
-int			ft_strncmp(const char *str1, const char *str2, size_t n);
-
-// libft_2.c
-int			ft_atoi(char *str);
+int			ft_strncmp(const char *str1, const char *str2,
+								size_t n);
 double		ft_atof(char *str);
 double		ft_pow(double num, int len);
-
-// split_whitespace.c
 size_t		ft_wordcnt_whitespace(char *s);
 char		*ft_worddup_whitespace(char *s);
 char		**ft_split_whitespace(char *s);

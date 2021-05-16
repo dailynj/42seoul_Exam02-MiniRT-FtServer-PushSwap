@@ -6,17 +6,17 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 20:53:43 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:39:02 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 01:14:58 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-#define GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#define OPEN_MAX 256
+# define OPEN_MAX 256
 
 int		ft_final(char **backup, char **line, ssize_t read_len);
 void	ft_fill_line(char **backup, char **line, ssize_t nl_line);

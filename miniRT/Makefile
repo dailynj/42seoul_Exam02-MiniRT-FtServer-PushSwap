@@ -6,7 +6,7 @@
 #    By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 15:07:00 by najlee            #+#    #+#              #
-#    Updated: 2021/05/12 01:01:45 by najlee           ###   ########.fr        #
+#    Updated: 2021/05/17 01:16:27 by najlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRCS	=	\
 			src/main.c \
 			src/color.c \
 			src/ray.c \
-			src/vec.c \
 			src/point.c \
 			src/object.c \
 			src/light.c \
@@ -44,6 +43,11 @@ SRCS	=	\
 			src/libft/split_whitespace.c \
 			src/libft/libft_1.c \
 			src/libft/libft_2.c \
+			\
+			src/vector/vec_1.c \
+			src/vector/vec_2.c \
+			src/vector/vec_3.c \
+
 
 
 OBJS = $(SRCS:%.c=%.o)

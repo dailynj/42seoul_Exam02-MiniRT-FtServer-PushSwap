@@ -48,13 +48,11 @@ int mlx_put_pixel_to_window(t_cntl *cntl)
     cntl->win = mlx_new_window(cntl->mlx, cntl->scene->canvas.width, cntl->scene->canvas.height, "NAJEONG's World!");
 	if (!(cntl->image = (t_data *)malloc(cntl->scene->camera_num * sizeof(t_data))))
 		print_error("Error : data malloc Fail!!!\n");
-	
 	idx = 0;
 	while (idx < cntl->scene->camera_num){
 		cntl->image[idx].img = mlx_new_image(cntl->mlx, cntl->scene->canvas.width, cntl->scene->canvas.height);
 		cntl->image[idx].addr = mlx_get_data_addr(cntl->image[idx].img, &cntl->image[idx].bits_per_pixel, &cntl->image[idx].line_length, &cntl->image[idx].endian);
 		j = cntl->scene->canvas.height - 1;
-		// printf("-> make %dth image\n", idx + 1);
 		while (j >= 0)
 		{
 			i = 0;
@@ -75,7 +73,6 @@ int mlx_put_pixel_to_window(t_cntl *cntl)
 int	mlx_show_window(t_cntl *cntl)
 {
 	printf("** START SHOW **\n");
-	// mlx_put_pixel_to_window(cntl);
 	printf("** FINISH SHOW **\n");
 	mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image[cntl->scene->camera_idx].img, 0, 0);
 	mlx_key_hook(cntl->win, key_hook, cntl);
@@ -98,7 +95,6 @@ t_bmp	bmp_set_header(t_scene *scene)
 	bmp.info_h.witdh = (int)(scene->canvas.width);
 	bmp.info_h.height = -(int)(scene->canvas.height);
 	bmp.info_h.planes = 1;
-	// bmp.info_h.bitcount = 24;
 	bmp.info_h.bitcount = 32;
 	bmp.info_h.compression = 0;
 	bmp.info_h.sizeimage = 4 * (int)(scene->canvas.width) * (int)(scene->canvas.height);
@@ -112,16 +108,13 @@ t_bmp	bmp_set_header(t_scene *scene)
 int	mlx_save_image(t_cntl *cntl)
 {
 	int			i;
-	// int			j;
 	int			fd;
 	t_bmp		bmp;
 	
 	printf("** START SAVE **\n");
-	// mlx_put_pixel_to_window(cntl);
 	fd = open("miniRT.bmp", O_CREAT | O_WRONLY | O_TRUNC);
 	bmp = bmp_set_header(cntl->scene);
 	write(fd, &bmp, 54);
-
 	i = 0;
 	while (i < (cntl->image[0].line_length / 4) * (int)(cntl->scene->canvas.height))
 	{
@@ -129,7 +122,6 @@ int	mlx_save_image(t_cntl *cntl)
 			write(fd, &cntl->image[0].addr[i * 4], 4);
 		++i;
 	}
-
 	close(fd);
 	printf("** FINISH SAVE **\n");
 	return (0);

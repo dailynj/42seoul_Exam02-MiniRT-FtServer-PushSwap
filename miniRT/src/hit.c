@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:49:45 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:44:07 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 00:32:24 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 void	set_face_normal(t_ray *ray, t_hit_record *rec)
 {
 	rec->front_face = vec_dot(ray->dir, rec->normal) < 0;
-	rec->normal = (rec->front_face) ? rec->normal : vec_mul_num(-1, rec->normal);
+	rec->normal = (rec->front_face) ? rec->normal :
+					vec_mul_num(-1, rec->normal);
 }

@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:05 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:44:44 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 01:22:39 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	*ft_memset(void *s, int c, size_t n)
 	unsigned char	*ptr;
 
 	ptr = s;
-	while (n-- > 0){
+	while (n-- > 0)
+	{
 		*ptr = c;
 		write(1, ptr, 1);
 		ptr++;
@@ -68,7 +69,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
-int			ft_strncmp(const char *str1, const char *str2, size_t n)
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
 

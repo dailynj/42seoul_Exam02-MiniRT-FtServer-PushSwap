@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:50:00 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:46:53 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 00:32:48 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_ray			ray_primary(t_camera *cam, double u, double v)
 
 	ray.origin = cam->orig;
 	ray.dir = vec_unit(vec_minus(
-		vec_add(vec_add(cam->left_bottom, vec_mul_num(u, cam->horizontal)),
+		vec_add(vec_add(cam->left_bottom, vec_mul_num(u,
+							cam->horizontal)),
 				vec_mul_num(v, cam->vertical)),
 		cam->orig));
 	return (ray);

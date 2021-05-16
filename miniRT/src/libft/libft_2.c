@@ -6,45 +6,15 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:09 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/12 21:44:50 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/17 01:23:32 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int		ft_atoi(char *str)
-{
-	int	minus;
-	int	answer;
-	int	i;
-	char *str_t;
-
-	i = 0;
-	minus = 1;
-	answer = 0;
-	str_t = str;
-	if (str[i] == '-')
-	{
-		minus *= -1;
-		i++;
-	}
-	while (str[i] != '\0')
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			answer = answer * 10 + (str[i] - '0');
-		else
-		{
-			printf("Error : %s ft_atoi 에러\n", str_t);
-			exit(1);
-		}
-		i++;
-	}
-	return (minus * answer);
-}
-
 double	ft_atof(char *str)
 {
-	double	answer;
+	double		answer;
 	int		i;
 	int		minus;
 	int		dot;
@@ -53,9 +23,6 @@ double	ft_atof(char *str)
 	minus = 1;
 	dot = 0;
 	answer = 0.0;
-	char *str_t;
-
-	str_t = str;
 	if (str[i] == '-')
 	{
 		minus *= -1;
@@ -68,13 +35,10 @@ double	ft_atof(char *str)
 		else if (str[i] >= '0' && str[i] <= '9' && dot == 0)
 			answer = answer * 10 + str[i] - '0';
 		else if (str[i] >= '0' && str[i] <= '9' && dot > 0)
-		{
-			answer = answer + (str[i] - '0') / ft_pow(10.0, dot);
-			dot++;
-		}
+			answer = answer + (str[i] - '0') / ft_pow(10.0, dot++);
 		else
 		{
-			printf("Error : %s ft_atof 에러\n", str_t);
+			printf("Error : ft_atof 에러\n");
 			exit(1);
 		}
 		i++;
