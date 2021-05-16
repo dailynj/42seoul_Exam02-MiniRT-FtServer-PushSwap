@@ -92,12 +92,12 @@ int	main(int argc, char **argv)
 	int idx = 0;
 	if (!(cntl.image = (t_data *)malloc(cntl.scene->camera_num * sizeof(t_data))))
 		print_error("Error : data malloc Fail!!!\n");
-	printf("aaaaa\n");
+	printf("\n*** miniRT start ***\n");
 	while (idx < cntl.scene->camera_num){
 		cntl.image[idx].img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height);
 		cntl.image[idx].addr = mlx_get_data_addr(cntl.image[idx].img, &cntl.image[idx].bits_per_pixel, &cntl.image[idx].line_length, &cntl.image[idx].endian);
 		j = cntl.scene->canvas.height - 1;
-		printf("bbbbb\n");
+		printf("make image\n");
 		while (j >= 0)
 		{
 			i = 0;
@@ -117,10 +117,11 @@ int	main(int argc, char **argv)
 		}
 		idx++;
 	}
+	// mlx_put_image_to_window(cntl.mlx, cntl.win, cntl.image[cntl.scene->camera_idx].img, 0, 0);
 	mlx_put_image_to_window(cntl.mlx, cntl.win, cntl.image[cntl.scene->camera_idx].img, 0, 0);
-	printf("main\n");
 	mlx_key_hook(cntl.win, key_hook, &cntl);
 	mlx_loop(cntl.mlx);
+	// mlx_loop(cntl.mlx);
 	
 	return (0);
 }

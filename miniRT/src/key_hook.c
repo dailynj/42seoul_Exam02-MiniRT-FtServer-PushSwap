@@ -24,21 +24,21 @@ int	key_hook(int keycode, t_cntl *cntl)
 	}
 	else if (keycode == KEY_RIGHT){
 		printf("right\n");
-		cntl->scene->camera_idx++;
-		if (cntl->scene->camera_idx == cntl->scene->camera_num)
+		if (cntl->scene->camera_idx == cntl->scene->camera_num-1)
 			cntl->scene->camera_idx = 0;
+		else
+			cntl->scene->camera_idx = cntl->scene->camera_idx + 1;
+		printf("idx = %d\n", cntl->scene->camera_idx);
 		mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image[cntl->scene->camera_idx].img, 0, 0);
-		mlx_key_hook(cntl->win, key_hook, &cntl);
-		mlx_loop(cntl->mlx);
 	}
 	else if (keycode == KEY_LEFT){
 		printf("left\n");
-		cntl->scene->camera_idx--;
-		if (cntl->scene->camera_idx == -1)
+		if (cntl->scene->camera_idx == 0)
+			cntl->scene->camera_idx = cntl->scene->camera_num - 1;
+		else
 			cntl->scene->camera_idx = cntl->scene->camera_idx - 1;
+		printf("idx = %d\n", cntl->scene->camera_idx);
 		mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image[cntl->scene->camera_idx].img, 0, 0);
-		mlx_key_hook(cntl->win, key_hook, &cntl);
-		mlx_loop(cntl->mlx);
 	}
 	return (0);
 }
