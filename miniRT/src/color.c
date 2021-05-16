@@ -12,7 +12,6 @@
 
 #include "../includes/minirt.h"
 
-// create color
 t_color	color(double r, double g, double b)
 {
 	t_color	c;

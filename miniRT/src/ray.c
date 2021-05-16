@@ -36,7 +36,6 @@ t_ray			ray_primary(t_camera *cam, double u, double v)
 	t_ray	ray;
 
 	ray.origin = cam->orig;
-	// left_bottom + u * horizontal + v * vertical - origin 의 단위 벡터.
 	ray.dir = vec_unit(vec_minus(
 		vec_add(vec_add(cam->left_bottom, vec_mul_num(u, cam->horizontal)),
 				vec_mul_num(v, cam->vertical)),
@@ -53,20 +52,10 @@ t_hit_record	record_init(void)
 	return (record);
 }
 
-// Image의 크기 및 종횡비, Projection 공간에서 나타나는 Vector에 따른 색상을 결정
 t_vec			ray_color(t_scene *scene)
 {
-	// double	t;
-	// t_vec	unit_direction;
-	//printf("@@@");
 	scene->rec = record_init();
-	if (hit(scene->world, &scene->ray, &scene->rec)){
-		// printf("%f %f %f", phong_lighting(scene).x, phong_lighting(scene).y, phong_lighting(scene).z);
+	if (hit(scene->world, &scene->ray, &scene->rec))
 		return (phong_lighting(scene));
-	}
-	//printf(" $$$");
-	// return (vec_mul_num(0.5, vec_add(scene->rec.normal, color(1, 1, 1))));
-	// unit_direction = vec_unit(scene->ray.dir);
-	// t = 0.5 * (unit_direction.y + 1.0);
 	return (vec(0, 0, 0));
 }

@@ -38,7 +38,6 @@ int	key_hook(int keycode, t_cntl *cntl)
 	return (0);
 }
 
-// close button press event
 int	exit_hook()
 {
 	exit(0);

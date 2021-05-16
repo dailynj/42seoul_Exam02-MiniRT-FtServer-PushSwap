@@ -45,23 +45,12 @@ SRCS	=	\
 			src/libft/libft_1.c \
 			src/libft/libft_2.c \
 
-#	
-#
-#
 
 OBJS = $(SRCS:%.c=%.o)
-
-#
-# Compiler and flags
-#
 
 CC		=	clang
 CFLAGS	=	-Wall -Werror -Wextra
 CLIB	=	-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
-
-#
-# Rules
-#
 
 all		: $(NAME)
 

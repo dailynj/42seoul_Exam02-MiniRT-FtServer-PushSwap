@@ -19,7 +19,7 @@ int	parsing(t_cntl *cntl, char *rtname)
 	char	**tmp;
 	int		read_len;
 
-	if (check_rt(rtname) == FALSE) // 파일이 .rt로 끝나는것 확인
+	if (check_rt(rtname) == FALSE)
 		return (0);
 	fd = open(rtname, O_RDONLY);
 	if (fd == -1)

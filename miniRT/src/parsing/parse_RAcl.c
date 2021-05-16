@@ -62,8 +62,6 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	if (cal_cmd_len(tmp) != 3)
 		return (print_error("Error : camera point 인수의 개수가 잘못 들어왔습니다! \n"));
 	tmp_c->orig = vec(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
-	// write(1, &tmp_c->orig.x, 1);
-	// printf("orig.x = %f, orig.y = %f, orig.z = %f", tmp_c->orig.x, tmp_c->orig.y, tmp_c->orig.z);
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp2) != 3)
@@ -73,12 +71,11 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	ft_freeall(tmp2);
 
 	fov = ft_atof(one_line[3]);
-	// printf("cccc parsing");
 	if (fov >= 180.0)
 		return (print_error("Error: fov값은 180도 보다 작아야합니다!\n"));
 	tmp_c->viewport_w = 2 * tan((fov * 3.141592) / 360.0);
 	tmp_c->viewport_h = tmp_c->viewport_w / cntl->scene->canvas.aspect_ratio;
-	tmp_c->focal_len = 1.0; //고정
+	tmp_c->focal_len = 1.0;
 	tmp_c->horizontal =
 		vec_mul_num(tmp_c->viewport_w, vec_unit(vec_cross(tmp_c->normal, vec(0, 1, 0))));
 	tmp_c->vertical =
@@ -86,7 +83,7 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 	tmp_c->left_bottom =
 		vec_minus(vec_minus(vec_minus(tmp_c->orig, vec_div(2, tmp_c->horizontal)),
 							vec_div(2, tmp_c->vertical)),
-					vec(0, 0, 1.0)); // 1.0 은 focal len
+					vec(0, 0, 1.0));
 	return (1);
 }
 
@@ -94,7 +91,6 @@ int	l_parse(t_cntl *cntl, char **one_line)
 {
 	char	**tmp;
 	char	**tmp2;
-	// printf("llllll parsing");
 	if (cal_cmd_len(one_line) != 4)
 		return (print_error("Error: camera 인수 개수 오류\n"));
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
@@ -105,7 +101,6 @@ int	l_parse(t_cntl *cntl, char **one_line)
 		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp2) != 3)
 		return (print_error("Error : light color 인수의 개수가 잘못 들어왔습니다! \n"));
-	// printf("llllll parsing");
 	obj_add_back(
 		&cntl->scene->light,
 		object(LIGHT_POINT,
