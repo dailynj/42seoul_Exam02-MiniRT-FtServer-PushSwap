@@ -21,8 +21,12 @@ int	sp_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: sp 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp) != 3)
+		print_error("Error : sphere point 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp2 = ft_split_char(one_line[3], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp2) != 3)
+		print_error("Error : sphere color 인수의 개수가 잘못 들어왔습니다! \n");
 	obj_add_back(
 		&cntl->scene->world,
 		object(SP,
@@ -43,10 +47,16 @@ int	pl_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: pl 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp) != 3)
+		print_error("Error : plane point 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp2) != 3)
+		print_error("Error : plane normal 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp3 = ft_split_char(one_line[3], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp3) != 3)
+		print_error("Error : plane color 인수의 개수가 잘못 들어왔습니다! \n");
 	obj_add_back(
 		&cntl->scene->world,
 		object(PL,
@@ -69,10 +79,16 @@ int	sq_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: sq 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp) != 3)
+		print_error("Error : square point 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp2) != 3)
+		print_error("Error : square normal 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp3 = ft_split_char(one_line[4], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp3) != 3)
+		print_error("Error : square color 인수의 개수가 잘못 들어왔습니다! \n");
 	
 	obj_add_back(
 		&cntl->scene->world,
@@ -97,10 +113,16 @@ int	cy_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: cy 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp) != 3)
+		print_error("Error : cqlinder point 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp2) != 3)
+		print_error("Error : cqlinder normal 인수의 개수가 잘못 들어왔습니다! \n");
 	if ((tmp3 = ft_split_char(one_line[5], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp3) != 3)
+		print_error("Error : cqlinder color 인수의 개수가 잘못 들어왔습니다! \n");
 	obj_add_back(
 		&cntl->scene->world,
 		object(CY, cylinder(point3(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])),
@@ -124,12 +146,23 @@ int	tr_parse(t_cntl *cntl, char **one_line)
 		print_error("Error: tr 인수 개수 오류\n");
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp) != 3)
+		print_error("Error : triangle point1 인수의 개수가 잘못 들어왔습니다! \n");
+
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp2) != 3)
+		print_error("Error : triangle point2 인수의 개수가 잘못 들어왔습니다! \n");
+
 	if ((tmp3 = ft_split_char(one_line[3], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp3) != 3)
+		print_error("Error : triangle point3 인수의 개수가 잘못 들어왔습니다! \n");
+
 	if ((tmp4 = ft_split_char(one_line[4], ',')) == NULL)
 		print_error("Error: split 오류!\n");
+	if (cal_cmd_len(tmp4) != 3)
+		print_error("Error : triangle color 인수의 개수가 잘못 들어왔습니다! \n");
 	obj_add_back(
 		&cntl->scene->world,
 		object(TR,
