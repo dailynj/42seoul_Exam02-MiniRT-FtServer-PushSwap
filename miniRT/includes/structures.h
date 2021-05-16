@@ -105,6 +105,7 @@ typedef struct			s_scene
 	t_canvas				canvas;
 	t_camera				*camera_arr;
 	int						camera_num;
+	int						camera_idx;
 	t_object				*world;
 	t_object				*light;
 	t_color					ambient;
@@ -116,7 +117,8 @@ typedef struct			s_cntl
 {
 	void					*mlx;
 	void					*win;
-	t_scene					*scene;
+	t_scene					*scene; 
+	t_data					*image;
 }						t_cntl;
 
 typedef struct			s_sphere

@@ -77,5 +77,6 @@ t_scene		*scene_init(void)
 	scene->world = 0;
 	scene->light = 0;
 	scene->camera_num = 0;
+	scene->camera_idx = 0;
 	return (scene);
 }
