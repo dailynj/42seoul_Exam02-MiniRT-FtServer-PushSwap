@@ -76,5 +76,6 @@ t_scene		*scene_init(void)
 	scene->ambient = color(-1, -1, -1);
 	scene->world = 0;
 	scene->light = 0;
+	scene->camera_num = 0;
 	return (scene);
 }

@@ -42,10 +42,10 @@ int	check_parse_num(t_cntl *cntl, char **line)
 	int		i;
 	int		cmd_len;
 	char	**one_line;
-	int		check[10];
+	int		check[5];
 
 	i = 0;
-	ft_memset(check, 0, 10 * sizeof(int));
+	ft_memset(check, 0, 5 * sizeof(int));
 	cmd_len = cal_cmd_len(line);
 	while (i < cmd_len)
 	{
@@ -53,26 +53,18 @@ int	check_parse_num(t_cntl *cntl, char **line)
 			ft_freeall(one_line);
 			return (print_error("Error : white_space split이 잘못 됬습니다.\n"));
 		}
-		if (one_line[0][0] == 's' && one_line[0][1] == 'p')
-			check[4]++;
-		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
-			check[5]++;
-		else if (one_line[0][0] == 's' && one_line[0][1] == 'q')
-			check[6]++;
-		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y')
-			check[7]++;
-		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
-			check[8]++;
+		if ((one_line[0][0] == 's' && one_line[0][1] == 'p') || (one_line[0][0] 
+			== 'p' && one_line[0][1] == 'l') || (one_line[0][0] == 's' && 
+			one_line[0][1] == 'q') || (one_line[0][0] == 'c' && one_line[0][1] 
+			== 'y') || (one_line[0][0] == 't' && one_line[0][1] == 'r')
+			|| one_line[0][0] == 'l' || one_line[0][0] == '#')
+			;
 		else if (one_line[0][0] == 'R')
 			check[0]++;
 		else if (one_line[0][0] == 'A')
 			check[1]++;
 		else if (one_line[0][0] == 'c')
-			check[2]++;
-		else if (one_line[0][0] == 'l')
-			check[3]++;
-		else if (one_line[0][0] == '#')
-			;
+			cntl->scene->camera_num++;
 		else
 		{
 			ft_freeall(one_line);
@@ -81,9 +73,9 @@ int	check_parse_num(t_cntl *cntl, char **line)
 		ft_freeall(one_line);
 		i++;
 	}
-	if (check[0] != 1 || check[1] != 1 || check[2] == 0)
+	if (check[0] != 1 || check[1] != 1 || cntl->scene->camera_num == 0)
 		return (print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n"));
-	if (!(cntl->scene->camera_arr = (t_camera *)malloc(check[2] * sizeof(t_camera))))
+	if (!(cntl->scene->camera_arr = (t_camera *)malloc(cntl->scene->camera_num * sizeof(t_camera))))
 		return (print_error("Error : camera 할당이 제대로 되지 않았습니다\n"));
 	return(parsing_all(cntl, line, cmd_len));
 	return (1);

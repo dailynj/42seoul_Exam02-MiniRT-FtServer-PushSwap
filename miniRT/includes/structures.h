@@ -104,6 +104,7 @@ typedef struct			s_scene
 {
 	t_canvas				canvas;
 	t_camera				*camera_arr;
+	int						camera_num;
 	t_object				*world;
 	t_object				*light;
 	t_color					ambient;

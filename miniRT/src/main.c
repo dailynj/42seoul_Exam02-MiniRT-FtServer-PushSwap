@@ -16,7 +16,7 @@
 int	main(int argc, char **argv)
 {
 	t_cntl		cntl;
-    t_data		image;
+    t_data		*image;
 	t_color	pixel_color;
 	int			i;
 	int			j;
@@ -88,30 +88,37 @@ int	main(int argc, char **argv)
 
 
     cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "NAJEONG World!");
-    image.img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height);
-	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
-	j = cntl.scene->canvas.height - 1;
-	while (j >= 0)
-	{
-		i = 0;
-		while (i < cntl.scene->canvas.width)
+    
+	
+	int idx = 0;
+	if (!(image = (t_data *)malloc(cntl.scene->camera_num * sizeof(t_data))))
+		print_error("Error : data malloc Fail!!!\n");
+	while (idx < cntl.scene->camera_num){
+		image[idx].img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height);
+		image[idx].addr = mlx_get_data_addr(image[idx].img, &image[idx].bits_per_pixel, &image[idx].line_length, &image[idx].endian);
+		j = cntl.scene->canvas.height - 1;
+		while (j >= 0)
 		{
-			///printf("\ni, j = %d, %d", i, j);
-			u = (double)i / (cntl.scene->canvas.width - 1);
-			v = (double)j / (cntl.scene->canvas.height - 1);
-			
-			cntl.scene->ray = ray_primary(&cntl.scene->camera_arr[0], u, v);
-			pixel_color = ray_color(cntl.scene);
-			//printf("pixel_color = %f, %f, %f", pixel_color.x, pixel_color.y, pixel_color.z);
-			my_mlx_pixel_put(&image, i, cntl.scene->canvas.height - 1 - j, write_color(0, pixel_color));
-			++i;
+			i = 0;
+			while (i < cntl.scene->canvas.width)
+			{
+				///printf("\ni, j = %d, %d", i, j);
+				u = (double)i / (cntl.scene->canvas.width - 1);
+				v = (double)j / (cntl.scene->canvas.height - 1);
+				
+				cntl.scene->ray = ray_primary(&cntl.scene->camera_arr[idx], u, v);
+				pixel_color = ray_color(cntl.scene);
+				//printf("pixel_color = %f, %f, %f", pixel_color.x, pixel_color.y, pixel_color.z);
+				my_mlx_pixel_put(&image[idx], i, cntl.scene->canvas.height - 1 - j, write_color(0, pixel_color));
+				++i;
+			}
+			--j;
 		}
-		--j;
-		
+		// printf("ppppppppp\n");
+		mlx_put_image_to_window(cntl.mlx, cntl.win, image[idx].img, 0, 0);
+		mlx_key_hook(cntl.win, key_hook, &cntl);
+		mlx_loop(cntl.mlx);
 	}
-	// printf("ppppppppp\n");
-    mlx_put_image_to_window(cntl.mlx, cntl.win, image.img, 0, 0);
-    mlx_key_hook(cntl.win, key_hook, &cntl);
-    mlx_loop(cntl.mlx);
+	
 	return (0);
 }
