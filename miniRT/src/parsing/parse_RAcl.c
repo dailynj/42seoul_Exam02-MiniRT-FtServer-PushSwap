@@ -34,9 +34,9 @@ int	a_parse(t_cntl *cntl, char **one_line)
 	if (cal_cmd_len(one_line) != 3)
 		return (print_error("Error: A 인수 개수 오류\n"));
 	if ((amb = ft_split_char(one_line[2], ',')) == NULL)
-		print_error("Error: split 오류!\n");
+		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(amb) != 3)
-		print_error("Error : color 인수의 개수가 잘못 들어왔습니다! \n");
+		return (print_error("Error : color 인수의 개수가 잘못 들어왔습니다! \n"));
 
 	ratio = ft_atof(one_line[1]);
 	cntl->scene->ambient = color(
@@ -55,19 +55,19 @@ int	c_parse(t_cntl *cntl, char **one_line, int idx)
 
 	tmp_c = &(cntl->scene->camera_arr[idx]);
 	if (cal_cmd_len(one_line) != 4)
-		print_error("Error: camera 인수 개수 오류\n");
+		return (print_error("Error: camera 인수 개수 오류\n"));
 	
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
-		print_error("Error: split 오류!\n");
+		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp) != 3)
-		print_error("Error : camera point 인수의 개수가 잘못 들어왔습니다! \n");
+		return (print_error("Error : camera point 인수의 개수가 잘못 들어왔습니다! \n"));
 	tmp_c->orig = vec(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	// write(1, &tmp_c->orig.x, 1);
 	// printf("orig.x = %f, orig.y = %f, orig.z = %f", tmp_c->orig.x, tmp_c->orig.y, tmp_c->orig.z);
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
-		print_error("Error: split 오류!\n");
+		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp2) != 3)
-		print_error("Error : camera normal 인수의 개수가 잘못 들어왔습니다! \n");
+		return (print_error("Error : camera normal 인수의 개수가 잘못 들어왔습니다! \n"));
 	tmp_c->normal = vec_unit(vec(ft_atof(tmp2[0]), ft_atof(tmp2[1]), ft_atof(tmp2[2])));
 	ft_freeall(tmp);
 	ft_freeall(tmp2);
@@ -96,15 +96,15 @@ int	l_parse(t_cntl *cntl, char **one_line)
 	char	**tmp2;
 	// printf("llllll parsing");
 	if (cal_cmd_len(one_line) != 4)
-		print_error("Error: camera 인수 개수 오류\n");
+		return (print_error("Error: camera 인수 개수 오류\n"));
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
-		print_error("Error: split 오류!\n");
+		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp) != 3)
-		print_error("Error : light point 인수의 개수가 잘못 들어왔습니다! \n");
+		return (print_error("Error : light point 인수의 개수가 잘못 들어왔습니다! \n"));
 	if ((tmp2 = ft_split_char(one_line[3], ',')) == NULL)
-		print_error("Error: split 오류!\n");
+		return (print_error("Error: split 오류!\n"));
 	if (cal_cmd_len(tmp2) != 3)
-		print_error("Error : light color 인수의 개수가 잘못 들어왔습니다! \n");
+		return (print_error("Error : light color 인수의 개수가 잘못 들어왔습니다! \n"));
 	// printf("llllll parsing");
 	obj_add_back(
 		&cntl->scene->light,

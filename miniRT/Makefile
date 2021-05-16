@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	miniRT  # 최종!! minirt 로 바꾸기!!
+NAME	=	miniRT
 
 SRCS	=	\
 			src/mlx.c \
@@ -82,5 +82,8 @@ fclean	: clean
 
 re		: fclean all
 
-test	: clean re
+show	: clean re
 		./miniRT subject.rt
+
+save	: clean re
+		./miniRT subject.rt --save

@@ -22,6 +22,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+int	mlx_show_window(t_cntl *cntl);
+int	mlx_save_image(t_cntl *cntl);
+void generateBitmapImage (unsigned char* image, int height, int width, char* imageFileName);
+unsigned char* createBitmapFileHeader (int height, int stride);
+unsigned char* createBitmapInfoHeader (int height, int width);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			exit_hook();
 int			key_hook(int keycode, t_cntl *cntl);
@@ -150,6 +155,7 @@ char		**ft_freeall(char **s);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memset(void *s, int c, size_t n);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
+int			ft_strncmp(const char *str1, const char *str2, size_t n);
 
 // libft_2.c
 int			ft_atoi(char *str);

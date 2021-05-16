@@ -18,26 +18,21 @@ int	key_hook(int keycode, t_cntl *cntl)
 {
 	if (keycode == KEY_ESC)
 	{
-		printf("esc\n");
 		mlx_destroy_window(cntl->mlx, cntl->win);
 		exit(0);
 	}
 	else if (keycode == KEY_RIGHT){
-		printf("right\n");
 		if (cntl->scene->camera_idx == cntl->scene->camera_num-1)
 			cntl->scene->camera_idx = 0;
 		else
 			cntl->scene->camera_idx = cntl->scene->camera_idx + 1;
-		printf("idx = %d\n", cntl->scene->camera_idx);
 		mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image[cntl->scene->camera_idx].img, 0, 0);
 	}
 	else if (keycode == KEY_LEFT){
-		printf("left\n");
 		if (cntl->scene->camera_idx == 0)
 			cntl->scene->camera_idx = cntl->scene->camera_num - 1;
 		else
 			cntl->scene->camera_idx = cntl->scene->camera_idx - 1;
-		printf("idx = %d\n", cntl->scene->camera_idx);
 		mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image[cntl->scene->camera_idx].img, 0, 0);
 	}
 	return (0);
