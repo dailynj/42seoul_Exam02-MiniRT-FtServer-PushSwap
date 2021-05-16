@@ -18,18 +18,14 @@
 # include "structures.h"
 # include <fcntl.h>
 # include <math.h>
-// # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-// # include <pthread.h>
 
-// minirt.c
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			exit_hook();
 int			key_hook(int keycode, t_cntl *cntl);
 
-// ray.c
 t_ray		ray(t_point origin, t_vec dir);
 t_vec		ray_at(t_ray *ray, double t);
 t_ray		ray_primary(t_camera *cam, double u, double v);

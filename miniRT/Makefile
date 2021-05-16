@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	a.out  # 최종!! minirt 로 바꾸기!!
+NAME	=	miniRT  # 최종!! minirt 로 바꾸기!!
 
 SRCS	=	\
 			src/mlx.c \
@@ -65,6 +65,8 @@ CLIB	=	-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 
 all		: $(NAME)
 
+bonus	: all
+
 %.o	:%.c
 	$(CC) $(CFLAGS)  -c $< -o $@
 
@@ -81,4 +83,4 @@ fclean	: clean
 re		: fclean all
 
 test	: clean re
-		./a.out subject.rt
+		./miniRT subject.rt
