@@ -22,11 +22,45 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# pragma pack(push, 1)
+
+typedef struct		s_fileheader
+{
+	unsigned char	sign1;
+	unsigned char	sign2;
+	unsigned int	file_size;
+	unsigned short	reserved1;
+	unsigned short	reserved2;
+	unsigned int	start_bmp;
+}					t_fileheader;
+
+typedef struct		s_infoheader
+{
+	unsigned int	size;
+	unsigned int	witdh;
+	unsigned int	height;
+	unsigned short	planes;
+	unsigned short	bitcount;
+	unsigned int	compression;
+	unsigned int	sizeimage;
+	unsigned int	x_pelspermeter;
+	unsigned int	y_pelspermeter;
+	unsigned int	color_used;
+	unsigned int	color_important;
+}					t_infoheader;
+
+typedef struct		s_bmp
+{
+	t_fileheader	file_h;
+	t_infoheader	info_h;
+}					t_bmp;
+# pragma pack(pop)
+
 int	mlx_show_window(t_cntl *cntl);
 int	mlx_save_image(t_cntl *cntl);
-void generateBitmapImage (unsigned char* image, int height, int width, char* imageFileName);
-unsigned char* createBitmapFileHeader (int height, int stride);
-unsigned char* createBitmapInfoHeader (int height, int width);
+t_bmp	bmp_set_header(t_scene *scene);
+int mlx_put_pixel_to_window(t_cntl *cntl);
+
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			exit_hook();
 int			key_hook(int keycode, t_cntl *cntl);
