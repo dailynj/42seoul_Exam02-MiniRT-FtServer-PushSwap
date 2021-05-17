@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-t_cylinder	*cylinder(t_point point, double radius, double height, t_vec normal)
+t_cylinder          *cylinder(t_point point, double radius, double height, t_vec normal)
 {
 	t_cylinder	*cy;
 

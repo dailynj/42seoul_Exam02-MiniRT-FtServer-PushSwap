@@ -19,13 +19,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 && argc != 3)
 		return (print_error("Error : Argument Error!\n"));
-	
 	cntl.mlx = mlx_init();
 	if ((cntl.scene = scene_init()) == NULL)
 		return (print_error("Error : scene_init 에러!\n"));
 	if (parsing(&cntl, argv[1]) == 0)
 		return (print_error("Error : Parsing Error!\n"));
-
 	mlx_put_pixel_to_window(&cntl);
 	if (argc == 2)
 		return (mlx_show_window(&cntl));
@@ -44,7 +42,7 @@ int mlx_put_pixel_to_window(t_cntl *cntl)
 	int			i;
 	int			j;
 	int			idx;
-
+	
     cntl->win = mlx_new_window(cntl->mlx, cntl->scene->canvas.width, cntl->scene->canvas.height, "NAJEONG's World!");
 	if (!(cntl->image = (t_data *)malloc(cntl->scene->camera_num * sizeof(t_data))))
 		print_error("Error : data malloc Fail!!!\n");

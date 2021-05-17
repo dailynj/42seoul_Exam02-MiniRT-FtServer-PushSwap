@@ -50,30 +50,29 @@ char	*ft_worddup_whitespace(char *s)
 	return (ptr);
 }
 
+
 char	**ft_split_whitespace(char *s)
 {
 	char	**ptr;
-	int		len;
-	int		idx[5];
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
-	ft_memset(idx, 0, 5);
-	if (!s)
+	if (!(len = ft_wordcnt_whitespace(s)) || !(ptr = (char **)ft_calloc(len + 1, sizeof(char *))))
 		return (NULL);
-	len = ft_wordcnt_whitespace(s);
-	if (!(ptr = (char **)ft_calloc(len + 1, sizeof(char *))))
-		return (NULL);
-	while (idx[0] < len && s[idx[1]])
+	i = 0;
+	j = 0;
+	while (i < len && s[j])
 	{
-		if ((!(9 <= s[idx[1]] && s[idx[1]] <= 13)) && s[idx[1]] != 32)
+		if ((!(9 <= s[j] && s[j] <= 13)) && s[j] != 32)
 		{
-			if (!(ptr[idx[0]++] = ft_worddup_whitespace(&(s[idx[1]]))))
+			if (!(ptr[i++] = ft_worddup_whitespace(&(s[j]))))
 				return (ft_freeall(ptr));
-			while (s[idx[1]] && (!(9 <= s[idx[1]] && s[idx[1]] <= 13))
-							&& s[idx[1]] != 32)
-				idx[1]++;
+			while (s[j] && (!(9 <= s[j] && s[j] <= 13)) && s[j] != 32)
+				j++;
 		}
 		else
-			idx[1]++;
+			j++;
 	}
 	return (ptr);
 }

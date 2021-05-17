@@ -73,6 +73,7 @@ int	check_parse_num(t_cntl *cntl, char **line)
 		ft_freeall(one_line);
 		i++;
 	}
+	
 	if (check[0] != 1 || check[1] != 1 || cntl->scene->camera_num == 0)
 		return (print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n"));
 	if (!(cntl->scene->camera_arr = (t_camera *)malloc(cntl->scene->camera_num * sizeof(t_camera))))

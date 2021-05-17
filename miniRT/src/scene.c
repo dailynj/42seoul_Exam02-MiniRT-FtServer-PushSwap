@@ -36,10 +36,7 @@ t_scene		*scene_init(void)
 	t_scene	*scene;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-	{
-		printf("Error : Scene init Fail!!!\n");
-		return (NULL);
-	}
+		return (print_error("Error : Scene init Fail!!!\n"));
 	scene->canvas.height = -1;
 	scene->canvas.width = -1;
 	scene->canvas.aspect_ratio = -1.0;
