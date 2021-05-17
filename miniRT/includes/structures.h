@@ -29,8 +29,8 @@
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_color;
 typedef struct s_vec	t_point;
-typedef int			t_bool;
-typedef int			t_object_type;
+typedef int				t_bool;
+typedef int				t_object_type;
 
 struct			s_vec
 {
@@ -39,22 +39,22 @@ struct			s_vec
 	double		z;
 };
 
-typedef struct		s_data
+typedef struct	s_data
 {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}			t_data;
+}				t_data;
 
-typedef struct		s_ray
+typedef struct	s_ray
 {
 	t_vec		origin;
 	t_vec		dir;
-}			t_ray;
+}				t_ray;
 
-typedef struct		s_camera
+typedef struct	s_camera
 {
 	t_point		orig;
 	t_vec		normal;
@@ -64,16 +64,16 @@ typedef struct		s_camera
 	t_vec		vertical;
 	double		focal_len;
 	t_point		left_bottom;
-}			t_camera;
+}				t_camera;
 
-typedef struct		s_canvas
+typedef struct	s_canvas
 {
 	double		width;
 	double		height;
 	double		aspect_ratio;
-}			t_canvas;
+}				t_canvas;
 
-typedef struct		s_hit_record
+typedef struct	s_hit_record
 {
 	t_vec		p;
 	t_vec		normal;
@@ -81,80 +81,115 @@ typedef struct		s_hit_record
 	double		tmax;
 	double		t;
 	double		t2;
-	int		front_face;
+	int			front_face;
 	t_color		albedo;
-}			t_hit_record;
+}				t_hit_record;
 
-typedef struct		s_object
+typedef struct	s_object
 {
 	t_object_type	type;
-	void		*element;
-	void		*next;
-	t_color		albedo;
-}			t_object;
+	void			*element;
+	void			*next;
+	t_color			albedo;
+}				t_object;
 
-typedef struct		s_light
+typedef struct	s_light
 {
 	t_vec		origin;
 	t_color		light_color;
 	double		bright_ratio;
-}			t_light;
+}				t_light;
 
-typedef struct		s_scene
+typedef struct	s_scene
 {
-	t_canvas	canvas;
-	t_camera	*camera_arr;
-	int			camera_num;
-	int			camera_idx;
-	t_object	*world;
-	t_object	*light;
-	t_color		ambient;
-	t_ray		ray;
+	t_canvas		canvas;
+	t_camera		*camera_arr;
+	int				camera_num;
+	int				camera_idx;
+	t_object		*world;
+	t_object		*light;
+	t_color			ambient;
+	t_ray			ray;
 	t_hit_record	rec;
-}			t_scene;
+}				t_scene;
 
-typedef struct		s_cntl
+typedef struct	s_cntl
 {
 	void		*mlx;
 	void		*win;
 	t_scene		*scene;
 	t_data		*image;
-}			t_cntl;
+}				t_cntl;
 
-typedef struct		s_sphere
+typedef struct	s_sphere
 {
 	t_vec		center;
 	double		radius;
 	double		radius2;
-}			t_sphere;
+}				t_sphere;
 
-typedef struct		s_plane
+typedef struct	s_plane
 {
 	t_vec		point;
 	t_vec		normal;
-}			t_plane;
+}				t_plane;
 
-typedef struct		s_square
+typedef struct	s_square
 {
 	t_vec		point;
 	t_vec		normal;
 	double		length;
-}			t_square;
+}				t_square;
 
-typedef struct		s_triangle
+typedef struct	s_triangle
 {
 	t_point		p1;
 	t_point		p2;
 	t_point		p3;
 	t_vec		normal;
-}			t_triangle;
+}				t_triangle;
 
-typedef struct		s_cylinder
+typedef struct	s_cylinder
 {
 	t_point		point;
 	t_vec		normal;
 	double		radius;
 	double		height;
-}			t_cylinder;
+}				t_cylinder;
+
+# pragma pack(push, 1)
+
+typedef	struct	s_fileheader
+{
+	unsigned char	sign1;
+	unsigned char	sign2;
+	unsigned int	file_size;
+	unsigned short	reserved1;
+	unsigned short	reserved2;
+	unsigned int	start_bmp;
+}				t_fileheader;
+
+typedef	struct	s_infoheader
+{
+	unsigned int	size;
+	unsigned int	witdh;
+	unsigned int	height;
+	unsigned short	planes;
+	unsigned short	bitcount;
+	unsigned int	compression;
+	unsigned int	sizeimage;
+	unsigned int	x_pelspermeter;
+	unsigned int	y_pelspermeter;
+	unsigned int	color_used;
+	unsigned int	color_important;
+}				t_infoheader;
+
+typedef	struct	s_bmp
+{
+	t_fileheader	file_h;
+	t_infoheader	info_h;
+}				t_bmp;
+
+# pragma pack(pop)
 
 #endif

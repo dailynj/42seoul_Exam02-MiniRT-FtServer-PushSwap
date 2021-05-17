@@ -6,7 +6,7 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:23 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/17 01:18:23 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/17 13:43:16 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,27 @@ char	*ft_worddup_whitespace(char *s)
 char	**ft_split_whitespace(char *s)
 {
 	char	**ptr;
-	size_t	len;
-	size_t	i;
-	size_t	j;
+	int		len;
+	int		idx[5];
 
+	ft_memset(idx, 0, 5);
 	if (!s)
 		return (NULL);
 	len = ft_wordcnt_whitespace(s);
 	if (!(ptr = (char **)ft_calloc(len + 1, sizeof(char *))))
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < len && s[j])
+	while (idx[0] < len && s[idx[1]])
 	{
-		if ((!(9 <= s[j] && s[j] <= 13)) && s[j] != 32)
+		if ((!(9 <= s[idx[1]] && s[idx[1]] <= 13)) && s[idx[1]] != 32)
 		{
-			if (!(ptr[i++] = ft_worddup_whitespace(&(s[j]))))
+			if (!(ptr[idx[0]++] = ft_worddup_whitespace(&(s[idx[1]]))))
 				return (ft_freeall(ptr));
-			while (s[j] && (!(9 <= s[j] && s[j] <= 13))
-							&& s[j] != 32)
-				j++;
+			while (s[idx[1]] && (!(9 <= s[idx[1]] && s[idx[1]] <= 13))
+							&& s[idx[1]] != 32)
+				idx[1]++;
 		}
 		else
-			j++;
+			idx[1]++;
 	}
 	return (ptr);
 }

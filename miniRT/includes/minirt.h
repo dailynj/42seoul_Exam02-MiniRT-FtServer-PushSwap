@@ -22,48 +22,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# pragma pack(push, 1)
-
-typedef	struct		s_fileheader
-{
-	unsigned char	sign1;
-	unsigned char	sign2;
-	unsigned int	file_size;
-	unsigned short	reserved1;
-	unsigned short	reserved2;
-	unsigned int	start_bmp;
-}				t_fileheader;
-
-typedef	struct		s_infoheader
-{
-	unsigned int	size;
-	unsigned int	witdh;
-	unsigned int	height;
-	unsigned short	planes;
-	unsigned short	bitcount;
-	unsigned int	compression;
-	unsigned int	sizeimage;
-	unsigned int	x_pelspermeter;
-	unsigned int	y_pelspermeter;
-	unsigned int	color_used;
-	unsigned int	color_important;
-}				t_infoheader;
-
-typedef	struct		s_bmp
-{
-	t_fileheader	file_h;
-	t_infoheader	info_h;
-}				t_bmp;
-
-# pragma pack(pop)
-
-int		mlx_show_window(t_cntl *cntl);
-int		mlx_save_image(t_cntl *cntl);
+int			mlx_show_window(t_cntl *cntl);
+int			mlx_save_image(t_cntl *cntl);
 t_bmp		bmp_set_header(t_scene *scene);
-int		mlx_put_pixel_to_window(t_cntl *cntl);
+int			mlx_put_pixel_to_window(t_cntl *cntl);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		exit_hook();
-int		key_hook(int keycode, t_cntl *cntl);
+int			exit_hook();
+int			key_hook(int keycode, t_cntl *cntl);
 t_ray		ray(t_point origin, t_vec dir);
 t_vec		ray_at(t_ray *ray, double t);
 t_ray		ray_primary(t_camera *cam, double u, double v);
@@ -82,7 +47,7 @@ t_vec		vec_min(t_vec vec1, t_vec vec2);
 t_vec		vsymmetric(t_point p1, t_point stan);
 double		vec_length_2(t_vec vector);
 t_color		color(double r, double g, double b);
-int		write_color(int t, t_color pixel_color);
+int			write_color(int t, t_color pixel_color);
 t_vec		point3(double x, double y, double z);
 t_object	*object(t_object_type type, void *element, t_color albedo);
 void		oadd(t_object **list, t_object *new);
@@ -122,23 +87,23 @@ char		*ft_strdup(char *s1);
 char		*ft_strjoin(char *s1, char *s2);
 ssize_t		ft_nl_index(char *backup);
 void		ft_fill_line(char **backup, char **line, ssize_t nl_line);
-int		ft_final(char **backup, char **line, ssize_t read_len);
-int		get_next_line(int fd, char **line);
-int		parsing(t_cntl *cntl, char *rtname);
-int		check_parse_num(t_cntl *cntl, char **line);
-int		parsing_all(t_cntl *cntl, char **line, int cmd_len);
-int		cal_cmd_len(char **tmp);
-int		print_error(char *str);
+int			ft_final(char **backup, char **line, ssize_t read_len);
+int			get_next_line(int fd, char **line);
+int			parsing(t_cntl *cntl, char *rtname);
+int			check_parse_num(t_cntl *cntl, char **line);
+int			parsing_all(t_cntl *cntl, char **line, int cmd_len);
+int			cal_cmd_len(char **tmp);
+int			print_error(char *str);
 t_bool		check_rt(char *rtname);
-int		r_parse(t_cntl *cntl, char **one_line);
-int		a_parse(t_cntl *cntl, char **one_line);
-int		c_parse(t_cntl *cntl, char **one_line, int idx);
-int		l_parse(t_cntl *cntl, char **one_line);
-int		sp_parse(t_cntl *cntl, char **one_line);
-int		pl_parse(t_cntl *cntl, char **one_line);
-int		sq_parse(t_cntl *cntl, char **one_line);
-int		cy_parse(t_cntl *cntl, char **one_line);
-int		tr_parse(t_cntl *cntl, char **one_line);
+int			r_parse(t_cntl *cntl, char **one_line);
+int			a_parse(t_cntl *cntl, char **one_line);
+int			c_parse(t_cntl *cntl, char **one_line, int idx);
+int			l_parse(t_cntl *cntl, char **one_line);
+int			sp_parse(t_cntl *cntl, char **one_line);
+int			pl_parse(t_cntl *cntl, char **one_line);
+int			sq_parse(t_cntl *cntl, char **one_line);
+int			cy_parse(t_cntl *cntl, char **one_line);
+int			tr_parse(t_cntl *cntl, char **one_line);
 size_t		ft_wordcnt_char(char *s, char d);
 char		*ft_worddup_char(char *s, char d);
 char		**ft_split_char(char *s, char d);
@@ -149,6 +114,7 @@ size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
 int			ft_strncmp(const char *str1, const char *str2,
 								size_t n);
 double		ft_atof(char *str);
+void		print_exit(char *str);
 double		ft_pow(double num, int len);
 size_t		ft_wordcnt_whitespace(char *s);
 char		*ft_worddup_whitespace(char *s);

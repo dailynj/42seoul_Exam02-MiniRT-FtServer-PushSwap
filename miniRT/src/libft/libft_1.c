@@ -6,13 +6,13 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 00:51:05 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/17 01:22:39 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/17 13:38:47 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-char	**ft_freeall(char **s)
+char				**ft_freeall(char **s)
 {
 	unsigned int	i;
 
@@ -26,7 +26,7 @@ char	**ft_freeall(char **s)
 	return (NULL);
 }
 
-void	*ft_memset(void *s, int c, size_t n)
+void				*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*ptr;
 
@@ -40,9 +40,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void				*ft_calloc(size_t count, size_t size)
 {
-	char	*tmp;
+	char			*tmp;
 
 	tmp = malloc(count * size);
 	if (!tmp)
@@ -51,7 +51,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (tmp);
 }
 
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
+size_t				ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
 	unsigned int	i;
 
@@ -69,9 +69,9 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
+int					ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	if (!n)
