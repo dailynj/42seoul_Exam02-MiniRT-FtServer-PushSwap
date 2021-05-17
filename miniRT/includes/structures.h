@@ -102,8 +102,8 @@ typedef struct	s_light
 
 typedef struct	s_scene
 {
-	t_canv		canv;
-	t_cam		*c_arr;
+	t_canv			canv;
+	t_cam			*c_arr;
 	int				c_num;
 	int				camera_idx;
 	t_object		*world;

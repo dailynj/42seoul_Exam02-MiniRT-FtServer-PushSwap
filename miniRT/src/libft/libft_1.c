@@ -69,7 +69,7 @@ size_t				ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
-int					ft_strncmp(const char *str1, const char *str2, size_t n)
+int					s_ncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t			i;
 

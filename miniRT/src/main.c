@@ -30,7 +30,7 @@ int		main(int argc, char **argv)
 		return (mlx_show_window(&cntl));
 	else if (argc == 3)
 	{
-		if (ft_strncmp(argv[2], "--save", 6) != 0)
+		if (s_ncmp(argv[2], "--save", 6) != 0)
 			return (print_error("Error : --save 인수가 잘못되었습니다\n"));
 		return (mlx_save_image(&cntl));
 	}

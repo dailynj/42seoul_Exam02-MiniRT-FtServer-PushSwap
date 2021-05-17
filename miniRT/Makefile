@@ -36,14 +36,17 @@ SRCS	=	\
 			src/gnl/get_next_line.c \
 			\
 			src/parsing/parse.c \
+			src/parsing/parse_2.c \
 			src/parsing/parse_racl.c \
 			src/parsing/parse_object.c \
+			src/parsing/parse_object2.c \
 			src/parsing/parse_util.c \
 			\
 			src/libft/split_char.c \
 			src/libft/split_whitespace.c \
 			src/libft/libft_1.c \
 			src/libft/libft_2.c \
+			src/libft/libft_3.c \
 			\
 			src/vector/vec_1.c \
 			src/vector/vec_2.c \

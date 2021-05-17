@@ -59,7 +59,7 @@ t_light		*light_point(t_point light_origin, t_color light_color,
 t_color		phong_lighting(t_scene *scene);
 t_color		point_light_get(t_scene *scene, t_light *light);
 t_vec		reflect(t_vec v, t_vec n);
-t_cam	*camera(t_point orig, double aspect_ratio);
+t_cam		*camera(t_point orig, double aspect_ratio);
 t_scene		*scene_init(void);
 t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);
 t_bool		hit(t_object *world, t_ray *ray, t_hit_record *rec);
@@ -106,7 +106,11 @@ int			pl_parse(t_cntl *cntl, char **one_line);
 int			sq_parse(t_cntl *cntl, char **one_line);
 int			cy_parse(t_cntl *cntl, char **one_line);
 int			tr_parse(t_cntl *cntl, char **one_line);
+char		**split_char_lencheck(char *one_line, int num);
 int			parse_object(t_cntl *cntl, char **ol);
+int			parse_ral(t_cntl *cntl, char **ol);
+int			parse_all2(t_cntl *cntl, char **ol);
+void		parse_num2(char **ol, t_cntl *cntl, int check[]);
 size_t		ft_wordcnt_char(char *s, char d);
 char		*ft_worddup_char(char *s, char d);
 char		**ft_split_char(char *s, char d);
@@ -114,10 +118,12 @@ char		**ft_freeall(char **s);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memset(void *s, int c, size_t n);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
-int			ft_strncmp(const char *str1, const char *str2,
+int			s_ncmp(const char *str1, const char *str2,
 								size_t n);
-double		ft_a2f(char *str);
+double		a2f(char *str);
 void		print_exit(char *str);
+void		ft_free3(char **tmp, char **tmp2, char **tmp3);
+void		ft_free2(char **tmp, char **tmp2);
 double		ft_pow(double num, int len);
 size_t		ft_wordcnt_whitespace(char *s);
 char		*ft_worddup_whitespace(char *s);

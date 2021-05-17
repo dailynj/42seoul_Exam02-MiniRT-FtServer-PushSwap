@@ -38,24 +38,21 @@ t_bool		sphere_discriminant(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 	double	a;
 	double	half_b;
 	double	c;
-	double	discriminant;
-	double	sqrtd;
 	double	root;
+	t_vec	oc;
 
-	t_vec oc = vec(ray->origin.x - sp->center.x,
+	oc = vec(ray->origin.x - sp->center.x,
 					ray->origin.y - sp->center.y,
 					ray->origin.z - sp->center.z);
 	a = vec_dot(ray->dir, ray->dir);
 	half_b = vec_dot(oc, ray->dir);
 	c = vec_dot(oc, oc) - sp->radius * sp->radius;
-	discriminant = half_b * half_b - a * c;
-	if (discriminant < 0)
+	if ((half_b * half_b - a * c) < 0)
 		return (FALSE);
-	sqrtd = sqrt(discriminant);
-	root = (-half_b - sqrtd) / a;
+	root = (-half_b - sqrt((half_b * half_b - a * c))) / a;
 	if (root < rec->tmin || rec->tmax < root)
 	{
-		root = (-half_b + sqrtd) / a;
+		root = (-half_b + sqrt((half_b * half_b - a * c))) / a;
 		if (root < rec->tmin || rec->tmax < root)
 			return (FALSE);
 	}

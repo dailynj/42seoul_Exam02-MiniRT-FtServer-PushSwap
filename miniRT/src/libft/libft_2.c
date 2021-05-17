@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-double			ft_a2f(char *str)
+double			a2f(char *str)
 {
 	double		answer;
 	int			i;
@@ -36,7 +36,7 @@ double			ft_a2f(char *str)
 		else if (str[i] >= '0' && str[i] <= '9' && dot > 0)
 			answer = answer + (str[i] - '0') / ft_pow(10.0, dot++);
 		else
-			print_exit("Error : ft_a2f 에러\n");
+			print_exit("Error : a2f 에러\n");
 	}
 	return (minus * answer);
 }
@@ -55,4 +55,17 @@ void			print_exit(char *str)
 {
 	printf("%s", str);
 	exit(1);
+}
+
+void			ft_free3(char **tmp, char **tmp2, char **tmp3)
+{
+	ft_freeall(tmp);
+	ft_freeall(tmp2);
+	ft_freeall(tmp3);
+}
+
+void			ft_free2(char **tmp, char **tmp2)
+{
+	ft_freeall(tmp);
+	ft_freeall(tmp2);
 }

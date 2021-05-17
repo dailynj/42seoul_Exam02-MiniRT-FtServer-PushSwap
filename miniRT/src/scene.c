@@ -12,7 +12,7 @@
 
 #include "../includes/minirt.h"
 
-t_cam	*camera(t_point orig, double aspect_ratio)
+t_cam		*camera(t_point orig, double aspect_ratio)
 {
 	t_cam	*cam;
 
