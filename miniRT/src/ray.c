@@ -17,7 +17,7 @@ t_ray			ray(t_point origin, t_vec dir)
 	t_ray	ray;
 
 	ray.origin = origin;
-	ray.dir = vec_unit(dir);
+	ray.dir = v_unit(dir);
 	return (ray);
 }
 
@@ -31,15 +31,15 @@ t_vec			ray_at(t_ray *ray, double t)
 	return (out);
 }
 
-t_ray			ray_primary(t_camera *cam, double u, double v)
+t_ray			ray_primary(t_cam *cam, double u, double v)
 {
 	t_ray	ray;
 
 	ray.origin = cam->orig;
-	ray.dir = vec_unit(vec_minus(
-		vec_add(vec_add(cam->left_bottom, vec_mul_num(u,
-							cam->horizontal)),
-				vec_mul_num(v, cam->vertical)),
+	ray.dir = v_unit(v_minus(
+		vec_add(vec_add(cam->left_bottom, v_mul_n(u,
+							cam->horiz)),
+				v_mul_n(v, cam->vertical)),
 		cam->orig));
 	return (ray);
 }

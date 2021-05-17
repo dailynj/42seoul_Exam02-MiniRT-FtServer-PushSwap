@@ -54,5 +54,5 @@ void	set_face_normal(t_ray *ray, t_hit_record *rec)
 {
 	rec->front_face = vec_dot(ray->dir, rec->normal) < 0;
 	rec->normal = (rec->front_face) ? rec->normal :
-					vec_mul_num(-1, rec->normal);
+					v_mul_n(-1, rec->normal);
 }

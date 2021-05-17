@@ -42,7 +42,7 @@ t_vec	vec_add(t_vec vector1, t_vec vector2)
 	return (vector);
 }
 
-t_vec	vec_minus(t_vec vector1, t_vec vector2)
+t_vec	v_minus(t_vec vector1, t_vec vector2)
 {
 	t_vec	vector;
 

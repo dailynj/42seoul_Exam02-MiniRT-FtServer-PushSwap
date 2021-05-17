@@ -16,6 +16,7 @@ SRCS	=	\
 			src/mlx.c \
 			src/key_hook.c \
 			src/main.c \
+			src/bmp.c \
 			src/color.c \
 			src/ray.c \
 			src/point.c \
@@ -35,7 +36,7 @@ SRCS	=	\
 			src/gnl/get_next_line.c \
 			\
 			src/parsing/parse.c \
-			src/parsing/parse_RAcl.c \
+			src/parsing/parse_racl.c \
 			src/parsing/parse_object.c \
 			src/parsing/parse_util.c \
 			\

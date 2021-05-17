@@ -38,7 +38,7 @@ int ft_printf(char *format, ...)
     va_start(ap, format);
     while (format[i])
     {
-        int width = 0;
+        int wid = 0;
         int dot = 0;
         int pre = 0;
         if (format[i] == '%')
@@ -52,7 +52,7 @@ int ft_printf(char *format, ...)
                     ++i;
                 }
                 for ( ; dot == 0 && format[i] >= '0' && format[i] <= '9' ; i++)
-                    width = width * 10 + (format[i] - '0');
+                    wid = wid * 10 + (format[i] - '0');
                 for ( ; dot == 1 && format[i] >= '0' && format[i] <= '9' ; i++)
                     pre = pre * 10 + (format[i] - '0');
             }
@@ -65,7 +65,7 @@ int ft_printf(char *format, ...)
                     s = "";
                 if (dot == 0)
                     pre = ft_strlen(s);
-                for (int idx = 0 ; idx < width - min(ft_strlen(s), pre) ; idx++)
+                for (int idx = 0 ; idx < wid - min(ft_strlen(s), pre) ; idx++)
                     print_size += write(1, " ", 1);
                 for (int idx = 0 ; idx < min(ft_strlen(s), pre) ; idx++)
                     print_size += write(1, &s[idx], 1);
@@ -79,8 +79,8 @@ int ft_printf(char *format, ...)
                     sign = 1;
                 }
                 if (num == 0 && dot == 1 && pre == 0)
-                    ++width;
-                for (int idx = 0 ; idx < width - sign - max(pre, numlen(num, 10)) ; idx++)
+                    ++wid;
+                for (int idx = 0 ; idx < wid - sign - max(pre, numlen(num, 10)) ; idx++)
                     print_size += write(1, " ", 1);
                 print_size += write(1, "-", sign);
                 for (int idx = 0 ; idx < pre - numlen(num, 10) ; idx++)
@@ -92,8 +92,8 @@ int ft_printf(char *format, ...)
             {
                 long long num = va_arg(ap, unsigned int);
                 if (num == 0 && dot == 1 && pre == 0)
-                    ++width;
-                for (int idx = 0 ; idx < width - max(pre, numlen(num, 16)) ; idx++)
+                    ++wid;
+                for (int idx = 0 ; idx < wid - max(pre, numlen(num, 16)) ; idx++)
                     print_size += write(1, " ", 1);
                 for (int idx = 0 ; idx < pre - numlen(num, 16) ; idx++)
                     print_size += write(1, "0", 1);

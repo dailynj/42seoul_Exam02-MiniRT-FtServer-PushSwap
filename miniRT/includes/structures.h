@@ -58,20 +58,20 @@ typedef struct	s_camera
 {
 	t_point		orig;
 	t_vec		normal;
-	double		viewport_h;
-	double		viewport_w;
-	t_vec		horizontal;
+	double		vp_h;
+	double		vp_w;
+	t_vec		horiz;
 	t_vec		vertical;
 	double		focal_len;
 	t_point		left_bottom;
-}				t_camera;
+}				t_cam;
 
-typedef struct	s_canvas
+typedef struct	s_canv
 {
-	double		width;
-	double		height;
+	double		wid;
+	double		heig;
 	double		aspect_ratio;
-}				t_canvas;
+}				t_canv;
 
 typedef struct	s_hit_record
 {
@@ -102,9 +102,9 @@ typedef struct	s_light
 
 typedef struct	s_scene
 {
-	t_canvas		canvas;
-	t_camera		*camera_arr;
-	int				camera_num;
+	t_canv		canv;
+	t_cam		*c_arr;
+	int				c_num;
 	int				camera_idx;
 	t_object		*world;
 	t_object		*light;
@@ -154,7 +154,7 @@ typedef struct	s_cylinder
 	t_point		point;
 	t_vec		normal;
 	double		radius;
-	double		height;
+	double		heig;
 }				t_cylinder;
 
 # pragma pack(push, 1)
@@ -173,7 +173,7 @@ typedef	struct	s_infoheader
 {
 	unsigned int	size;
 	unsigned int	witdh;
-	unsigned int	height;
+	unsigned int	heig;
 	unsigned short	planes;
 	unsigned short	bitcount;
 	unsigned int	compression;

@@ -69,7 +69,7 @@ int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 ** Image stuff
 */
 
-void	*mlx_new_image(void *mlx_ptr,int width,int height);
+void	*mlx_new_image(void *mlx_ptr,int wid,int heig);
 /*
 **  return void *0 if failed
 */
@@ -115,10 +115,10 @@ int	mlx_loop (void *mlx_ptr);
 int	mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color,
 		       char *string);
 void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data,
-			  int *width, int *height);
+			  int *wid, int *heig);
 void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
-			       int *width, int *height);
-void    *mlx_png_file_to_image(void *mlx_ptr, char *file, int *width, int *height);
+			       int *wid, int *heig);
+void    *mlx_png_file_to_image(void *mlx_ptr, char *file, int *wid, int *heig);
 
 int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 

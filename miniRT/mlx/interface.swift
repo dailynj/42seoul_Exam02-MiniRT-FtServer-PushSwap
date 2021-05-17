@@ -54,7 +54,7 @@ public func mlx_loop_swift(_ mlxptr:UnsafeRawPointer)
 public func mlx_new_window_swift(_ mlxptr:UnsafeRawPointer, Width w:UInt32, Height h:UInt32, Title t:UnsafePointer<CChar>) -> UnsafeRawPointer
 {
 		let mlx:MlxMain = _mlx_bridge(ptr:mlxptr)
-		let mw = MlxWin(device: mlx.device, width: Int(w), height: Int(h), title: String(cString: t))
+		let mw = MlxWin(device: mlx.device, wid: Int(w), heig: Int(h), title: String(cString: t))
 		mw.setNotifs()
 		mw.initMetal()
 		mlx.addWinToList(mw)
@@ -147,10 +147,10 @@ public func mlx_get_color_value(_ mlxptr:UnsafeRawPointer, _ color:UInt32) -> UI
 
 
 @_cdecl("mlx_new_image")
-public func mlx_new_image(_ mlxptr:UnsafeRawPointer, _ width:Int32, _ height:Int32) -> UnsafeRawPointer
+public func mlx_new_image(_ mlxptr:UnsafeRawPointer, _ wid:Int32, _ heig:Int32) -> UnsafeRawPointer
 {
 	let mlx:MlxMain = _mlx_bridge(ptr:mlxptr)
-	let img = MlxImg(d:mlx.device, w:Int(width), h:Int(height))
+	let img = MlxImg(d:mlx.device, w:Int(wid), h:Int(heig))
 	mlx.addImgToList(img)
 ///	print(CFGetRetainCount(img))
 	return (_mlx_bridge_retained(obj:img))
@@ -242,8 +242,8 @@ public func mlx_destroy_image_swift(_ mlxptr:UnsafeRawPointer, _ imgptr:UnsafeRa
 public func mlx_get_screen_size_swift(_ mlxptr:UnsafeRawPointer, _ sizex:UnsafeMutablePointer<Int32>, _ sizey:UnsafeMutablePointer<Int32>) -> Int32
 {
 	/// let mlx:MlxMain = _mlx_bridge(ptr:mlxptr)
-	sizex.pointee = Int32(NSScreen.main!.frame.size.width)
-	sizey.pointee = Int32(NSScreen.main!.frame.size.height)
+	sizex.pointee = Int32(NSScreen.main!.frame.size.wid)
+	sizey.pointee = Int32(NSScreen.main!.frame.size.heig)
 	return Int32(0)
 }
 
@@ -272,7 +272,7 @@ public func mlx_mouse_move_swift(_ winptr:UnsafeRawPointer, _ x:Int32, _ y:Int32
 	var pt = CGPoint()
 	pt.x = frame.origin.x + CGFloat(x)
 ///	pt.y = sframe.size.y - frame.size.y - frame.origin.y + 1 + y
-	pt.y = frame.origin.y + frame.size.height - 1.0 - CGFloat(y)
+	pt.y = frame.origin.y + frame.size.heig - 1.0 - CGFloat(y)
 	CGWarpMouseCursorPosition(pt)
 	CGAssociateMouseAndMouseCursorPosition(UInt32(1))
 	return Int32(0);
@@ -287,6 +287,6 @@ public func mlx_mouse_get_pos_swift(_ winptr:UnsafeRawPointer, _ x:UnsafeMutable
 	let frame = win.getWinEFrame()
 	let point = win.getMouseLoc()
 	x.pointee = Int32(point.x)
-	y.pointee = Int32(frame.size.height - 1.0 - point.y)
+	y.pointee = Int32(frame.size.heig - 1.0 - point.y)
 	return Int32(0)
 }

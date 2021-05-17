@@ -22,7 +22,7 @@ int	key_hook(int keycode, t_cntl *cntl)
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		if (cntl->scene->camera_idx == cntl->scene->camera_num - 1)
+		if (cntl->scene->camera_idx == cntl->scene->c_num - 1)
 			cntl->scene->camera_idx = 0;
 		else
 			cntl->scene->camera_idx = cntl->scene->camera_idx + 1;
@@ -32,7 +32,7 @@ int	key_hook(int keycode, t_cntl *cntl)
 	else if (keycode == KEY_LEFT)
 	{
 		if (cntl->scene->camera_idx == 0)
-			cntl->scene->camera_idx = cntl->scene->camera_num - 1;
+			cntl->scene->camera_idx = cntl->scene->c_num - 1;
 		else
 			cntl->scene->camera_idx = cntl->scene->camera_idx - 1;
 		mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->image

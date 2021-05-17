@@ -223,7 +223,7 @@ void	mlx_int_xpm_set_pixel(char *data, int opp, int col, int x)
 }
 
 
-void	*mlx_int_parse_xpm(void *xvar,void *info,int info_size,char *(*f)(), int *width, int *height)
+void	*mlx_int_parse_xpm(void *xvar,void *info,int info_size,char *(*f)(), int *wid, int *heig)
 {
   int	pos;
   char	*line;
@@ -252,8 +252,8 @@ void	*mlx_int_parse_xpm(void *xvar,void *info,int info_size,char *(*f)(), int *w
   tab = 0;
   pos = 0;
   if (!(line = f(info,&pos,info_size)) ||
-      !(tab = mlx_int_str_to_wordtab(line)) || !(*width = atoi(tab[0])) ||
-      !(*height = atoi(tab[1])) || !(nc = atoi(tab[2])) ||
+      !(tab = mlx_int_str_to_wordtab(line)) || !(*wid = atoi(tab[0])) ||
+      !(*heig = atoi(tab[1])) || !(nc = atoi(tab[2])) ||
       !(cpp = atoi(tab[3])) )
     RETURN;
   free(tab);
@@ -296,18 +296,18 @@ void	*mlx_int_parse_xpm(void *xvar,void *info,int info_size,char *(*f)(), int *w
       tab = 0;
     }
 
-  if (!(img = mlx_new_image(xvar,*width,*height)))
+  if (!(img = mlx_new_image(xvar,*wid,*heig)))
     RETURN;
   data = mlx_get_data_addr(img, &opp, &sl, &endian);
   opp = 4;
 
-  i = *height;
+  i = *heig;
   while (i--)
     {
       if (!(line = f(info,&pos,info_size)))
 	RETURN;
       x = 0;
-      while (x<*width)
+      while (x<*wid)
 	{
 	  col = 0;
 	  col_name = mlx_int_get_col_name(line+cpp*x,cpp);
@@ -328,7 +328,7 @@ void	*mlx_int_parse_xpm(void *xvar,void *info,int info_size,char *(*f)(), int *w
 	  mlx_int_xpm_set_pixel(data, opp, col, x);
 	  x ++;
 	}
-      data += sl; //img->width*4;
+      data += sl; //img->wid*4;
     }
   if (colors)
     free(colors);
@@ -356,7 +356,7 @@ void	mlx_int_file_get_rid_comment(char *ptr, int size)
 }
 
 
-void	*mlx_xpm_file_to_image(void *xvar,char *file,int *width,int *height)
+void	*mlx_xpm_file_to_image(void *xvar,char *file,int *wid,int *heig)
 {
   int	fd;
   int	size;
@@ -372,13 +372,13 @@ void	*mlx_xpm_file_to_image(void *xvar,char *file,int *width,int *height)
       return ((void *)0);
     }
   mlx_int_file_get_rid_comment(ptr, size);
-  img = mlx_int_parse_xpm(xvar,ptr,size,mlx_int_get_line, width, height);
+  img = mlx_int_parse_xpm(xvar,ptr,size,mlx_int_get_line, wid, heig);
   munmap(ptr,size);
   close(fd);
   return (img);
 }
 
-void	*mlx_xpm_to_image(void *xvar,char **xpm_data,int *width,int *height)
+void	*mlx_xpm_to_image(void *xvar,char **xpm_data,int *wid,int *heig)
 {
-  return (mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_static_line, width, height));
+  return (mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_static_line, wid, heig));
 }

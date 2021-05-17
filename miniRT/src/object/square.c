@@ -38,9 +38,9 @@ t_bool		hit_square(t_object *world, t_ray *ray, t_hit_record *rec)
 	u = vec(0, 1, 0);
 	if ((sq->normal.x == 0 && sq->normal.y == 1) && sq->normal.z == 0)
 		u = vec(0, 0, 1);
-	v = vec_cross(sq->normal, u);
-	u_len = vec_dot(u, vec_minus(rec->p, sq->point)) / vec_dot(u, u);
-	v_len = vec_dot(v, vec_minus(rec->p, sq->point)) / vec_dot(v, v);
+	v = v_cr(sq->normal, u);
+	u_len = vec_dot(u, v_minus(rec->p, sq->point)) / vec_dot(u, u);
+	v_len = vec_dot(v, v_minus(rec->p, sq->point)) / vec_dot(v, v);
 	if ((u_len < sq->length / -2.0) || (u_len > sq->length / 2.0) ||
 		(v_len < sq->length / -2.0) || (v_len > sq->length / 2.0))
 		return (FALSE);

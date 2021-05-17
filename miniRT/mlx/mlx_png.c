@@ -54,8 +54,8 @@ char *(mipng_err[]) =
 
 typedef struct png_info_s
 {
-  unsigned int	width;
-  unsigned int	height;
+  unsigned int	wid;
+  unsigned int	heig;
   int		depth;
   int		color;
   int		interlace;
@@ -121,17 +121,17 @@ int	mipng_fill_img(void *img, unsigned char *buf, png_info_t *pi)
   unsigned char *ibuf;
 
   ibuf = (unsigned char *)mlx_get_data_addr(img, &bpp, &iline, &endian);
-  //  iline = img->width * UNIQ_BPP;
-  // ilen = img->width * img->height * UNIQ_BPP;
-  ilen = iline*pi->height;
+  //  iline = img->wid * UNIQ_BPP;
+  // ilen = img->wid * img->heig * UNIQ_BPP;
+  ilen = iline*pi->heig;
   ipos = 0;
-  blen = pi->width * pi->height * pi->bpp + pi->height;  // ??? why + pi->height ??
+  blen = pi->wid * pi->heig * pi->bpp + pi->heig;  // ??? why + pi->heig ??
   bpos = 0;
   while (ipos < ilen && bpos < blen)
     {
       if (ipos % iline == 0)
 	{
-	  // printf("ipos %d iline %d pi->width %d bpos %d\n", ipos, iline, pi->width, bpos);
+	  // printf("ipos %d iline %d pi->wid %d bpos %d\n", ipos, iline, pi->wid, bpos);
 	  if ((current_filter = buf[bpos++]) > 4)
 	    {  
 	    return (ERR_DATA_FILTER);
@@ -147,8 +147,8 @@ int	mipng_fill_img(void *img, unsigned char *buf, png_info_t *pi)
 	bpos ++;
       if (ipos % 4 == 3 && pi->color == 2)  // no alpha
 	ibuf[ipos++] = 0xFF;
-      if (ipos % iline == pi->width * 4)
-	ipos += iline-pi->width*4;
+      if (ipos % iline == pi->wid * 4)
+	ipos += iline-pi->wid*4;
     }
   if (ipos != ilen || bpos != blen)
     {
@@ -180,7 +180,7 @@ int	mipng_data(void *img, unsigned char *dat, png_info_t *pi)
   unsigned char z_out[Z_CHUNK];
 
   b_pos = 0;
-  if (!(buffer = malloc((long long)pi->width*(long long)pi->height*(long long)pi->bpp + pi->height)))
+  if (!(buffer = malloc((long long)pi->wid*(long long)pi->heig*(long long)pi->bpp + pi->heig)))
     return (ERR_MALLOC);
   z_strm.zalloc = Z_NULL;
   z_strm.zfree = Z_NULL;
@@ -213,7 +213,7 @@ int	mipng_data(void *img, unsigned char *dat, png_info_t *pi)
 	      free(buffer);
 	      return (ERR_ZLIB);
 	    }
-	  if (b_pos + Z_CHUNK - z_strm.avail_out > pi->width*pi->height*pi->bpp+pi->height)
+	  if (b_pos + Z_CHUNK - z_strm.avail_out > pi->wid*pi->heig*pi->bpp+pi->heig)
 	    {
 	      inflateEnd(&z_strm);
 	      free(buffer);
@@ -225,9 +225,9 @@ int	mipng_data(void *img, unsigned char *dat, png_info_t *pi)
       dat += len + 4 + 4 + 4;
     } 
   inflateEnd(&z_strm);
-  if (b_pos != pi->width*pi->height*pi->bpp+pi->height)
+  if (b_pos != pi->wid*pi->heig*pi->bpp+pi->heig)
     {
-      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
+      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->wid*img->heig*pi->bpp+img->heig);
       free(buffer);
       return (ERR_DATA_MISMATCH);
     }
@@ -340,14 +340,14 @@ int	mipng_verif_hdr(unsigned char *hdr, png_info_t *pi)
   unsigned int	filter;
 
   hdr += 8;
-  pi->width = ntohl(*((unsigned long *)hdr));
-  pi->height = ntohl(*((unsigned long *)(hdr+4)));
+  pi->wid = ntohl(*((unsigned long *)hdr));
+  pi->heig = ntohl(*((unsigned long *)(hdr+4)));
   pi->depth = *(hdr+8);
   pi->color = *(hdr+9);
   compress = *(hdr+10);
   filter = *(hdr+11);
   pi->interlace = *(hdr+12);
-  if (pi->width <= 0 || pi->height <= 0 || (pi->depth != 8 && pi->depth != 16)
+  if (pi->wid <= 0 || pi->heig <= 0 || (pi->depth != 8 && pi->depth != 16)
       || (pi->color != 2 && pi->color != 6) || compress != 0 || filter != 0 || pi->interlace != 0)
     return (ERR_STRUCT_INCIMPL);
   pi->bpp = pi->depth / 8;
@@ -356,12 +356,12 @@ int	mipng_verif_hdr(unsigned char *hdr, png_info_t *pi)
   if (pi->color == 6)
     pi->bpp *= 4;
   //  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
-  //	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
+  //	 pi->wid, pi->heig, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
   return (0);
 }
 
 
-void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *width, int *height)
+void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *wid, int *heig)
 {
   int		err;
   unsigned char *hdr;
@@ -386,13 +386,13 @@ void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *width, i
       warnx("mlx PNG error : %s", mipng_err[err]);
       return ((void *)0);
     }
-  if (!(img = mlx_new_image(xvar, pi.width, pi.height)))
+  if (!(img = mlx_new_image(xvar, pi.wid, pi.heig)))
     {
       warnx("mlx PNG error : Can't create mlx image");
       return ((void *)0);
     }
-  *width = pi.width;
-  *height = pi.height;
+  *wid = pi.wid;
+  *heig = pi.heig;
   if ((err = mipng_data(img, dat, &pi)))
     {
       mlx_destroy_image(xvar, img);
@@ -405,7 +405,7 @@ void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *width, i
 
 
 
-void	*mlx_png_file_to_image(void *xvar, char *file, int *width, int *height)
+void	*mlx_png_file_to_image(void *xvar, char *file, int *wid, int *heig)
 {
   int			fd;
   int			size;
@@ -420,10 +420,10 @@ void	*mlx_png_file_to_image(void *xvar, char *file, int *width, int *height)
       warnx("Can't map png file '%s'", file);
       return ((void *)0);
     }
-  if (!(img = mlx_int_parse_png(xvar, ptr, size, width, height)))
+  if (!(img = mlx_int_parse_png(xvar, ptr, size, wid, heig)))
     {
-      *width = 0;
-      *height = 0;
+      *wid = 0;
+      *heig = 0;
     }
   munmap(ptr,size);
   close(fd);

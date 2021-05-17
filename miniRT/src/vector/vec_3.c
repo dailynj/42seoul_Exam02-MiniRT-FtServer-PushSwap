@@ -12,7 +12,7 @@
 
 #include "../includes/minirt.h"
 
-t_vec	vec_unit(t_vec vector1)
+t_vec	v_unit(t_vec vector1)
 {
 	t_vec	vector;
 

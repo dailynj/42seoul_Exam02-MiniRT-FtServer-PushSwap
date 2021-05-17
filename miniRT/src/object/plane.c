@@ -34,7 +34,7 @@ t_bool	hit_plane(t_object *world, t_ray *ray, t_hit_record *rec)
 	denom = vec_dot(pl->normal, ray->dir);
 	if (fabs(denom) < EPSILON)
 		return (FALSE);
-	to_hit = vec_minus(pl->point, ray->origin);
+	to_hit = v_minus(pl->point, ray->origin);
 	root = vec_dot(to_hit, pl->normal) / denom;
 	if (root < rec->tmin || root > rec->tmax)
 		return (FALSE);

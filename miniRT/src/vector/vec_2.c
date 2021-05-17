@@ -12,7 +12,7 @@
 
 #include "../includes/minirt.h"
 
-t_vec	vec_mul(t_vec vector1, t_vec vector2)
+t_vec	v_mul(t_vec vector1, t_vec vector2)
 {
 	t_vec	vector;
 
@@ -22,7 +22,7 @@ t_vec	vec_mul(t_vec vector1, t_vec vector2)
 	return (vector);
 }
 
-t_vec	vec_mul_num(double t, t_vec vector1)
+t_vec	v_mul_n(double t, t_vec vector1)
 {
 	t_vec	vector;
 
@@ -48,7 +48,7 @@ double	vec_dot(t_vec vector1, t_vec vector2)
 						vector1.z * vector2.z);
 }
 
-t_vec	vec_cross(t_vec vec, t_vec vec2)
+t_vec	v_cr(t_vec vec, t_vec vec2)
 {
 	t_vec	vector;
 

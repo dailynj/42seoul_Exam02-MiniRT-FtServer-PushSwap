@@ -50,7 +50,6 @@ char	*ft_worddup_whitespace(char *s)
 	return (ptr);
 }
 
-
 char	**ft_split_whitespace(char *s)
 {
 	char	**ptr;
@@ -58,7 +57,8 @@ char	**ft_split_whitespace(char *s)
 	size_t	i;
 	size_t	j;
 
-	if (!(len = ft_wordcnt_whitespace(s)) || !(ptr = (char **)ft_calloc(len + 1, sizeof(char *))))
+	if ((!(len = ft_wordcnt_whitespace(s)))
+			|| (!(ptr = (char **)ft_calloc(len + 1, sizeof(char *)))))
 		return (NULL);
 	i = 0;
 	j = 0;

@@ -27,7 +27,7 @@ class WinEvent: NSWindow
 
     let wsm = NSWindow.StyleMask(rawValue: NSWindow.StyleMask.titled.rawValue|NSWindow.StyleMask.closable.rawValue|NSWindow.StyleMask.miniaturizable.rawValue)
     let bck = NSWindow.BackingStoreType.buffered
-    size_y = Int(rect.size.height)
+    size_y = Int(rect.size.heig)
     super.init(contentRect: rect, styleMask: wsm, backing: bck, defer: false)
   }
 
@@ -245,9 +245,9 @@ public class MlxWin
   var GPUbatch = 0
 
 
-  public init(device d:MTLDevice, width w:Int, height h:Int, title t:String)
+  public init(device d:MTLDevice, wid w:Int, heig h:Int, title t:String)
   {
-    vrect = CGRect(x: 100, y: 100, width: w, height: h)
+    vrect = CGRect(x: 100, y: 100, wid: w, heig: h)
     winE = WinEvent(frame: vrect)
 
     device = d
@@ -265,15 +265,15 @@ public class MlxWin
     winE.makeKeyAndOrderFront(nil)
 
 
-    /// drawable_image = MlxImg(d: device, w:Int(CGFloat(vrect.size.width)*winE.screen!.backingScaleFactor), h:Int(CGFloat(vrect.size.height)*winE.screen!.backingScaleFactor), t:1)
-    drawable_image = MlxImg(d: device, w:Int(vrect.size.width), h:Int(vrect.size.height), t:1)
-    pixel_image = MlxImg(d: device, w:Int(vrect.size.width), h:Int(vrect.size.height))
-    for i in 0...(pixel_image.texture_height*pixel_image.texture_sizeline/4-1)
+    /// drawable_image = MlxImg(d: device, w:Int(CGFloat(vrect.size.wid)*winE.screen!.backingScaleFactor), h:Int(CGFloat(vrect.size.heig)*winE.screen!.backingScaleFactor), t:1)
+    drawable_image = MlxImg(d: device, w:Int(vrect.size.wid), h:Int(vrect.size.heig), t:1)
+    pixel_image = MlxImg(d: device, w:Int(vrect.size.wid), h:Int(vrect.size.heig))
+    for i in 0...(pixel_image.texture_heig*pixel_image.texture_sizeline/4-1)
       { pixel_image.texture_data[i] = UInt32(0xFF000000) }
     pixel_count = 0
 
     mtl_origin_null = MTLOriginMake(0,0,0)
-    mtl_size_all = MTLSizeMake(drawable_image.texture.width, drawable_image.texture.height, 1)
+    mtl_size_all = MTLSizeMake(drawable_image.texture.wid, drawable_image.texture.heig, 1)
 
     uniq_renderPassDescriptor = MTLRenderPassDescriptor()
     uniq_renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha:0.0)
@@ -326,7 +326,7 @@ public class MlxWin
     var dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
     vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: []) 
 
-    let uniformData: [Float] = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Float(vrect.size.width), Float(vrect.size.height), 0.0, 0.0, 0.0, 0.0,
+    let uniformData: [Float] = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Float(vrect.size.wid), Float(vrect.size.heig), 0.0, 0.0, 0.0, 0.0,
     		     	       1.0, 1.0, 1.0, 1.0 ]
     dataSize = uniformData.count * MemoryLayout.size(ofValue: uniformData[0])
     for _ in 0...255
@@ -387,10 +387,10 @@ public class MlxWin
 	     if (GPUbatch > 0) { waitForGPU() }
 	     else { flushImages() }
 	  }
-	  for i in 0...pixel_image.texture_height*pixel_image.texture_sizeline/4-1
+	  for i in 0...pixel_image.texture_heig*pixel_image.texture_sizeline/4-1
 	    { pixel_image.texture_data[i] = UInt32(0xFF000000) }
 	}
-	let t = (x&(Int32(vrect.size.width-1)-x))&(y&(Int32(vrect.size.height-1)-y))
+	let t = (x&(Int32(vrect.size.wid-1)-x))&(y&(Int32(vrect.size.heig-1)-y))
 	if t >= 0
 	{
 		pixel_image.texture_data[Int(y)*pixel_image.texture_sizeline/4+Int(x)] = color
@@ -401,8 +401,8 @@ public class MlxWin
   public func putImage(image img:MlxImg, x posx:Int32, y posy:Int32)
   {
 	flushPixels()
-	putImageScale(image:img, sx:0, sy:0, sw:Int32(img.texture_width), sh:Int32(img.texture_height), 
-			   dx:posx, dy:posy, dw:Int32(img.texture_width), dh:Int32(img.texture_height),
+	putImageScale(image:img, sx:0, sy:0, sw:Int32(img.texture_wid), sh:Int32(img.texture_heig), 
+			   dx:posx, dy:posy, dw:Int32(img.texture_wid), dh:Int32(img.texture_heig),
 			   c:UInt32(0xFFFFFFFF))
   }
 
@@ -413,8 +413,8 @@ public class MlxWin
 	{
 		waitForGPU()    /// to be able to write again in uniforms
 	}
-	texture_list[texture_list_count].uniform_data[0] = Float(img.texture_width)
-	texture_list[texture_list_count].uniform_data[1] = Float(img.texture_height)
+	texture_list[texture_list_count].uniform_data[0] = Float(img.texture_wid)
+	texture_list[texture_list_count].uniform_data[1] = Float(img.texture_heig)
 	texture_list[texture_list_count].uniform_data[2] = Float(src_x)
 	texture_list[texture_list_count].uniform_data[3] = Float(src_y)
 	texture_list[texture_list_count].uniform_data[4] = Float(src_w)

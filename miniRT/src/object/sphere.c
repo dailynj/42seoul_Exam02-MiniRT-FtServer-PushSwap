@@ -61,6 +61,6 @@ t_bool		sphere_discriminant(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 	}
 	rec->t = root;
 	rec->p = ray_at(ray, root);
-	rec->normal = vec_div(sp->radius, vec_minus(rec->p, sp->center));
+	rec->normal = vec_div(sp->radius, v_minus(rec->p, sp->center));
 	return (TRUE);
 }

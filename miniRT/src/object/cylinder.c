@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-t_cylinder          *cylinder(t_point point, double radius, double height, t_vec normal)
+t_cylinder          *cylinder(t_point point, double radius, double heig, t_vec normal)
 {
 	t_cylinder	*cy;
 
@@ -21,7 +21,7 @@ t_cylinder          *cylinder(t_point point, double radius, double height, t_vec
 	cy->point = point;
 	cy->normal = normal;
 	cy->radius = radius;
-	cy->height = height;
+	cy->heig = heig;
 	return (cy);
 }
 
@@ -34,11 +34,11 @@ t_bool              hit_cylinder(t_object *world, t_ray *ray, t_hit_record *rec)
     if (cylinder_discriminant(cylinder, ray, rec) == FALSE)
         return (FALSE);
     rec->p = ray_at(ray, rec->t);
-    rec->normal = vec_unit(vec_minus(vec_minus(rec->p, cylinder->point),
-                    vec_mul_num(
-                    vec_dot(cylinder->normal, vec_minus(rec->p, cylinder->point)), cylinder->normal)));
+    rec->normal = v_unit(v_minus(v_minus(rec->p, cylinder->point),
+                    v_mul_n(
+                    vec_dot(cylinder->normal, v_minus(rec->p, cylinder->point)), cylinder->normal)));
     rec->albedo = world->albedo;
-    if (!cylinder_height_check(cylinder, ray, rec))
+    if (!cylinder_heig_check(cylinder, ray, rec))
         return (FALSE);
     set_face_normal(ray, rec);
     return (TRUE);
@@ -56,16 +56,16 @@ t_bool              cylinder_discriminant(t_cylinder *cylinder,
     double          c;
     double          d;
 	
-    a = vec_length_2(vec_minus(ray->dir, vec_mul_num(
+    a = vec_length_2(v_minus(ray->dir, v_mul_n(
             vec_dot(cylinder->normal, ray->dir), cylinder->normal)));
-    b = vec_dot(vec_minus(ray->dir, vec_mul_num(
+    b = vec_dot(v_minus(ray->dir, v_mul_n(
             vec_dot(cylinder->normal, ray->dir), cylinder->normal)),
-            vec_minus(vec_minus(ray->origin, cylinder->point),
-            vec_mul_num(vec_dot(cylinder->normal,
-            vec_minus(ray->origin, cylinder->point)), cylinder->normal)));
-    c = vec_length_2(vec_minus(vec_minus(ray->origin, cylinder->point),
-            vec_mul_num(vec_dot(cylinder->normal,
-            vec_minus(ray->origin, cylinder->point)), cylinder->normal))) -
+            v_minus(v_minus(ray->origin, cylinder->point),
+            v_mul_n(vec_dot(cylinder->normal,
+            v_minus(ray->origin, cylinder->point)), cylinder->normal)));
+    c = vec_length_2(v_minus(v_minus(ray->origin, cylinder->point),
+            v_mul_n(vec_dot(cylinder->normal,
+            v_minus(ray->origin, cylinder->point)), cylinder->normal))) -
             cylinder->radius * cylinder->radius;
 
     d = b * b - a * c;
@@ -83,20 +83,20 @@ t_bool              cylinder_discriminant(t_cylinder *cylinder,
 ** 원기둥 길이 제한 함수
 */
 
-t_bool              cylinder_height_check(t_cylinder *cylinder,
+t_bool              cylinder_heig_check(t_cylinder *cylinder,
                                                 t_ray *ray, t_hit_record *rec)
 {
     double          h;
-    h = vec_length_2(vec_minus(rec->p, cylinder->point)) -
+    h = vec_length_2(v_minus(rec->p, cylinder->point)) -
             cylinder->radius * cylinder->radius;
-    if (sqrt(h) > cylinder->height)
+    if (sqrt(h) > cylinder->heig)
     {
         rec->p = ray_at(ray, rec->t2);
-        h = vec_length_2(vec_minus(rec->p, cylinder->point)) -
+        h = vec_length_2(v_minus(rec->p, cylinder->point)) -
                 cylinder->radius * cylinder->radius;
-        rec->normal = vec_unit(vec_div(cylinder->radius, vec_minus(vec_minus(rec->p, cylinder->point), 
-		vec_mul_num(vec_dot(cylinder->normal, vec_minus(rec->p, cylinder->point)), cylinder->normal))));
-        if (sqrt(h) > cylinder->height)
+        rec->normal = v_unit(vec_div(cylinder->radius, v_minus(v_minus(rec->p, cylinder->point), 
+		v_mul_n(vec_dot(cylinder->normal, v_minus(rec->p, cylinder->point)), cylinder->normal))));
+        if (sqrt(h) > cylinder->heig)
             return (FALSE);
     }
     return (TRUE);

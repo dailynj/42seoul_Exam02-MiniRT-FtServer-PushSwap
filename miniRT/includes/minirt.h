@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+int			mlx_pixel_put_while(t_cntl *cntl, int idx);
 int			mlx_show_window(t_cntl *cntl);
 int			mlx_save_image(t_cntl *cntl);
 t_bmp		bmp_set_header(t_scene *scene);
@@ -31,18 +32,18 @@ int			exit_hook();
 int			key_hook(int keycode, t_cntl *cntl);
 t_ray		ray(t_point origin, t_vec dir);
 t_vec		ray_at(t_ray *ray, double t);
-t_ray		ray_primary(t_camera *cam, double u, double v);
+t_ray		ray_primary(t_cam *cam, double u, double v);
 t_vec		ray_color(t_scene *scene);
 t_vec		vec(double x, double y, double z);
 double		vec_length(t_vec vector);
 t_vec		vec_add(t_vec vector1, t_vec vector2);
-t_vec		vec_minus(t_vec vector1, t_vec vector2);
-t_vec		vec_mul(t_vec vector1, t_vec vector2);
-t_vec		vec_mul_num(double t, t_vec vector1);
+t_vec		v_minus(t_vec vector1, t_vec vector2);
+t_vec		v_mul(t_vec vector1, t_vec vector2);
+t_vec		v_mul_n(double t, t_vec vector1);
 t_vec		vec_div(double t, t_vec vector1);
 double		vec_dot(t_vec vector1, t_vec vector2);
-t_vec		vec_cross(t_vec vec, t_vec vec2);
-t_vec		vec_unit(t_vec vector1);
+t_vec		v_cr(t_vec vec, t_vec vec2);
+t_vec		v_unit(t_vec vector1);
 t_vec		vec_min(t_vec vec1, t_vec vec2);
 t_vec		vsymmetric(t_point p1, t_point stan);
 double		vec_length_2(t_vec vector);
@@ -58,7 +59,7 @@ t_light		*light_point(t_point light_origin, t_color light_color,
 t_color		phong_lighting(t_scene *scene);
 t_color		point_light_get(t_scene *scene, t_light *light);
 t_vec		reflect(t_vec v, t_vec n);
-t_camera	*camera(t_point orig, double aspect_ratio);
+t_cam	*camera(t_point orig, double aspect_ratio);
 t_scene		*scene_init(void);
 t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);
 t_bool		hit(t_object *world, t_ray *ray, t_hit_record *rec);
@@ -75,9 +76,9 @@ t_bool		hit_triangle(t_object *world, t_ray *ray, t_hit_record *rec);
 t_bool		check_tri(t_vec a, t_vec b, t_vec c, t_vec point);
 t_square	*square(t_point point, t_vec normal, double length);
 t_bool		hit_square(t_object *world, t_ray *ray, t_hit_record *rec);
-t_cylinder	*cylinder(t_point point, double radius, double height,
+t_cylinder	*cylinder(t_point point, double radius, double heig,
 								t_vec normal);
-t_bool		cylinder_height_check(t_cylinder *cylinder,
+t_bool		cylinder_heig_check(t_cylinder *cylinder,
 					t_ray *ray, t_hit_record *rec);
 t_bool		cylinder_discriminant(t_cylinder *cylinder,
 					t_ray *ray, t_hit_record *rec);
@@ -92,18 +93,20 @@ int			get_next_line(int fd, char **line);
 int			parsing(t_cntl *cntl, char *rtname);
 int			check_parse_num(t_cntl *cntl, char **line);
 int			parsing_all(t_cntl *cntl, char **line, int cmd_len);
-int			cal_cmd_len(char **tmp);
+int			cmdlen(char **tmp);
 int			print_error(char *str);
 t_bool		check_rt(char *rtname);
 int			r_parse(t_cntl *cntl, char **one_line);
 int			a_parse(t_cntl *cntl, char **one_line);
 int			c_parse(t_cntl *cntl, char **one_line, int idx);
+int			c_parse2(t_cntl *cntl, char **one_line, t_cam *tmp_c);
 int			l_parse(t_cntl *cntl, char **one_line);
 int			sp_parse(t_cntl *cntl, char **one_line);
 int			pl_parse(t_cntl *cntl, char **one_line);
 int			sq_parse(t_cntl *cntl, char **one_line);
 int			cy_parse(t_cntl *cntl, char **one_line);
 int			tr_parse(t_cntl *cntl, char **one_line);
+int			parse_object(t_cntl *cntl, char **ol);
 size_t		ft_wordcnt_char(char *s, char d);
 char		*ft_worddup_char(char *s, char d);
 char		**ft_split_char(char *s, char d);
@@ -113,11 +116,12 @@ void		*ft_memset(void *s, int c, size_t n);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
 int			ft_strncmp(const char *str1, const char *str2,
 								size_t n);
-double		ft_atof(char *str);
+double		ft_a2f(char *str);
 void		print_exit(char *str);
 double		ft_pow(double num, int len);
 size_t		ft_wordcnt_whitespace(char *s);
 char		*ft_worddup_whitespace(char *s);
 char		**ft_split_whitespace(char *s);
+int			free_print_error(char **ol, char *str);
 
 #endif

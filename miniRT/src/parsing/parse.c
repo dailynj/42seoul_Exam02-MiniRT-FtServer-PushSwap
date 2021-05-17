@@ -27,7 +27,8 @@ int	parsing(t_cntl *cntl, char *rtname)
 	read_len = read(fd, line, BUFFER_SIZE);
 	if (read_len == 0)
 		return (print_error("Error : read_len 에러\n"));
-	if ((tmp = ft_split_char(line, '\n')) == NULL){
+	if ((tmp = ft_split_char(line, '\n')) == NULL)
+	{
 		ft_freeall(tmp);
 		return (print_error("Error : split 에러입니다!\n"));
 	}
@@ -40,110 +41,113 @@ int	parsing(t_cntl *cntl, char *rtname)
 int	check_parse_num(t_cntl *cntl, char **line)
 {
 	int		i;
-	int		cmd_len;
-	char	**one_line;
+	char	**ol;
 	int		check[5];
 
-	i = 0;
+	i = -1;
 	ft_memset(check, 0, 5 * sizeof(int));
-	cmd_len = cal_cmd_len(line);
-	while (i < cmd_len)
+	while (++i < cmdlen(line))
 	{
-		if ((one_line = ft_split_whitespace(line[i])) == NULL){
-			ft_freeall(one_line);
-			return (print_error("Error : white_space split이 잘못 됬습니다.\n"));
-		}
-		if ((one_line[0][0] == 's' && one_line[0][1] == 'p') || (one_line[0][0] 
-			== 'p' && one_line[0][1] == 'l') || (one_line[0][0] == 's' && 
-			one_line[0][1] == 'q') || (one_line[0][0] == 'c' && one_line[0][1] 
-			== 'y') || (one_line[0][0] == 't' && one_line[0][1] == 'r')
-			|| one_line[0][0] == 'l' || one_line[0][0] == '#')
+		if ((ol = ft_split_whitespace(line[i])) == NULL)
+			free_print_error(ol, "Error : white_space split이 잘못 됬습니다.\n");
+		if ((ol[0][0] == 's' && ol[0][1] == 'p') || (ol[0][0] == 'p' &&
+		ol[0][1] == 'l') || (ol[0][0] == 's' && ol[0][1] == 'q') ||
+		(ol[0][0] == 'c' && ol[0][1] == 'y') || (ol[0][0] == 't'
+		&& ol[0][1] == 'r') || ol[0][0] == 'l' || ol[0][0] == '#')
 			;
-		else if (one_line[0][0] == 'R')
+		else if (ol[0][0] == 'R')
 			check[0]++;
-		else if (one_line[0][0] == 'A')
+		else if (ol[0][0] == 'A')
 			check[1]++;
-		else if (one_line[0][0] == 'c')
-			cntl->scene->camera_num++;
+		else if (ol[0][0] == 'c')
+			cntl->scene->c_num++;
 		else
-		{
-			ft_freeall(one_line);
-			return (print_error("Error : 존재하지 않는 단어(?) 입니다!\n"));
-		}
-		ft_freeall(one_line);
-		i++;
+			free_print_error(ol, "Error : 존재하지 않는 단어 입니다!\n");
+		ft_freeall(ol);
 	}
-	
-	if (check[0] != 1 || check[1] != 1 || cntl->scene->camera_num == 0)
-		return (print_error("Error : R이나 A이나 c의 개수가 틀립니다!\n"));
-	if (!(cntl->scene->camera_arr = (t_camera *)malloc(cntl->scene->camera_num * sizeof(t_camera))))
-		return (print_error("Error : camera 할당이 제대로 되지 않았습니다\n"));
-	return(parsing_all(cntl, line, cmd_len));
+	if ((check[0] != 1 || check[1] != 1 || cntl->scene->c_num == 0) ||
+	(!(cntl->scene->c_arr = (t_cam *)malloc(cntl->scene->c_num * sizeof(t_cam)))))
+		return (print_error("Error : camera 할당 || RAc개수 오류\n"));
+	return (parsing_all(cntl, line, cmdlen(line)));
 	return (1);
+}
+
+int	free_print_error(char **ol, char *str)
+{
+	ft_freeall(ol);
+	return (print_error(str));
 }
 
 int	parsing_all(t_cntl *cntl, char **line, int cmd_len)
 {
 	int		i;
-	char	**one_line;
+	char	**ol;
+	int		cam_t;
 
-	int _cam = 0;
+	cam_t = 0;
 	i = 0;
 	while (i < cmd_len)
 	{
-		if ((one_line = ft_split_whitespace(line[i])) == NULL)
+		if ((ol = ft_split_whitespace(line[i])) == NULL)
 			return (0);
-		if (one_line[0][0] == 's' && one_line[0][1] == 'p')
+		if ((ol[0][0] == 's' && ol[0][1] == 'p') || (ol[0][0] == 'p' && ol[0][1] == 'l')
+			|| (ol[0][0] == 's' && ol[0][1] == 'q') || (ol[0][0] == 'c' && ol[0][1] == 'y')
+			|| (ol[0][0] == 't' && ol[0][1] == 'r'))
 		{
-			if (sp_parse(cntl, one_line) == 0)
+			if (parse_object(cntl, ol) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'p' && one_line[0][1] == 'l')
+		else if (ol[0][0] == 'R')
 		{
-			if (pl_parse(cntl, one_line) == 0)
+			if (r_parse(cntl, ol) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 's' && one_line[0][1] == 'q')
+		else if (ol[0][0] == 'A')
 		{
-			if (sq_parse(cntl, one_line) == 0)
+			if (a_parse(cntl, ol) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 'c' && one_line[0][1] == 'y')
+		else if (ol[0][0] == 'c')
 		{
-			if (cy_parse(cntl, one_line) == 0)
+			if (c_parse(cntl, ol, cam_t) == 0)
+				return (0);
+			cam_t++;
+		}
+		else if (ol[0][0] == 'l')
+		{
+			if (l_parse(cntl, ol) == 0)
 				return (0);
 		}
-		else if (one_line[0][0] == 't' && one_line[0][1] == 'r')
-		{
-			if (tr_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 'R')
-		{
-			if (r_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 'A')
-		{
-			if (a_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		else if (one_line[0][0] == 'c')
-		{
-			
-			if (c_parse(cntl, one_line, _cam) == 0)
-			{
-				return (0);
-			}
-			_cam++;
-		}
-		else if (one_line[0][0] == 'l')
-		{
-			if (l_parse(cntl, one_line) == 0)
-				return (0);
-		}
-		ft_freeall(one_line);
+		ft_freeall(ol);
 		i++;
 	}
+	return (1);
+}
+
+int	parse_object(t_cntl *cntl, char **ol)
+{
+	if (ol[0][0] == 's' && ol[0][1] == 'p')
+	{
+		if (sp_parse(cntl, ol) == 0)
+			return (0);
+	}
+	else if (ol[0][0] == 'p' && ol[0][1] == 'l')
+	{
+		if (pl_parse(cntl, ol) == 0)
+			return (0);
+	}
+	else if (ol[0][0] == 's' && ol[0][1] == 'q')
+	{
+		if (sq_parse(cntl, ol) == 0)
+			return (0);
+	}
+	else if (ol[0][0] == 'c' && ol[0][1] == 'y')
+	{
+		if (cy_parse(cntl, ol) == 0)
+			return (0);
+	}
+	else if (ol[0][0] == 't' && ol[0][1] == 'r')
+		if (tr_parse(cntl, ol) == 0)
+			return (0);
 	return (1);
 }

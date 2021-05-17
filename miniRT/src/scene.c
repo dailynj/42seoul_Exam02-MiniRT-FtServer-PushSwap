@@ -12,20 +12,20 @@
 
 #include "../includes/minirt.h"
 
-t_camera	*camera(t_point orig, double aspect_ratio)
+t_cam	*camera(t_point orig, double aspect_ratio)
 {
-	t_camera	*cam;
+	t_cam	*cam;
 
-	if (!(cam = (t_camera *)malloc(sizeof(t_camera))))
+	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (NULL);
 	cam->orig = orig;
-	cam->viewport_w = 2.0;
-	cam->viewport_h = cam->viewport_w / aspect_ratio;
+	cam->vp_w = 2.0;
+	cam->vp_h = cam->vp_w / aspect_ratio;
 	cam->focal_len = 1.0;
-	cam->horizontal = vec(cam->viewport_w, 0, 0);
-	cam->vertical = vec(0, cam->viewport_h, 0);
+	cam->horiz = vec(cam->vp_w, 0, 0);
+	cam->vertical = vec(0, cam->vp_h, 0);
 	cam->left_bottom =
-		vec_minus(vec_minus(vec_minus(cam->orig, vec_div(2, cam->horizontal)),
+		v_minus(v_minus(v_minus(cam->orig, vec_div(2, cam->horiz)),
 							vec_div(2, cam->vertical)),
 					vec(0, 0, 1.0));
 	return (cam);
@@ -40,14 +40,14 @@ t_scene		*scene_init(void)
 		print_error("Error : Scene init Fail!!!\n");
 		return (NULL);
 	}
-	scene->canvas.height = -1;
-	scene->canvas.width = -1;
-	scene->canvas.aspect_ratio = -1.0;
-	scene->camera_arr = camera(point3(0, 0, 0), scene->canvas.aspect_ratio);
+	scene->canv.heig = -1;
+	scene->canv.wid = -1;
+	scene->canv.aspect_ratio = -1.0;
+	scene->c_arr = camera(point3(0, 0, 0), scene->canv.aspect_ratio);
 	scene->ambient = color(-1, -1, -1);
 	scene->world = 0;
 	scene->light = 0;
-	scene->camera_num = 0;
+	scene->c_num = 0;
 	scene->camera_idx = 0;
 	return (scene);
 }

@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-int		cal_cmd_len(char **tmp)
+int		cmdlen(char **tmp)
 {
 	int	i;
 
