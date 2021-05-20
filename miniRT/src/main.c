@@ -13,6 +13,18 @@
 #include "../includes/minirt.h"
 #include "mlx.h"
 
+void	check_window_size(t_cntl cntl)
+{
+	int			x;
+	int			y;
+
+	mlx_get_screen_size(cntl.mlx, &x, &y);
+	if (cntl.scene->canv.wid > x)
+		cntl.scene->canv.wid = x;
+	if (cntl.scene->canv.heig > y)
+		cntl.scene->canv.heig = y;
+}
+
 int		main(int argc, char **argv)
 {
 	t_cntl	cntl;
@@ -23,8 +35,9 @@ int		main(int argc, char **argv)
 	if ((cntl.scene = scene_init()) == NULL)
 		return (print_error("Error : scene_init 에러!\n"));
 	if (parsing(&cntl, argv[1]) == 0)
-		return (print_error("Error : Parsing Error!\n"));
-	printf("*** START MINIRT ***\n");
+		return (0);
+	printf("<<< START MINIRT >>>\n");
+	check_window_size(cntl);
 	mlx_put_pixel_to_window(&cntl);
 	if (argc == 2)
 		return (mlx_show_window(&cntl));
@@ -32,7 +45,7 @@ int		main(int argc, char **argv)
 	{
 		if (s_ncmp(argv[2], "--save", 6) != 0)
 			return (print_error("Error : --save 인수가 잘못되었습니다\n"));
-		return (mlx_save_image(&cntl));
+		return (mlx_save_image(&cntl, -1));
 	}
 	return (0);
 }
@@ -46,7 +59,7 @@ int		mlx_put_pixel_to_window(t_cntl *cntl)
 	cntl->scene->canv.heig, "NAJEONG's World!");
 	if (!(cntl->image = (t_data *)malloc(cntl->scene->c_num *
 	sizeof(t_data))))
-		print_error("Error : data malloc Fail!!!\n");
+		return (0);
 	while (idx < cntl->scene->c_num)
 	{
 		cntl->image[idx].img = mlx_new_image(cntl->mlx,
@@ -72,7 +85,7 @@ int		mlx_pixel_put_while(t_cntl *cntl, int idx)
 		i = 0;
 		while (i < cntl->scene->canv.wid)
 		{
-			cntl->scene->ray = ray_primary(&cntl->scene->c_arr[idx],
+			cntl->scene->ray = ray_primary(cntl->scene->c_arr[idx],
 			(double)i / (cntl->scene->canv.wid - 1), (double)j /
 			(cntl->scene->canv.heig - 1));
 			pixel_color = ray_color(cntl->scene);
@@ -90,7 +103,7 @@ int		mlx_show_window(t_cntl *cntl)
 	printf("** START SHOW **\n");
 	printf("** FINISH SHOW **\n");
 	mlx_put_image_to_window(cntl->mlx, cntl->win,
-	cntl->image[cntl->scene->camera_idx].img, 0, 0);
+		cntl->image[cntl->scene->camera_idx].img, 0, 0);
 	mlx_key_hook(cntl->win, key_hook, cntl);
 	mlx_loop(cntl->mlx);
 	return (0);

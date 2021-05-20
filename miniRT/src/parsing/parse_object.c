@@ -22,11 +22,11 @@ int		sp_parse(t_cntl *cntl, char **one_line)
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		return (print_error("Error: split 오류!\n"));
 	if (cmdlen(tmp) != 3)
-		return (print_error("Error : sphere point 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free_print_error(tmp, "Error : sphere point 오류\n"));
 	if ((tmp2 = ft_split_char(one_line[3], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free_print_error(tmp, "Error: split 오류!\n"));
 	if (cmdlen(tmp2) != 3)
-		return (print_error("Error : sphere color 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free2_print_error(tmp, tmp2, "Error : sphere color 오류\n"));
 	obj_add_back(&cntl->scene->world, object(SP, sphere(point3(
 		a2f(tmp[0]), a2f(tmp[1]), a2f(tmp[2])), a2f(one_line[2])),
 		color(a2f(tmp2[0]) / 255.0, a2f(tmp2[1]) / 255.0,
@@ -46,15 +46,15 @@ int		pl_parse(t_cntl *cntl, char **one_line)
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		return (print_error("Error: split 오류!\n"));
 	if (cmdlen(tmp) != 3)
-		return (print_error("Error : plane point 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free_print_error(tmp, "Error : plane point 오류\n"));
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free_print_error(tmp, "Error: split 오류!\n"));
 	if (cmdlen(tmp2) != 3)
-		return (print_error("Error : plane normal 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free2_print_error(tmp, tmp2, "Error : plane normal 오류\n"));
 	if ((tmp3 = ft_split_char(one_line[3], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free2_print_error(tmp, tmp2, "Error: split 오류!\n"));
 	if (cmdlen(tmp3) != 3)
-		return (print_error("Error : plane color 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free3_print_error(tmp, tmp2, tmp3, "Error : plane color 오류\n"));
 	obj_add_back(&cntl->scene->world, object(PL,
 	plane(point3(a2f(tmp[0]), a2f(tmp[1]), a2f(tmp[2])),
 	v_unit(vec(a2f(tmp2[0]), a2f(tmp2[1]), a2f(tmp2[2])))),
@@ -74,15 +74,15 @@ int		sq_parse(t_cntl *cntl, char **one_line)
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		return (print_error("Error: split 오류!\n"));
 	if (cmdlen(tmp) != 3)
-		return (print_error("Error : square point 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free_print_error(tmp, "Error : sq point 오류\n"));
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free_print_error(tmp, "Error: split 오류!\n"));
 	if (cmdlen(tmp2) != 3)
-		return (print_error("Error : square normal 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free2_print_error(tmp, tmp2, "Error : sq normal 오류\n"));
 	if ((tmp3 = ft_split_char(one_line[4], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free2_print_error(tmp, tmp2, "Error: split 오류!\n"));
 	if (cmdlen(tmp3) != 3)
-		return (print_error("Error : square color 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free3_print_error(tmp, tmp2, tmp3, "Error : sq color 오류\n"));
 	obj_add_back(&cntl->scene->world, object(SQ, square(point3(a2f(tmp[0]),
 		a2f(tmp[1]), a2f(tmp[2])), v_unit(vec(a2f(tmp2[0]),
 		a2f(tmp2[1]), a2f(tmp2[2]))), a2f(one_line[3])), color(
@@ -102,19 +102,19 @@ int		cy_parse(t_cntl *cntl, char **one_line)
 	if ((tmp = ft_split_char(one_line[1], ',')) == NULL)
 		return (print_error("Error: split 오류!\n"));
 	if (cmdlen(tmp) != 3)
-		return (print_error("Error : cqlinder point 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free_print_error(tmp, "Error : cy point 오류\n"));
 	if ((tmp2 = ft_split_char(one_line[2], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free_print_error(tmp, "Error: split 오류!\n"));
 	if (cmdlen(tmp2) != 3)
-		return (print_error("Error : cqlinder normal 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free2_print_error(tmp, tmp2, "Error : cy normal 오류\n"));
 	if ((tmp3 = ft_split_char(one_line[5], ',')) == NULL)
-		return (print_error("Error: split 오류!\n"));
+		return (free2_print_error(tmp, tmp2, "Error: split 오류!\n"));
 	if (cmdlen(tmp3) != 3)
-		return (print_error("Error : cqlinder color 인수의 개수가 잘못 들어왔습니다! \n"));
+		return (free3_print_error(tmp, tmp2, tmp3, "Error : cy color 오류\n"));
 	obj_add_back(&cntl->scene->world, object(CY, cylinder(point3(a2f(tmp[0]),
-	a2f(tmp[1]), a2f(tmp[2])), a2f(one_line[3]), a2f(one_line[4]),
-	v_unit(vec(a2f(tmp2[0]), a2f(tmp2[1]), a2f(tmp2[2])))), color(
-	a2f(tmp3[0]) / 255.0, a2f(tmp3[1]) / 255.0, a2f(tmp3[2]) / 255.0)));
+		a2f(tmp[1]), a2f(tmp[2])), a2f(one_line[3]), a2f(one_line[4]),
+		v_unit(vec(a2f(tmp2[0]), a2f(tmp2[1]), a2f(tmp2[2])))), color(
+		a2f(tmp3[0]) / 255.0, a2f(tmp3[1]) / 255.0, a2f(tmp3[2]) / 255.0)));
 	ft_free3(tmp, tmp2, tmp3);
 	return (1);
 }

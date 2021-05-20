@@ -60,6 +60,7 @@ CC		=	clang
 CFLAGS	=	-Wall -Werror -Wextra
 CLIB	=	-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 
+
 all		: $(NAME)
 
 bonus	: all
@@ -79,8 +80,4 @@ fclean	: clean
 
 re		: fclean all
 
-show	: clean re
-		./miniRT subject.rt
-
-save	: clean re
-		./miniRT subject.rt --save
+.PHONY: all clean fclean re

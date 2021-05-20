@@ -36,14 +36,10 @@ t_scene		*scene_init(void)
 	t_scene	*scene;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-	{
-		print_error("Error : Scene init Fail!!!\n");
 		return (NULL);
-	}
 	scene->canv.heig = -1;
 	scene->canv.wid = -1;
 	scene->canv.aspect_ratio = -1.0;
-	scene->c_arr = camera(point3(0, 0, 0), scene->canv.aspect_ratio);
 	scene->ambient = color(-1, -1, -1);
 	scene->world = 0;
 	scene->light = 0;

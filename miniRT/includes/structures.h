@@ -103,7 +103,7 @@ typedef struct	s_light
 typedef struct	s_scene
 {
 	t_canv			canv;
-	t_cam			*c_arr;
+	t_cam			**c_arr;
 	int				c_num;
 	int				camera_idx;
 	t_object		*world;
@@ -158,6 +158,13 @@ typedef struct	s_cylinder
 }				t_cylinder;
 
 # pragma pack(push, 1)
+
+typedef	struct	s_color2
+{
+	unsigned char	z;
+	unsigned char	y;
+	unsigned char	x;
+}				t_color2;
 
 typedef	struct	s_fileheader
 {

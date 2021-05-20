@@ -17,3 +17,18 @@ int	free_print_error(char **ol, char *str)
 	ft_freeall(ol);
 	return (print_error(str));
 }
+
+int	free2_print_error(char **ol, char **ol2, char *str)
+{
+	ft_freeall(ol);
+	ft_freeall(ol2);
+	return (print_error(str));
+}
+
+int	free3_print_error(char **ol, char **ol2, char **ol3, char *str)
+{
+	ft_freeall(ol);
+	ft_freeall(ol2);
+	ft_freeall(ol3);
+	return (print_error(str));
+}

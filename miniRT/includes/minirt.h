@@ -24,7 +24,7 @@
 
 int			mlx_pixel_put_while(t_cntl *cntl, int idx);
 int			mlx_show_window(t_cntl *cntl);
-int			mlx_save_image(t_cntl *cntl);
+int			mlx_save_image(t_cntl *cntl, int i);
 t_bmp		bmp_set_header(t_scene *scene);
 int			mlx_put_pixel_to_window(t_cntl *cntl);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -129,5 +129,7 @@ size_t		ft_wordcnt_whitespace(char *s);
 char		*ft_worddup_whitespace(char *s);
 char		**ft_split_whitespace(char *s);
 int			free_print_error(char **ol, char *str);
+int			free2_print_error(char **ol, char **ol2, char *str);
+int			free3_print_error(char **ol, char **ol2, char **ol3, char *str);
 
 #endif
