@@ -1,5 +1,16 @@
 #include "push_swap.h"
 
+t_list  *node(int value, t_list *prev, t_list *next)
+{
+	t_list *new_list;
+
+	new_list = (t_list *)malloc(sizeof(t_list));
+	new_list->data = value;
+	new_list->prev = prev;
+	new_list->next = next;
+	return new_list;
+}
+
 void init_list(t_info *info)
 {
 	info->stack[A]->size = 0;
@@ -12,28 +23,4 @@ void init_list(t_info *info)
 	info->stack[A]->tail->prev = info->stack[A]->head;
 	info->stack[B]->tail = (t_list *)malloc(sizeof(t_list));
 	info->stack[B]->tail->prev = info->stack[B]->head;
-}
-
-void add_head(int value, t_stack *stack)
-{
-	t_list *new_list;
-
-	new_list = (t_list *)malloc(sizeof(t_list));
-	new_list->data = value;
-	new_list->prev = stack->head;
-	new_list->next = stack->head->next;
-	stack->head->next->prev = new_list;
-	stack->head->next = new_list;
-}
-
-void add_tail(int value, t_stack *stack)
-{
-	t_list *new_list;
-
-	new_list = (t_list *)malloc(sizeof(t_list));
-	new_list->data = value;
-	new_list->prev = stack->tail->prev;
-	new_list->next = stack->tail;
-	stack->tail->prev->next = new_list;
-	stack->tail->prev = new_list;
 }

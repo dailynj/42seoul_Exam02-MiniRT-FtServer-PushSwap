@@ -2,15 +2,14 @@ NAME	=	push_swap
 
 CC		=	gcc
 CF		=	-Wall -Wextra -Werror -I ./includes
-SRC		=	push_swap.c list.c \
+SRC		=	src/push_swap.c src/list_util_1.c src/list_util_2.c \
+			src/cmd_1.c src/cmd_2.c \
 
 OBJ		=	$(SRC:.c=.o)
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJ)
-			make all -C ./libft
-			cp ./libft/libft.a $(NAME)
 			ar rcs $(NAME) $(OBJ)
 			ranlib $(NAME)
 
