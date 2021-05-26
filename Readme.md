@@ -3,5 +3,7 @@ Run `make`.
 
 ## Running
 ```
-./miniRT Mul
+./miniRT Multi-objects.rt
+
+./miniRT Multi-objects.rt --save
 ```
