@@ -1,4 +1,4 @@
-# miniRT 
+# 📌 miniRT 
 
 ## Compiling
 Run `make`.
@@ -9,6 +9,6 @@ Run `make`.
 
 ./miniRT Multi-objects.rt --save
 ```
-# ft_server
+# 📌 ft_server
 
 Docker
