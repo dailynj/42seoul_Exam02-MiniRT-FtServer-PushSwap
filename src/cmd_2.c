@@ -15,7 +15,7 @@
 void	rrab(t_info *info, int num)
 {
 	t_stack *stack;
-	
+
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{

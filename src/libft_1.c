@@ -12,10 +12,10 @@
 
 #include "../includes/push_swap.h"
 
-int		ft_atoi(char *str)
+long long	ft_atoi(char *str)
 {
 	int	minus;
-	int	answer;
+	long long	answer;
 	int	i;
 
 	i = 0;

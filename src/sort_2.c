@@ -1,16 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/26 21:32:39 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/26 21:32:40 by najlee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-void	sort_a(t_info* info, int r)
+void	sort_a(t_info *info, int r)
 {
-	
+	int a;
+	int b;
+	int c;
+
 	if (r == 2)
-		if (info->stack[A]->head->next->data > info->stack[A]->head->next->next->data)
+		if (info->stack[A]->head->next->data >
+			info->stack[A]->head->next->next->data)
 			sab(info, A);
 	if (r == 3)
 	{
-		int a = info->stack[A]->head->next->data;
-		int b = info->stack[A]->head->next->next->data;
-		int c = info->stack[A]->head->next->next->next->data;
+		a = info->stack[A]->head->next->data;
+		b = info->stack[A]->head->next->next->data;
+		c = info->stack[A]->head->next->next->next->data;
 		if (b < a)
 			sort_aa(a, b, c, info);
 		else if (a < c && c < b)
@@ -33,7 +49,7 @@ void	sort_aa(int a, int b, int c, t_info *info)
 {
 	if (b < a && a < c)
 		sab(info, A);
-	else if(b < c && c < a)
+	else if (b < c && c < a)
 	{
 		rab(info, A);
 		sab(info, A);
@@ -50,11 +66,15 @@ void	sort_aa(int a, int b, int c, t_info *info)
 	}
 }
 
-void	sort_b(t_info* info, int r)
+void	sort_b(t_info *info, int r)
 {
-	
+	int a;
+	int b;
+	int c;
+
 	if (r == 2)
-		if (info->stack[A]->head->next->data < info->stack[A]->head->next->next->data)
+		if (info->stack[A]->head->next->data <
+			info->stack[A]->head->next->next->data)
 		{
 			sab(info, A);
 			pab(info, A);
@@ -62,9 +82,9 @@ void	sort_b(t_info* info, int r)
 		}
 	if (r == 3)
 	{
-		int a = info->stack[B]->head->next->data;
-		int b = info->stack[B]->head->next->next->data;
-		int c = info->stack[B]->head->next->next->next->data;
+		a = info->stack[B]->head->next->data;
+		b = info->stack[B]->head->next->next->data;
+		c = info->stack[B]->head->next->next->next->data;
 		if (b < a)
 			sort_bb(a, b, c, info);
 		else if (b > a && a > c)
@@ -74,7 +94,7 @@ void	sort_b(t_info* info, int r)
 			rrab(info, B);
 			sab(info, B);
 		}
-		else if(b > c && c > a)
+		else if (b > c && c > a)
 			sab(info, B);
 		pab(info, B);
 		pab(info, B);

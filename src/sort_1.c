@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/26 21:32:32 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/26 21:32:33 by najlee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-void	A_to_B(t_info *info, int r)
+void	a_to_b(t_info *info, int r)
 {
 	int ra_;
 	int pb_;
@@ -34,16 +46,16 @@ void	A_to_B(t_info *info, int r)
 		}
 	}
 	// rrr 로 합칠 수 있음
-	while(++i < ra_)
+	while (++i < ra_)
 		rrab(info, A);
-	while(++i < ra_ + rb_)
+	while (++i < ra_ + rb_)
 		rrab(info, B);
-	A_to_B(info, ra_);
-	B_to_A(info, rb_);
-	B_to_A(info, pb_ - ra_);
+	a_to_b(info, ra_);
+	b_to_a(info, rb_);
+	b_to_a(info, pb_ - ra_);
 }
 
-void	B_to_A(t_info * info, int r)
+void	b_to_a(t_info *info, int r)
 {
 	int rb_;
 	int pa_;
@@ -64,22 +76,24 @@ void	B_to_A(t_info * info, int r)
 		{
 			rab(info, B);
 			rb_++;
-		}	
+		}
 		else
 		{
 			pab(info, A);
 			pa_++;
 			if (info->stack[B]->head->next->data >= pivot[1])
+			{
 				rab(info, A);
 				ra_++;
+			}
 		}
 	}
-	A_to_B(info, pa_ - ra_);
+	a_to_b(info, pa_ - ra_);
 	// rrr 로 합칠 수 있음
-	while(++i < ra_)
+	while (++i < ra_)
 		rrab(info, A);
-	while(++i < ra_ + rb_)
+	while (++i < ra_ + rb_)
 		rrab(info, B);
-	A_to_B(info, rb_);
-	B_to_A(info, ra_);
+	a_to_b(info, rb_);
+	b_to_a(info, ra_);
 }

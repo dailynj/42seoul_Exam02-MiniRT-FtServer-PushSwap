@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-void	push_all(t_stack *stack, int arr[], int len)
+void	push_all(t_stack *stack, long long arr[], int len)
 {
 	int idx;
 

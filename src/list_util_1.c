@@ -56,7 +56,6 @@ void	init_list(t_info *info)
 	info->stack[B]->head->flag = 0;
 	info->stack[B]->tail->flag = 0;
 	info->stack[A]->tail->flag = 0;
-
 	// info->cmd.head = (t_list *)malloc(sizeof(t_list));
 	// info->cmd.head->next = (t_list *)malloc(sizeof(t_list));
 	// info->cmd.head->prev = (t_list *)malloc(sizeof(t_list));
@@ -83,12 +82,12 @@ void	init_list(t_info *info)
 // 	box->pivot1 = tmp[len / 3];
 // }
 
-int *find_pivot(t_info *info, int num, int r)
+int		*find_pivot(t_info *info, int num, int r)
 {
-	int	tmp_arr[r];
-	t_list *now;
-	int	i;
-	int	*pivot;
+	int		tmp_arr[r];
+	t_list	*now;
+	int		i;
+	int		*pivot;
 
 	i = -1;
 	pivot = malloc(2 * sizeof(int));
