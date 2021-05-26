@@ -3,7 +3,7 @@ NAME	=	push_swap
 CC		=	gcc
 CF		=	-Wall -Wextra -Werror -I ./includes -fsanitize=address -g
 SRC		=	push_swap.c list_util_1.c list_util_2.c \
-			cmd_1.c cmd_2.c libft_1.c error_check.c \
+			cmd_1.c cmd_2.c libft_1.c error_check.c quick_sort.c  sort_1.c sort_2.c\
 
 SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR),$(SRC))

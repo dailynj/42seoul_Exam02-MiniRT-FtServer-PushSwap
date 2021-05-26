@@ -49,9 +49,18 @@ typedef struct	s_info {
 	// t_stack		cmd;
 }				t_info;
 
+typedef struct	s_box {
+	int			*arr;
+	int			min;
+	int			max;
+	int			pivot1;
+	int			pivot2;
+}				t_box;
+
 // list.c
 t_list	*node(int value, t_list *prev, t_list *next);
 void	init_list(t_info *info);
+int		*find_pivot(t_info *info, int num, int r);
 void	push_all(t_stack *stack, int arr[], int len);
 void	push_head(int value, t_stack *stack);
 void	push_tail(int value, t_stack *stack);
@@ -73,5 +82,16 @@ int		ft_atoi(char *str);
 // error_check.c
 int		argv_check(int arr[], int num);
 int		print_error(char *str);
+
+// quick_sort.c
+void	quicksort(int arr[], int left, int right);
+
+// sort.c
+void	A_to_B(t_info *info, int r);
+void	B_to_A(t_info * info, int r);
+void	sort_a(t_info* info, int r);
+void	sort_aa(int a, int b, int c, t_info *info);
+void	sort_b(t_info* info, int r);
+void	sort_bb(int a, int b, int c, t_info *info);
 
 #endif

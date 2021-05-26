@@ -19,7 +19,7 @@ void	sab(t_info *info, int num)
 	t_stack	*stack;
 	
 	stack = info->stack[num];
-	if (stack->size == 0)
+	if (stack->size < 2)
 	{
 		printf("sab error\n");
 		return ;

@@ -43,8 +43,8 @@ void	push_tail(int value, t_stack *stack)
 
 void	pop_head(t_stack *stack)
 {
-	stack->head->next = stack->head->next->next;
 	stack->head->next->next->prev = stack->head;
+	stack->head->next = stack->head->next->next;
 	stack->size--;
 }
 

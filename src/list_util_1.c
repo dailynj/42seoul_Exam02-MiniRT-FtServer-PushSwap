@@ -70,3 +70,36 @@ void	init_list(t_info *info)
 	// info->cmd.head->flag = 0;  //node 가 아니고 head 나 tail 이다!
 	// info->cmd.tail->flag = 0;
 }
+
+// void	init_arr(t_box *box, int len)
+// {
+// 	int	*tmp;
+
+// 	tmp = box->arr;
+// 	quicksort(tmp, 0, len -1);
+// 	box->min = tmp[len - 1];
+// 	box->max = tmp[0];
+// 	box->pivot2 = tmp[2 * len / 3];
+// 	box->pivot1 = tmp[len / 3];
+// }
+
+int *find_pivot(t_info *info, int num, int r)
+{
+	int	tmp_arr[r];
+	t_list *now;
+	int	i;
+	int	*pivot;
+
+	i = -1;
+	pivot = malloc(2 * sizeof(int));
+	now = info->stack[num]->head->next;
+	while (++i < r)
+	{
+		tmp_arr[i] = now->data;
+		now = now->next;
+	}
+	quicksort(tmp_arr, 0, r - 1);
+	pivot[1] = tmp_arr[2 * r / 3];
+	pivot[0] = tmp_arr[r / 3];
+	return (pivot);
+}

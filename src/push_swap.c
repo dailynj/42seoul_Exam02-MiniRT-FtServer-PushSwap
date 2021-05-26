@@ -51,25 +51,31 @@ int	main(int argc, char **argv)
 {
 	int		idx;
 	t_info	*info;
-	int		arr[argc];
+	t_box	*box;
 
 	info = (t_info *)malloc(sizeof(t_info));
+	box = (t_box *)malloc(sizeof(t_box));
 	init_list(info);  //list 초기화
+	if (!(box->arr = malloc(argc * sizeof(int))))
+		return (0);
+	
+
 	idx = -1;
 	while (++idx < argc - 1)
 	{
-		arr[idx] = ft_atoi(argv[idx + 1]);
-		if ((arr[idx] == 0 && argv[idx + 1][0] != '0')
-			|| argv_check(arr, idx) == 0)  // 문자가 들어왔을 때 + 인자 에러 체크(정수 범위, 중복)
+		box->arr[idx] = ft_atoi(argv[idx + 1]);
+		if ((box->arr[idx] == 0 && argv[idx + 1][0] != '0')
+			|| argv_check(box->arr, idx) == 0)  // 문자가 들어왔을 때 + 인자 에러 체크(정수 범위, 중복)
 			return (print_error("Error\n"));
 	}
-	push_all(info->stack[A], arr, argc - 1);  // A 에 인자로 들어온 값 넣어주기
-
+	// init_arr(box, argc - 1);
+	push_all(info->stack[A], box->arr, argc - 1);  // A 에 인자로 들어온 값 넣어주기
+	A_to_B(info, argc - 1);
 	// ------- 출력 확인
 	// sab(info, A);
 	// pab(info, B);
-	// print_stack(info->stack[A], A);
-	// print_stack(info->stack[B], B);
+	print_stack(info->stack[A], A);
+	print_stack(info->stack[B], B);
 	// print_cmd(&info->cmd); // 안씀
 	// -------
 	return (0);
