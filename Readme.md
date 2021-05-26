@@ -24,5 +24,5 @@ Run `make`.
 
 ### Running
 ```
-./push_swap 1 2 3 4
+./push_swap 4 3 2 1
 ```
