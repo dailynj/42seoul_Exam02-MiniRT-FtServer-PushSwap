@@ -1,9 +1,9 @@
 ## 📌 miniRT 
 
-## Compiling
+### Compiling
 Run `make`.
 
-## Running
+### Running
 ```
 ./miniRT Multi-objects.rt
 
