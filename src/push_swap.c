@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 	}
 	push_all(info->stack[A], arr, argc - 1);  // A 에 인자로 들어온 값 넣어주기
 
-	// -------
+	// ------- 출력 확인
 	// sab(info, A);
 	// pab(info, B);
 	// print_stack(info->stack[A], A);
