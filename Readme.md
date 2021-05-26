@@ -14,4 +14,4 @@ Run `make`.
 ```
 ## 📌 ft_server
 
-Docker 를 사용하여 Wordpress, phpMyAdmin, SQL database 사용하기
+`Docker` 를 사용하여 `Wordpress`, `phpMyAdmin`, `SQL database` 사용하기
