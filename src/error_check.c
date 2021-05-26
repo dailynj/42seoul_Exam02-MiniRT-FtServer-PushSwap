@@ -13,7 +13,7 @@
 #include "../includes/push_swap.h"
 
 // 중복, int의 최대 최소 체크
-int	argv_check(int arr[], int num)
+int		argv_check(int arr[], int num)
 {
 	int idx;
 
@@ -26,4 +26,10 @@ int	argv_check(int arr[], int num)
 			return (0);
 	}
 	return (1);
+}
+
+int		print_error(char *str)
+{
+	printf("%s", str);
+	return (0);
 }

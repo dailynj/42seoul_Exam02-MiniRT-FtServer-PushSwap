@@ -52,8 +52,21 @@ void	init_list(t_info *info)
 	info->stack[B]->tail->prev = info->stack[B]->head;
 	info->stack[A]->tail->next = NULL;
 	info->stack[B]->tail->next = NULL;
-	info->stack[A]->head->flag = 0;
+	info->stack[A]->head->flag = 0;  //node 가 아니고 head 나 tail 이다!
 	info->stack[B]->head->flag = 0;
 	info->stack[B]->tail->flag = 0;
 	info->stack[A]->tail->flag = 0;
+
+	// info->cmd.head = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.head->next = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.head->prev = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.tail = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.tail->next = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.tail->prev = (t_list *)malloc(sizeof(t_list));
+	// info->cmd.head->next = info->cmd.tail;
+	// info->cmd.head->prev = NULL;
+	// info->cmd.tail->prev = info->cmd.head;
+	// info->cmd.tail->next = NULL;
+	// info->cmd.head->flag = 0;  //node 가 아니고 head 나 tail 이다!
+	// info->cmd.tail->flag = 0;
 }

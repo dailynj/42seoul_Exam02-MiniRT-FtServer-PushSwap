@@ -12,16 +12,34 @@
 
 #include "../includes/push_swap.h"
 
-void	rrab(t_stack *stack)
+void	rrab(t_info *info, int num)
 {
+	t_stack *stack;
+	
+	stack = info->stack[num];
+	if (stack->size == 0)
+	{
+		printf("rrab error\n");
+		return ;
+	}
 	push_head(stack->tail->prev->data, stack);
 	pop_tail(stack);
+	// if (num == 0)
+	// 	push_tail(RRA, &(info->cmd));
+	// else
+	// 	push_tail(RRB, &(info->cmd));
+	if (num == 0)
+		printf("rra\n");
+	else
+		printf("rrb\n");
 }
 
-void	rrr(t_stack **stack)
+void	rrr(t_info *info)
 {
-	if (stack[A]->size > 0)
-		rrab(stack[A]);
-	if (stack[B]->size > 0)
-		rrab(stack[B]);
+	if (info->stack[A]->size > 0)
+		rrab(info, A);
+	if (info->stack[B]->size > 0)
+		rrab(info, B);
+	// push_tail(RRR, &(info->cmd));
+	printf("rrr\n");
 }
