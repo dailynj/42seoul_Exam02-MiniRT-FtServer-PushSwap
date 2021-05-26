@@ -31,7 +31,7 @@ int		ft_atoi(char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			answer = answer * 10 + (str[i] - '0');
 		else
-			break ;
+			return (0);
 		i++;
 	}
 	return (minus * answer);

@@ -12,12 +12,12 @@
 
 #include "../includes/push_swap.h"
 
-void	push_all(t_stack *stack, int arr[], int argc)
+void	push_all(t_stack *stack, int arr[], int len)
 {
 	int idx;
 
 	idx = -1;
-	while (++idx < argc)
+	while (++idx < len)
 		push_head(arr[idx], stack);
 }
 
@@ -50,7 +50,7 @@ void	pop_head(t_stack *stack)
 
 void	pop_tail(t_stack *stack)
 {
-	stack->tail->prev = stack->tail->prev->prev;
 	stack->tail->prev->prev->next = stack->tail;
+	stack->tail->prev = stack->tail->prev->prev;
 	stack->size--;
 }

@@ -20,6 +20,8 @@ void	rrab(t_stack *stack)
 
 void	rrr(t_stack **stack)
 {
-	rab(stack[0]);
-	rab(stack[1]);
+	if (stack[A]->size > 0)
+		rrab(stack[A]);
+	if (stack[B]->size > 0)
+		rrab(stack[B]);
 }

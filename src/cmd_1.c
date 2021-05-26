@@ -14,19 +14,23 @@
 
 void	sab(t_stack *stack)
 {
-	t_list *tmp;
+	int tmp1;
+	int tmp2;
 
-	tmp = (t_list *)malloc(sizeof(t_list));
-	tmp = stack->head->next->next;
-	stack->head->next->next = stack->head->next;
-	stack->head->next = stack->head->next->next;
-	free(tmp);
+	tmp1 = stack->head->next->data;
+	pop_head(stack);
+	tmp2 = stack->head->next->data;
+	pop_head(stack);
+	push_head(tmp1, stack);
+	push_head(tmp2, stack);
 }
 
 void	ss(t_stack **stack)
 {
-	sab(stack[0]);
-	sab(stack[1]);
+	if (stack[A]->size > 0)
+		sab(stack[A]);
+	if (stack[B]->size > 0)
+		sab(stack[B]);
 }
 
 void	pab(t_stack **stack, int n)
@@ -43,6 +47,8 @@ void	rab(t_stack *stack)
 
 void	rr(t_stack **stack)
 {
-	rab(stack[0]);
-	rab(stack[1]);
+	if (stack[A]->size > 0)
+		rab(stack[A]);
+	if (stack[B]->size > 0)
+		rab(stack[B]);
 }

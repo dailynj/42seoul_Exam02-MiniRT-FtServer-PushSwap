@@ -18,9 +18,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h> // write, close
 
 typedef struct	s_list {
     int				data;
+	int				flag;
     struct s_list*	next;
     struct s_list*	prev;
 }				t_list;
@@ -33,13 +35,13 @@ typedef struct	s_stack {
 
 typedef struct	s_info {
 	t_stack		*stack[2];
-	t_stack		cmd;
+	//t_stack		cmd;
 }				t_info;
 
 // list.c
 void	init_list(t_info *info);
 t_list	*node(int value, t_list *prev, t_list *next);
-void	push_all(t_stack *stack, int arr[], int argc);
+void	push_all(t_stack *stack, int arr[], int len);
 void	push_head(int value, t_stack *stack);
 void	push_tail(int value, t_stack *stack);
 void	pop_head(t_stack *stack);
@@ -58,6 +60,6 @@ void	rrr(t_stack **stack);
 int		ft_atoi(char *str);
 
 // error_check.c
-int		argv_check(int arr[], int num, int argc);
+int		argv_check(int arr[], int num);
 
 #endif

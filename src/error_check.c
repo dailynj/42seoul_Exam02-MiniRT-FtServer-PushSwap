@@ -13,16 +13,16 @@
 #include "../includes/push_swap.h"
 
 // 중복, int의 최대 최소 체크
-int	argv_check(int arr[], int num, int argc)
+int	argv_check(int arr[], int num)
 {
 	int idx;
 
 	idx = -1;
-	if (num > 2147483647 || num < -2147483647)
+	if (arr[num] > 2147483647 || arr[num] < -2147483647)
 		return (0);
-	while (++idx < argc)
+	while (++idx < num)
 	{
-		if (arr[idx] == num)
+		if (arr[idx] == arr[num])
 			return (0);
 	}
 	return (1);
