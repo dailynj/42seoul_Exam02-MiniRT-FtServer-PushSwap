@@ -91,3 +91,53 @@ int		*find_pivot(t_info *info, int num, int r)
 	pivot[0] = tmp_arr[r / 3];
 	return (pivot);
 }
+
+int		check_sorted_a(t_info *info, int r)
+{
+	int		tmp_arr[r];
+	t_list	*now;
+	int		i;
+
+	i = -1;
+	now = info->stack[A]->head->next;
+	while (++i < r)
+	{
+		tmp_arr[i] = now->data;
+		now = now->next;
+	}
+	quicksort(tmp_arr, 0, r - 1);
+	i = -1;
+	now = info->stack[A]->head->next;
+	while (++i < r)
+	{
+		if (tmp_arr[i] != now->data)
+			return (0);
+		now = now->next;
+	}
+	return (1);
+}
+
+int		check_sorted_b(t_info *info, int r)
+{
+	int		tmp_arr[r];
+	t_list	*now;
+	int		i;
+
+	i = -1;
+	now = info->stack[B]->head->next;
+	while (++i < r)
+	{
+		tmp_arr[i] = now->data;
+		now = now->next;
+	}
+	quicksort(tmp_arr, 0, r - 1);
+	i = -1;
+	now = info->stack[B]->tail->prev;
+	while (++i < r)
+	{
+		if (tmp_arr[i] != now->data)
+			return (0);
+		now = now->prev;
+	}
+	return (1);
+}

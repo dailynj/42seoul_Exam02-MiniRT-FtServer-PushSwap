@@ -64,6 +64,8 @@ typedef struct	s_box {
 t_list		*node(int value, t_list *prev, t_list *next);
 void		init_list(t_info *info);
 int			*find_pivot(t_info *info, int num, int r);
+int			check_sorted_a(t_info *info, int r);
+int			check_sorted_b(t_info *info, int r);
 void		push_all(t_stack *stack, long long arr[], int len);
 void		push_head(int value, t_stack *stack);
 void		push_tail(int value, t_stack *stack);

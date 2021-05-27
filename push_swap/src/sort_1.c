@@ -24,6 +24,11 @@ void	a_to_b(t_info *info, int r)
 	pb_ = 0;
 	rb_ = 0;
 	i = -1;
+
+	// 정렬됬으면 바로 빠져나오기
+	if (check_sorted_a(info, r))
+		return ;
+
 	pivot = find_pivot(info, A, r);
 	if (r <= 3)
 		return (sort_a(info, r));
@@ -76,12 +81,12 @@ void	a_to_b(t_info *info, int r)
 		i = -1;
 		if (ra_ > rb_)
 		{
-			while (++i < ra_ - rb_)
+			while (++i < (ra_ - rb_))
 				rrab(info, A, 1);
 		}
 		else
 		{
-			while (++i < rb_ - ra_)
+			while (++i < (rb_ - ra_))
 				rrab(info, B, 1);
 		}
 	}
@@ -102,6 +107,15 @@ void	b_to_a(t_info *info, int r)
 	pa_ = 0;
 	ra_ = 0;
 	i = -1;
+
+	// 정렬됬으면 바로 빠져나오기
+	if (check_sorted_b(info, r))
+	{
+		if (r == 1)
+			pab(info, A);
+		return ;
+	}
+
 	if (r <= 3)
 		return (sort_b(info, r));
 	pivot = find_pivot(info, B, r);
@@ -135,22 +149,34 @@ void	b_to_a(t_info *info, int r)
 		ra_ = 0;
 	if (rb_ == info->stack[B]->size)
 		rb_ = 0;
-	if (ra_ < rb_)
+	if ((info->stack[A]->size - ra_) < ra_)
 	{
-		i = -1;
-		while (++i < ra_)
-			rrr(info);
-		i = -1;
-		while (++i < rb_ - ra_)
-			rrab(info, B, 1);
+		if ((rb_ + info->stack[A]->size - ra_) < max(rb_, ra_))
+		{
+			ra_ = info->stack[A]->size - ra_;
+			i = -1;
+			while (++i < rb_)
+				rrab(info, B, 1);
+			i = -1;
+			while (++i < ra_)
+				rab(info, A, 1);
+		}
 	}
 	else{
 		i = -1;
-		while (++i < rb_)
+		while (++i < min(ra_, rb_))
 			rrr(info);
 		i = -1;
-		while (++i < ra_ - rb_)
-			rrab(info, A, 1);
+		if (rb_ > ra_)
+		{
+			while (++i < (rb_ - ra_))
+				rrab(info, B, 1);
+		}
+		else
+		{
+			while (++i < (ra_ - rb_))
+				rrab(info, A, 1);
+		}
 	}
 	a_to_b(info, tmp_rb);
 	b_to_a(info, tmp_ra);
