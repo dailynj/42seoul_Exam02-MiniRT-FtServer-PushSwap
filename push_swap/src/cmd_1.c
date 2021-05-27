@@ -21,7 +21,7 @@ void	sab(t_info *info, int num, int flag)
 	stack = info->stack[num];
 	if (stack->size < 2)
 	{
-		printf("sab error\n");
+		// printf("sab error\n");
 		return ;
 	}
 	tmp1 = stack->head->next->data;
@@ -57,7 +57,7 @@ void	pab(t_info *info, int num)
 {
 	if (info->stack[!num]->size == 0)
 	{
-		printf("pab error\n");
+		// printf("pab error\n");
 		return ;
 	}
 	push_head(info->stack[!num]->head->next->data, info->stack[num]);
@@ -79,7 +79,7 @@ void	rab(t_info *info, int num, int flag)
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{
-		printf("rab error\n");
+		// printf("rab error\n");
 		return ;
 	}
 	push_tail(stack->head->next->data, stack);

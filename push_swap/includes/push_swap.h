@@ -94,5 +94,7 @@ void		sort_a(t_info* info, int r);
 void		sort_aa(int a, int b, int c, t_info *info);
 void		sort_b(t_info* info, int r);
 void		sort_bb(int a, int b, int c, t_info *info);
+void		sort_3(t_info *info);
+void		sort_33(int a, int b, int c, t_info *info);
 
 #endif
