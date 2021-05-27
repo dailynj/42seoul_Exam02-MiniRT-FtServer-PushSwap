@@ -18,7 +18,7 @@ void	push_all(t_stack *stack, long long arr[], int len)
 
 	idx = -1;
 	while (++idx < len)
-		push_head(arr[idx], stack);
+		push_tail(arr[idx], stack);
 }
 
 void	push_head(int value, t_stack *stack)

@@ -31,7 +31,7 @@ void	a_to_b(t_info *info, int r)
 	{
 		if (info->stack[A]->head->next->data >= pivot[1])
 		{
-			rab(info, A);
+			rab(info, A, 1);
 			ra_++;
 		}
 		else
@@ -40,19 +40,20 @@ void	a_to_b(t_info *info, int r)
 			pb_++;
 			if (info->stack[B]->head->next->data >= pivot[0])
 			{
-				rab(info, B);
+				rab(info, B, 1);
 				rb_++;
 			}
 		}
 	}
 	// rrr 로 합칠 수 있음
 	while (++i < ra_)
-		rrab(info, A);
-	while (++i < ra_ + rb_)
-		rrab(info, B);
+		rrab(info, A, 1);
+	i = -1;
+	while (++i < rb_)
+		rrab(info, B, 1);
 	a_to_b(info, ra_);
 	b_to_a(info, rb_);
-	b_to_a(info, pb_ - ra_);
+	b_to_a(info, pb_ - rb_);
 }
 
 void	b_to_a(t_info *info, int r)
@@ -67,14 +68,14 @@ void	b_to_a(t_info *info, int r)
 	pa_ = 0;
 	ra_ = 0;
 	i = -1;
-	if (r < 3)
+	if (r <= 3)
 		return (sort_b(info, r));
 	pivot = find_pivot(info, B, r);
 	while (r--)
 	{
 		if (info->stack[B]->head->next->data < pivot[0])
 		{
-			rab(info, B);
+			rab(info, B, 1);
 			rb_++;
 		}
 		else
@@ -83,7 +84,7 @@ void	b_to_a(t_info *info, int r)
 			pa_++;
 			if (info->stack[B]->head->next->data >= pivot[1])
 			{
-				rab(info, A);
+				rab(info, A, 1);
 				ra_++;
 			}
 		}
@@ -91,9 +92,10 @@ void	b_to_a(t_info *info, int r)
 	a_to_b(info, pa_ - ra_);
 	// rrr 로 합칠 수 있음
 	while (++i < ra_)
-		rrab(info, A);
-	while (++i < ra_ + rb_)
-		rrab(info, B);
+		rrab(info, A, 1);
+	i = -1;
+	while (++i < rb_)
+		rrab(info, B, 1);
 	a_to_b(info, rb_);
 	b_to_a(info, ra_);
 }
