@@ -20,11 +20,12 @@ void	sort_a(t_info *info, int r)
 
 	if (r == 2)
 	{
-		if (info->stack[A]->head->next->data >
-			info->stack[A]->head->next->next->data)
+		if (info->stack[A]->head->next->data > info->stack[A]->head->next->next->data)
 			sab(info, A, 1);
 	}
-	if (r == 3)
+	else if (r == 3 && info->stack[A]->size == 3)
+		sort_3a(info);
+	else if (r == 3)
 	{
 		a = info->stack[A]->head->next->data;
 		b = info->stack[A]->head->next->next->data;
@@ -76,17 +77,18 @@ void	sort_b(t_info *info, int r)
 
 	if (r == 1)
 		pab(info, A);
-	if (r == 2)
+	else if (r == 2)
 	{
-		if (info->stack[B]->head->next->data <
-			info->stack[B]->head->next->next->data)
+		if (info->stack[B]->head->next->data < info->stack[B]->head->next->next->data)
 		{
 			sab(info, B, 1);
 		}
 		pab(info, A);
 		pab(info, A);
 	}
-	if (r == 3)
+	else if (r == 3 && info->stack[B]->size == 3)
+		sort_3b(info);
+	else if (r == 3)
 	{
 		a = info->stack[B]->head->next->data;
 		b = info->stack[B]->head->next->next->data;

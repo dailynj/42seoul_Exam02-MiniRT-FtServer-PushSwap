@@ -38,22 +38,56 @@ void	a_to_b(t_info *info, int r)
 		{
 			pab(info, B);
 			pb_++;
-			if (info->stack[B]->head->next->data >= pivot[0])
+			if (info->stack[B]->head->next->data >= pivot[0] && info->stack[B]->size > 1)
 			{
 				rab(info, B, 1);
 				rb_++;
 			}
+			else if (info->stack[B]->head->next->data >= pivot[0])
+			{
+				rb_++;
+			}
 		}
 	}
-	// rrr 로 합칠 수 있음
-	while (++i < ra_)
-		rrab(info, A, 1);
-	i = -1;
-	while (++i < rb_)
-		rrab(info, B, 1);
-	a_to_b(info, ra_);
-	b_to_a(info, rb_);
-	b_to_a(info, pb_ - rb_);
+	int tmp_ra = ra_;
+	int tmp_rb = rb_;
+	int tmp_pb = pb_;
+	if (ra_ == info->stack[A]->size)
+		ra_ = 0;
+	if (rb_ == info->stack[B]->size)
+		rb_ = 0;
+	if ((info->stack[B]->size - rb_) < rb_)
+	{
+		if ((ra_ + info->stack[B]->size - rb_) < max(ra_, rb_))
+		{
+			rb_ = info->stack[B]->size - rb_;
+			i = -1;
+			while (++i < ra_)
+				rrab(info, A, 1);
+			i = -1;
+			while (++i < rb_)
+				rab(info, B, 1);
+		}
+	}
+	else{
+		i = -1;
+		while (++i < min(ra_, rb_))
+			rrr(info);
+		i = -1;
+		if (ra_ > rb_)
+		{
+			while (++i < ra_ - rb_)
+				rrab(info, A, 1);
+		}
+		else
+		{
+			while (++i < rb_ - ra_)
+				rrab(info, B, 1);
+		}
+	}
+	a_to_b(info, tmp_ra);
+	b_to_a(info, tmp_rb);
+	b_to_a(info, tmp_pb - tmp_rb);
 }
 
 void	b_to_a(t_info *info, int r)
@@ -82,20 +116,42 @@ void	b_to_a(t_info *info, int r)
 		{
 			pab(info, A);
 			pa_++;
-			if (info->stack[B]->head->next->data >= pivot[1])
+			if (info->stack[A]->head->next->data < pivot[1] && info->stack[A]->size > 1)
 			{
 				rab(info, A, 1);
 				ra_++;
 			}
+			else if (info->stack[A]->head->next->data < pivot[1])
+			{
+				ra_++;
+			}
 		}
 	}
-	a_to_b(info, pa_ - ra_);
-	// rrr 로 합칠 수 있음
-	while (++i < ra_)
-		rrab(info, A, 1);
-	i = -1;
-	while (++i < rb_)
-		rrab(info, B, 1);
-	a_to_b(info, rb_);
-	b_to_a(info, ra_);
+	int tmp_ra = ra_;
+	int tmp_rb = rb_;
+	int tmp_pa = pa_;
+	a_to_b(info, tmp_pa - tmp_ra);
+	if (ra_ == info->stack[A]->size)
+		ra_ = 0;
+	if (rb_ == info->stack[B]->size)
+		rb_ = 0;
+	if (ra_ < rb_)
+	{
+		i = -1;
+		while (++i < ra_)
+			rrr(info);
+		i = -1;
+		while (++i < rb_ - ra_)
+			rrab(info, B, 1);
+	}
+	else{
+		i = -1;
+		while (++i < rb_)
+			rrr(info);
+		i = -1;
+		while (++i < ra_ - rb_)
+			rrab(info, A, 1);
+	}
+	a_to_b(info, tmp_rb);
+	b_to_a(info, tmp_ra);
 }

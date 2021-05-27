@@ -69,10 +69,10 @@ int		main(int argc, char **argv)
 	}
 	// init_arr(box, argc - 1);
 	push_all(info->stack[A], box->arr, argc - 1);  // A 에 인자로 들어온 값 넣어주기
-	if (argc == 4)
-		sort_3(info);
-	else
-		a_to_b(info, argc - 1);
+	// if (argc == 4)
+	// 	sort_3(info);
+	// else
+	a_to_b(info, argc - 1);
 
 	// ------- 출력 확인
 	// sab(info, A, 1);
@@ -83,8 +83,8 @@ int		main(int argc, char **argv)
 	// pab(info, A);
 	// pab(info, A);
 	// pab(info, A);
-	print_stack(info->stack[A], A);
-	print_stack(info->stack[B], B);
+	// print_stack(info->stack[A], A);
+	// print_stack(info->stack[B], B);
 	// print_cmd(&info->cmd); // 안씀
 	// -------
 

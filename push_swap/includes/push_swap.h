@@ -27,9 +27,12 @@
 # define RRB 9
 # define RRR 10
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h> // write, close
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h> // write, close
+
+# define max(a, b) (((a) < (b)) ? (b) : (a))
+# define min(a, b) (((a) > (b)) ? (b) : (a))
 
 typedef struct	s_list {
     int				data;
@@ -94,7 +97,9 @@ void		sort_a(t_info* info, int r);
 void		sort_aa(int a, int b, int c, t_info *info);
 void		sort_b(t_info* info, int r);
 void		sort_bb(int a, int b, int c, t_info *info);
-void		sort_3(t_info *info);
-void		sort_33(int a, int b, int c, t_info *info);
+void		sort_3a(t_info *info);
+void		sort_33a(int a, int b, int c, t_info *info);
+void		sort_3b(t_info *info);
+void		sort_33b(int a, int b, int c, t_info *info);
 
 #endif

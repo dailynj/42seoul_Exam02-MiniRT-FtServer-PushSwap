@@ -87,12 +87,6 @@ int		*find_pivot(t_info *info, int num, int r)
 		now = now->next;
 	}
 	quicksort(tmp_arr, 0, r - 1);
-	// if (r == 5)
-	// {
-	// 	pivot[1] = tmp_arr[2];
-	// 	pivot[0] = tmp_arr[2];
-	// 	return (pivot);
-	// }
 	pivot[1] = tmp_arr[2 * r / 3];
 	pivot[0] = tmp_arr[r / 3];
 	return (pivot);
