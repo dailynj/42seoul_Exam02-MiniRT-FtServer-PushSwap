@@ -12,36 +12,45 @@
 
 #include "../includes/push_swap.h"
 
-void	quicksort(int arr[], int left, int right)
+void swap(int arr[], int a, int b) // a,b 스왑 함수 
 {
-	int	l_;
-	int	r_;
-	int	temp;
-	int pivot;
-
-	pivot = arr[(left + right) / 2];
-	l_ = left;
-	r_ = right;
-	while (l_ <= r_)
-	{
-		while (arr[l_] < pivot)
-			l_++;
-		while (arr[r_] > pivot)
-			r_--;
-		if (l_ <= r_)
-		{
-			if (l_ != r_)
-			{
-				temp = arr[l_];
-				arr[l_] = arr[r_];
-				arr[r_] = temp;
-			}
-			l_++;
-			r_--;
-		}
-	}
-	if (left < r_)
-		quicksort(arr, left, r_);
-	if (l_ < right)
-		quicksort(arr, l_, right);
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+int partition(int arr[], int left, int right)
+{
+    int pivot = arr[left]; // 피벗의 위치는 가장 왼쪽에서 시작
+    int low = left + 1;
+    int high = right;
+ 
+    while (low <= high) // 교차되기 전까지 반복한다 
+    {
+        while (low <= right && pivot >= arr[low]) // 피벗보다 큰 값을 찾는 과정 
+        {
+            low++; // low를 오른쪽으로 이동 
+        }
+        while (high >= (left+1)  && pivot <= arr[high]) // 피벗보다 작은 값을 찾는 과정 
+        {
+            high--; // high를 왼쪽으로 이동
+        }
+        if (low <= high)// 교차되지 않은 상태이면 스왑 과정 실행 
+        {
+            swap(arr, low, high); //low와 high를 스왑 
+        }
+    }
+    swap(arr, left, high); // 피벗과 high가 가리키는 대상을 교환 
+    return high;  // 옮겨진 피벗의 위치정보를 반환 
+ 
+}
+ 
+ 
+void quicksort(int arr[], int left, int right)
+{
+    if (left <= right)
+    {
+        int pivot = partition(arr, left, right); // 둘로 나누어서
+        quicksort(arr, left, pivot - 1); // 왼쪽 영역을 정렬한다.
+        quicksort(arr, pivot + 1, right); // 오른쪽 영역을 정렬한다.
+    }
 }
