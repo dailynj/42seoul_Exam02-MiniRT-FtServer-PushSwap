@@ -81,7 +81,7 @@ int		*find_pivot(t_info *info, int num, int r)
 	i = -1;
 	pivot = malloc(2 * sizeof(int));
 	now = info->stack[num]->head->next;
-	while (++i < r)
+	while (++i < r && now->flag)
 	{
 		tmp_arr[i] = now->data;
 		now = now->next;
@@ -100,7 +100,7 @@ int		check_sorted_a(t_info *info, int r)
 
 	i = -1;
 	now = info->stack[A]->head->next;
-	while (++i < r)
+	while (++i < r && now->flag)
 	{
 		tmp_arr[i] = now->data;
 		now = now->next;
@@ -108,7 +108,7 @@ int		check_sorted_a(t_info *info, int r)
 	quicksort(tmp_arr, 0, r - 1);
 	i = -1;
 	now = info->stack[A]->head->next;
-	while (++i < r)
+	while (++i < r && now->flag)
 	{
 		if (tmp_arr[i] != now->data)
 			return (0);
@@ -125,7 +125,7 @@ int		check_sorted_b(t_info *info, int r)
 
 	i = -1;
 	now = info->stack[B]->head->next;
-	while (++i < r)
+	while (++i < r && now->flag)
 	{
 		tmp_arr[i] = now->data;
 		now = now->next;
@@ -133,7 +133,7 @@ int		check_sorted_b(t_info *info, int r)
 	quicksort(tmp_arr, 0, r - 1);
 	i = -1;
 	now = info->stack[B]->tail->prev;
-	while (++i < r)
+	while (++i < r && now->flag)
 	{
 		if (tmp_arr[i] != now->data)
 			return (0);

@@ -72,6 +72,9 @@ int		main(int argc, char **argv)
 	// if (argc == 4)
 	// 	sort_3(info);
 	// else
+
+	// print_stack(info->stack[A], A);
+	// print_stack(info->stack[B], B);
 	a_to_b(info, argc - 1);
 
 	// ------- 출력 확인
