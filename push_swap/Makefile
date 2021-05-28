@@ -10,31 +10,42 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	push_swap
+NAME1	=	push_swap
+NAME2	=	checker
 
 CC		=	gcc
 CF		=	-Wall -Wextra -Werror -I ./includes
-SRC		=	main.c list_util_1.c list_util_2.c \
+SRC1	=	push_swap.c list_util_1.c list_util_2.c \
 			cmd_1.c cmd_2.c libft_1.c error_check.c \
 			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c\
 
-SRC_DIR = ./src/
-SRCS = $(addprefix $(SRC_DIR),$(SRC))
-OBJ = $(SRCS:.c=.o)
+SRC2	=	checker.c \
 
-all		:	$(NAME)
+SRC_DIR = ./src/
+
+SRCS1 = $(addprefix $(SRC_DIR),$(SRC1))
+SRCS2 = $(addprefix $(SRC_DIR),$(SRC2))
+
+OBJ1 = $(SRCS1:.c=.o)
+OBJ2 = $(SRCS2:.c=.o)
+
+all		:	$(NAME1) $(NAME2)
 
 %.o		:	$(SRC_DIR)/%.c
 			$(CC) $(CF) -c $< -o $@
 
-$(NAME): $(OBJ)
-	$(CC) $(CF) $(SRCS) -o $(NAME)
+$(NAME1): $(OBJ)
+	$(CC) $(CF) $(SRCS1) -o $(NAME1)
+
+$(NAME2): $(OBJ)
+	$(CC) $(CF) $(SRCS2) -o $(NAME2)
 
 clean	:
-			rm -f $(OBJ)
+			rm -f $(OBJ1) $(OBJ2)
 
 fclean	:	clean
-			rm -f $(NAME)
+			rm -f $(NAME1)
+			rm -f $(NAME2)
 
 re		:	fclean	all
 
