@@ -12,7 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-// 중복, int의 최대 최소 체크
 int		argv_check(long long arr[], int num)
 {
 	int idx;

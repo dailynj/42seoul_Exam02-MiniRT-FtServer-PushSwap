@@ -62,7 +62,7 @@ typedef struct	s_box {
 
 // list.c
 t_list		*node(int value, t_list *prev, t_list *next);
-void		init_list(t_info *info);
+int			init_list(t_info *info);
 int			*find_pivot(t_info *info, int num, int r);
 int			check_sorted_a(t_info *info, int r);
 int			check_sorted_b(t_info *info, int r);
@@ -84,6 +84,7 @@ void		rrr(t_info *info);
 // libft.c
 long long	ft_atoi(char *str);
 void		*ft_memset(void *s, int c, size_t n);
+void		final_free(void);
 
 // error_check.c
 int			argv_check(long long arr[], int num);

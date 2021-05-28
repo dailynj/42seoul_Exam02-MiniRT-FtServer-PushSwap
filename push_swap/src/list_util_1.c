@@ -16,60 +16,54 @@ t_list	*node(int value, t_list *prev, t_list *next)
 {
 	t_list	*new_list;
 
-	new_list = (t_list *)malloc(sizeof(t_list));
-	new_list->prev = (t_list *)malloc(sizeof(t_list));
-	new_list->next = (t_list *)malloc(sizeof(t_list));
-	new_list->data = value;
-	new_list->flag = 1;  // node 이다
+	if (!(new_list = (t_list *)malloc(sizeof(t_list))))
+		return (0);
 	new_list->prev = prev;
 	new_list->next = next;
+	new_list->data = value;
+	new_list->flag = 1;
 	return (new_list);
 }
 
-void	init_list(t_info *info)
+int init_cmd(t_info *info)
+{
+	info->cmd.head = (t_list *)malloc(sizeof(t_list));
+	info->cmd.tail = (t_list *)malloc(sizeof(t_list));
+	if (!info->cmd.head || ! info->cmd.tail)
+		final_free();
+	info->cmd.head->next = info->cmd.tail;
+	info->cmd.head->prev = NULL;
+	info->cmd.tail->prev = info->cmd.head;
+	info->cmd.tail->next = NULL;
+	info->cmd.head->flag = 0;
+	info->cmd.tail->flag = 0;
+	return (1);
+}
+
+int	init_list(t_info *info)
 {
 	info->stack[A] = (t_stack *)malloc(sizeof(t_stack));
 	info->stack[B] = (t_stack *)malloc(sizeof(t_stack));
 	info->stack[A]->size = 0;
 	info->stack[B]->size = 0;
 	info->stack[A]->head = (t_list *)malloc(sizeof(t_list));
-	ft_memset(info->stack[A]->head, 0, sizeof(t_list));
 	info->stack[B]->head = (t_list *)malloc(sizeof(t_list));
-	ft_memset(info->stack[B]->head, 0, sizeof(t_list));
 	info->stack[A]->tail = (t_list *)malloc(sizeof(t_list));
-	ft_memset(info->stack[A]->tail, 0, sizeof(t_list));
 	info->stack[B]->tail = (t_list *)malloc(sizeof(t_list));
+	if (!info->stack[A] || !info->stack[B] || !info->stack[A]->head ||
+		!info->stack[B]->head || !info->stack[A]->tail || !info->stack[B]->tail)
+		final_free();
+	ft_memset(info->stack[A]->head, 0, sizeof(t_list));
+	ft_memset(info->stack[B]->head, 0, sizeof(t_list));
+	ft_memset(info->stack[A]->tail, 0, sizeof(t_list));
 	ft_memset(info->stack[B]->tail, 0, sizeof(t_list));
-	if (!info->stack[A] || !info->stack[A] || !info->stack[A] ||!info->stack[A] )
 	info->stack[A]->head->next = info->stack[A]->tail;
 	info->stack[B]->head->next = info->stack[B]->tail;
 	info->stack[A]->tail->prev = info->stack[A]->head;
 	info->stack[B]->tail->prev = info->stack[B]->head;
-
-
-
-
-	info->cmd.head = (t_list *)malloc(sizeof(t_list));
-	info->cmd.tail = (t_list *)malloc(sizeof(t_list));
-	info->cmd.head->next = info->cmd.tail;
-	info->cmd.head->prev = NULL;
-	info->cmd.tail->prev = info->cmd.head;
-	info->cmd.tail->next = NULL;
-	info->cmd.head->flag = 0;  //node 가 아니고 head 나 tail 이다!
-	info->cmd.tail->flag = 0;
+	init_cmd(info);
+	return (1);
 }
-
-// void	init_arr(t_box *box, int len)
-// {
-// 	int	*tmp;
-
-// 	tmp = box->arr;
-// 	quicksort(tmp, 0, len -1);
-// 	box->min = tmp[len - 1];
-// 	box->max = tmp[0];
-// 	box->pivot2 = tmp[2 * len / 3];
-// 	box->pivot1 = tmp[len / 3];
-// }
 
 int		*find_pivot(t_info *info, int num, int r)
 {

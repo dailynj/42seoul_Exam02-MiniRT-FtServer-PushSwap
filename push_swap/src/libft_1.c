@@ -46,3 +46,8 @@ void	*ft_memset(void *s, int c, size_t n)
 		*ptr++ = c;
 	return (s);
 }
+
+void	final_free(void)
+{
+	exit(0);
+}
