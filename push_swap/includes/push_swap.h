@@ -49,7 +49,7 @@ typedef struct	s_stack {
 
 typedef struct	s_info {
 	t_stack		*stack[2];
-	// t_stack		cmd;
+	t_stack		cmd;
 }				t_info;
 
 typedef struct	s_box {

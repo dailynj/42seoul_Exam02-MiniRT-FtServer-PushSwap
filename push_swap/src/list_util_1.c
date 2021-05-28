@@ -45,18 +45,18 @@ void	init_list(t_info *info)
 	info->stack[B]->head->next = info->stack[B]->tail;
 	info->stack[A]->tail->prev = info->stack[A]->head;
 	info->stack[B]->tail->prev = info->stack[B]->head;
-	// info->cmd.head = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.head->next = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.head->prev = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.tail = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.tail->next = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.tail->prev = (t_list *)malloc(sizeof(t_list));
-	// info->cmd.head->next = info->cmd.tail;
-	// info->cmd.head->prev = NULL;
-	// info->cmd.tail->prev = info->cmd.head;
-	// info->cmd.tail->next = NULL;
-	// info->cmd.head->flag = 0;  //node 가 아니고 head 나 tail 이다!
-	// info->cmd.tail->flag = 0;
+
+
+
+
+	info->cmd.head = (t_list *)malloc(sizeof(t_list));
+	info->cmd.tail = (t_list *)malloc(sizeof(t_list));
+	info->cmd.head->next = info->cmd.tail;
+	info->cmd.head->prev = NULL;
+	info->cmd.tail->prev = info->cmd.head;
+	info->cmd.tail->next = NULL;
+	info->cmd.head->flag = 0;  //node 가 아니고 head 나 tail 이다!
+	info->cmd.tail->flag = 0;
 }
 
 // void	init_arr(t_box *box, int len)

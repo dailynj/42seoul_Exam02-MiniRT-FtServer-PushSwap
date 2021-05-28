@@ -17,6 +17,7 @@ void	sab(t_info *info, int num, int flag)
 	int		tmp1;
 	int		tmp2;
 	t_stack	*stack;
+	(void) flag;
 	
 	stack = info->stack[num];
 	if (stack->size < 2)
@@ -34,13 +35,13 @@ void	sab(t_info *info, int num, int flag)
 	// 	push_tail(SA, &(info->cmd));
 	// else
 	// 	push_tail(SB, &(info->cmd));
-	if (flag == 1)
-	{
-		if (num == 0)
-			printf("sa\n");
-		else
-			printf("sb\n");
-	}
+	// if (flag == 1)
+	// {
+	// 	if (num == 0)
+	// 		printf("sa\n");
+	// 	else
+	// 		printf("sb\n");
+	// }
 }
 
 void	ss(t_info *info)
@@ -50,7 +51,7 @@ void	ss(t_info *info)
 	if (info->stack[B]->size > 0)
 		sab(info, B, 0);
 	// push_tail(SS, &(info->cmd));
-	printf("ss\n");
+	// printf("ss\n");
 }
 
 void	pab(t_info *info, int num)
@@ -66,16 +67,16 @@ void	pab(t_info *info, int num)
 	// 	push_tail(PA, &(info->cmd));
 	// else
 	// 	push_tail(PB, &(info->cmd));
-	if (num == 0)
-		printf("pa\n");
-	else
-		printf("pb\n");
+	// if (num == 0)
+	// 	printf("pa\n");
+	// else
+	// 	printf("pb\n");
 }
 
 void	rab(t_info *info, int num, int flag)
 {
 	t_stack *stack;
-	
+	(void) flag;
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{
@@ -88,13 +89,13 @@ void	rab(t_info *info, int num, int flag)
 	// 	push_tail(RA, &(info->cmd));
 	// else
 	// 	push_tail(RB, &(info->cmd));
-	if (flag == 1)
-	{
-		if (num == 0)
-			printf("ra\n");
-		else
-			printf("rb\n");
-	}
+	// if (flag == 1)
+	// {
+	// 	if (num == 0)
+	// 		printf("ra\n");
+	// 	else
+	// 		printf("rb\n");
+	// }
 }
 
 void	rr(t_info *info)
@@ -104,5 +105,5 @@ void	rr(t_info *info)
 	if (info->stack[B]->size > 0)
 		rab(info, B, 0);
 	// push_tail(RR, &(info->cmd));
-	printf("rr\n");
+	// printf("rr\n");
 }

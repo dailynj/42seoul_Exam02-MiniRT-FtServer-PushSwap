@@ -15,7 +15,7 @@
 void	rrab(t_info *info, int num, int flag)
 {
 	t_stack *stack;
-
+	(void) flag;
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{
@@ -28,13 +28,13 @@ void	rrab(t_info *info, int num, int flag)
 	// 	push_tail(RRA, &(info->cmd));
 	// else
 	// 	push_tail(RRB, &(info->cmd));
-	if (flag == 1)
-	{
-		if (num == 0)
-			printf("rra\n");
-		else
-			printf("rrb\n");
-	}
+	// if (flag == 1)
+	// {
+	// 	if (num == 0)
+	// 		printf("rra\n");
+	// 	else
+	// 		printf("rrb\n");
+	// }
 }
 
 void	rrr(t_info *info)
@@ -44,5 +44,5 @@ void	rrr(t_info *info)
 	if (info->stack[B]->size > 0)
 		rrab(info, B, 0);
 	// push_tail(RRR, &(info->cmd));
-	printf("rrr\n");
+	// printf("rrr\n");
 }
