@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 22:12:09 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/25 22:12:10 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/29 02:59:24 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@ void	cmd_zip(t_stack *stack)
 	now = stack->head->next;
 	while (now->flag == 1 && now->next->flag == 1)
 	{
-		if (now->data == SA && now->next->data == SB)
+		if ((now->data == SA && now->next->data == SB) ||
+			(now->data == SB && now->next->data == SA))
 		{
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
 			now->next->data = SS;
 		}
-		else if (now->data == RA && now->next->data == RB)
+		else if ((now->data == RA && now->next->data == RB) ||
+			(now->data == RB && now->next->data == RA))
 		{
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
 			now->next->data = RR;
 		}
-		else if (now->data == RRA && now->next->data == RRB)
+		else if ((now->data == RRA && now->next->data == RRB) ||
+			(now->data == RRB && now->next->data == RRA))
 		{
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
