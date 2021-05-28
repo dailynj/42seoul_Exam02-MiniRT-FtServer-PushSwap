@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_2.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 22:11:18 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/25 22:11:19 by najlee           ###   ########.fr       */
+/*   Created: 2021/05/28 18:01:46 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/28 18:01:47 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	rrab(t_info *info, int num)
+void	free_box(t_box *box)
 {
-	t_stack *stack;
-
-	stack = info->stack[num];
-	if (stack->size == 0)
-		return ;
-	push_head(stack->tail->prev->data, stack);
-	pop_tail(stack);
+	free(box->arr);
+	free(box);
 }
 
-void	rrr(t_info *info)
+void	free_info(t_info *info)
 {
-	if (info->stack[A]->size > 0)
-		rrab(info, A);
-	if (info->stack[B]->size > 0)
-		rrab(info, B);
+	//////////// free info 모두 하기
+	free(info);
+}
+
+void	free_stack(t_stack *stack)
+{
+	free(stack->head);
+	free(stack->tail);
+	free(stack);
 }

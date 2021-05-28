@@ -15,9 +15,9 @@
 void	cmd_zip(t_stack *stack)
 {
 	t_list *now;
-	
+
 	now = stack->head->next;
-	while(now->flag == 1 && now->next->flag == 1)
+	while (now->flag == 1 && now->next->flag == 1)
 	{
 		if (now->data == SA && now->next->data == SB)
 		{
@@ -41,42 +41,44 @@ void	cmd_zip(t_stack *stack)
 	}
 }
 
-void	print_cmd(t_info *info, t_stack *stack)
+void	print_cmd_2(int cmd)
+{
+	if (cmd == SA)
+		printf("sa\n");
+	else if (cmd == SB)
+		printf("sb\n");
+	else if (cmd == SS)
+		printf("ss\n");
+	else if (cmd == PA)
+		printf("pa\n");
+	else if (cmd == PB)
+		printf("pb\n");
+	else if (cmd == RA)
+		printf("ra\n");
+	else if (cmd == RB)
+		printf("rb\n");
+	else if (cmd == RR)
+		printf("rr\n");
+	else if (cmd == RRA)
+		printf("rra\n");
+	else if (cmd == RRB)
+		printf("rrb\n");
+	else if (cmd == RRR)
+		printf("rrr\n");
+}
+
+void	print_cmd(t_stack *stack)
 {
 	t_list *now;
-	(void) info;
-	
+
 	now = stack->head->next;
 	cmd_zip(stack);
-	while(now->flag == 1)
+	while (now->flag == 1)
 	{
-		if (now->data == SA)
-			printf("sa\n");
-		else if (now->data == SB)
-			printf("sb\n");
-		else if (now->data == SS)
-			printf("ss\n");
-		else if (now->data == PA)
-			printf("pa\n");
-		else if (now->data == PB)
-			printf("pb\n");
-		else if (now->data == RA)
-			printf("ra\n");
-		else if (now->data == RB)
-			printf("rb\n");
-		else if (now->data == RR)
-			printf("rr\n");
-		else if (now->data == RRA)
-			printf("rra\n");
-		else if (now->data == RRB)
-			printf("rrb\n");
-		else if (now->data == RRR)
-			printf("rrr\n");
+		print_cmd_2(now->data);
 		now = now->next;
 	}
 }
-
-
 
 int		main(int argc, char **argv)
 {
@@ -88,11 +90,18 @@ int		main(int argc, char **argv)
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (0);
 	if (!(box = (t_box *)malloc(sizeof(t_box))))
-		final_free();
+	{
+		free(info);
+		return (0);
+	}
 	if (init_list(info) == 0)
-		final_free();
+		return (0);
 	if (!(box->arr = malloc(argc * sizeof(long long))))
-		final_free();
+	{
+		free(info);
+		free_box(box);
+		return (0);
+	}
 	while (++idx < argc - 1)
 	{
 		box->arr[idx] = ft_atoi(argv[idx + 1]);
@@ -102,12 +111,12 @@ int		main(int argc, char **argv)
 	}
 	push_all(info->stack[A], box->arr, argc - 1);
 	if (check_sorted_a(info, argc - 1))
-		final_free();
+		return (0);
 	a_to_b(info, argc - 1);
-
-	free(info); // 모두 free 해야됨 
-	free(box);
-
-	print_cmd(info, &info->cmd);
+	free_info(info); // 모두 free 해야됨
+	free_box(box);
+	print_cmd(&info->cmd);
+	// while(1)
+	// 	;
 	return (0);
 }

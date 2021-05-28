@@ -64,8 +64,6 @@ typedef struct	s_box {
 t_list		*node(int value, t_list *prev, t_list *next);
 int			init_list(t_info *info);
 int			*find_pivot(t_info *info, int num, int r);
-int			check_sorted_a(t_info *info, int r);
-int			check_sorted_b(t_info *info, int r);
 void		push_all(t_stack *stack, long long arr[], int len);
 void		push_head(int value, t_stack *stack);
 void		push_tail(int value, t_stack *stack);
@@ -73,18 +71,18 @@ void		pop_head(t_stack *stack);
 void		pop_tail(t_stack *stack);
 
 // cmd.c
-void		sab(t_info *info, int num, int flag);
+void		sab(t_info *info, int num);
 void		ss(t_info *info);
 void		pab(t_info *info, int num);
-void		rab(t_info *info, int num, int flag);
+void		rab(t_info *info, int num);
 void		rr(t_info *info);
-void		rrab(t_info *info, int num, int flag);
+void		rrab(t_info *info, int num);
 void		rrr(t_info *info);
 
 // libft.c
 long long	ft_atoi(char *str);
 void		*ft_memset(void *s, int c, size_t n);
-void		final_free(void);
+int			check_sorted_a(t_info *info, int r);
 
 // error_check.c
 int			argv_check(long long arr[], int num);
@@ -105,4 +103,8 @@ void		sort_33a(int a, int b, int c, t_info *info);
 void		sort_3b(t_info *info);
 void		sort_33b(int a, int b, int c, t_info *info);
 
+//free.c
+void		free_box(t_box *box);
+void		free_info(t_info *info);
+void		free_stack(t_stack *stack);
 #endif

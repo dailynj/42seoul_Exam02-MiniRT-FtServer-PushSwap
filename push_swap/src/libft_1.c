@@ -47,7 +47,27 @@ void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 
-void	final_free(void)
+int		check_sorted_a(t_info *info, int r)
 {
-	exit(0);
+	int		tmp_arr[r];
+	t_list	*now;
+	int		i;
+
+	i = -1;
+	now = info->stack[A]->head->next;
+	while (++i < r && now->flag)
+	{
+		tmp_arr[i] = now->data;
+		now = now->next;
+	}
+	quicksort(tmp_arr, 0, r - 1);
+	i = -1;
+	now = info->stack[A]->head->next;
+	while (++i < r && now->flag)
+	{
+		if (tmp_arr[i] != now->data)
+			return (0);
+		now = now->next;
+	}
+	return (1);
 }

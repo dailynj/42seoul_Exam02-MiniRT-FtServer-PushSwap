@@ -12,12 +12,11 @@
 
 #include "../includes/push_swap.h"
 
-void	sab(t_info *info, int num, int flag)
+void	sab(t_info *info, int num)
 {
 	int		tmp1;
 	int		tmp2;
 	t_stack	*stack;
-	(void) flag;
 	
 	stack = info->stack[num];
 	if (stack->size < 2)
@@ -33,9 +32,9 @@ void	sab(t_info *info, int num, int flag)
 void	ss(t_info *info)
 {
 	if (info->stack[A]->size > 0)
-		sab(info, A, 0);
+		sab(info, A);
 	if (info->stack[B]->size > 0)
-		sab(info, B, 0);
+		sab(info, B);
 }
 
 void	pab(t_info *info, int num)
@@ -46,10 +45,10 @@ void	pab(t_info *info, int num)
 	pop_head(info->stack[!num]);
 }
 
-void	rab(t_info *info, int num, int flag)
+void	rab(t_info *info, int num)
 {
 	t_stack *stack;
-	(void) flag;
+
 	stack = info->stack[num];
 	if (stack->size == 0)
 		return ;
@@ -60,7 +59,7 @@ void	rab(t_info *info, int num, int flag)
 void	rr(t_info *info)
 {
 	if (info->stack[A]->size > 0)
-		rab(info, A, 0);
+		rab(info, A);
 	if (info->stack[B]->size > 0)
-		rab(info, B, 0);
+		rab(info, B);
 }

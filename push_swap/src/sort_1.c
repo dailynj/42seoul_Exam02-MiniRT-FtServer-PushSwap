@@ -35,7 +35,7 @@ void	a_to_b(t_info *info, int r)
 		if (info->stack[A]->head->next->data >= pivot[1])
 		{
 			push_tail(RA, &info->cmd);
-			rab(info, A, 1);
+			rab(info, A);
 			ra_++;
 		}
 		else
@@ -46,7 +46,7 @@ void	a_to_b(t_info *info, int r)
 			if (info->stack[B]->head->next->data >= pivot[0] && info->stack[B]->size > 1)
 			{
 				push_tail(RB, &info->cmd);
-				rab(info, B, 1);
+				rab(info, B);
 				rb_++;
 			}
 			else if (info->stack[B]->head->next->data >= pivot[0])
@@ -71,13 +71,13 @@ void	a_to_b(t_info *info, int r)
 			while (++i < ra_)
 			{
 				push_tail(RRA, &info->cmd);
-				rrab(info, A, 1);
+				rrab(info, A);
 			}
 			i = -1;
 			while (++i < rb_)
 			{
 				push_tail(RB, &info->cmd);
-				rab(info, B, 1);
+				rab(info, B);
 			}
 		}
 	}
@@ -94,7 +94,7 @@ void	a_to_b(t_info *info, int r)
 			while (++i < (ra_ - rb_))
 			{
 				push_tail(RRA, &info->cmd);
-				rrab(info, A, 1);
+				rrab(info, A);
 			}
 		}
 		else
@@ -102,10 +102,11 @@ void	a_to_b(t_info *info, int r)
 			while (++i < (rb_ - ra_))
 			{
 				push_tail(RRB, &info->cmd);
-				rrab(info, B, 1);
+				rrab(info, B);
 			}
 		}
 	}
+	free(pivot);
 	a_to_b(info, tmp_ra);
 	b_to_a(info, tmp_rb);
 	b_to_a(info, tmp_pb - tmp_rb);
@@ -135,7 +136,7 @@ void	b_to_a(t_info *info, int r)
 		if (tmp < pivot[0])
 		{	
 			push_tail(RB, &info->cmd);
-			rab(info, B, 1);
+			rab(info, B);
 			rb_++;
 		}
 		else
@@ -146,7 +147,7 @@ void	b_to_a(t_info *info, int r)
 			if (tmp < pivot[1] && info->stack[A]->size > 1)
 			{
 				push_tail(RA, &info->cmd);
-				rab(info, A, 1);
+				rab(info, A);
 				ra_++;
 			}
 			else if (tmp < pivot[1])
@@ -155,6 +156,7 @@ void	b_to_a(t_info *info, int r)
 			}
 		}
 	}
+	free(pivot);
 	int tmp_ra = ra_;
 	int tmp_rb = rb_;
 	int tmp_pa = pa_;
@@ -172,13 +174,13 @@ void	b_to_a(t_info *info, int r)
 			while (++i < rb_)
 			{
 				push_tail(RRB, &info->cmd);
-				rrab(info, B, 1);
+				rrab(info, B);
 			}
 			i = -1;
 			while (++i < ra_)
 			{
 				push_tail(RA, &info->cmd);
-				rab(info, A, 1);
+				rab(info, A);
 			}
 		}
 	}
@@ -195,7 +197,7 @@ void	b_to_a(t_info *info, int r)
 			while (++i < (rb_ - ra_))
 			{
 				push_tail(RRB, &info->cmd);
-				rrab(info, B, 1);
+				rrab(info, B);
 			}
 		}
 		else
@@ -203,7 +205,7 @@ void	b_to_a(t_info *info, int r)
 			while (++i < (ra_ - rb_))
 			{
 				push_tail(RRA, &info->cmd);
-				rrab(info, A, 1);
+				rrab(info, A);
 			}
 		}
 	}
