@@ -86,7 +86,10 @@ void	a_to_b(t_info *info, int r)
 	else{
 		i = -1;
 		while (++i < min(ra_, rb_))
+		{
+			push_tail(RRR, &info->cmd);
 			rrr(info);
+		}
 		i = -1;
 		if (ra_ > rb_)
 		{
@@ -195,7 +198,10 @@ void	b_to_a(t_info *info, int r)
 	else{
 		i = -1;
 		while (++i < min(ra_, rb_))
+		{
+			push_tail(RRR, &info->cmd);
 			rrr(info);
+		}
 		i = -1;
 		if (rb_ > ra_)
 		{
