@@ -86,8 +86,8 @@ int		main(int argc, char **argv)
 	// pab(info, A);
 	// pab(info, A);
 	// pab(info, A);
-	print_stack(info->stack[A], A);
-	print_stack(info->stack[B], B);
+	// print_stack(info->stack[A], A);
+	// print_stack(info->stack[B], B);
 	// print_cmd(&info->cmd); // 안씀
 	// -------
 

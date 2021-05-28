@@ -26,14 +26,19 @@ void	a_to_b(t_info *info, int r)
 	i = -1;
 
 	// 정렬됬으면 바로 빠져나오기
-	if (check_sorted_a(info, r))
-		return ;
+	// if (check_sorted_a(info, r))
+	// 	return ;
 
-	pivot = find_pivot(info, A, r);
 	if (r <= 3)
 		return (sort_a(info, r));
+	if (!info->stack[A]->head->next->flag)
+		return ;
+	pivot = find_pivot(info, A, r);
+	// printf("---> A pivot[0] = %d\n", pivot[0]);
+	// printf("---> A pivot[1] = %d\n", pivot[1]);
 	while (r--)
 	{
+		// int tmp = info->stack[A]->head->next->data;
 		if (info->stack[A]->head->next->data >= pivot[1])
 		{
 			rab(info, A, 1);
@@ -109,20 +114,25 @@ void	b_to_a(t_info *info, int r)
 	i = -1;
 
 	// 정렬됬으면 바로 빠져나오기
-	if (check_sorted_b(info, r))
-	{
-		if (r == 1)
-			pab(info, A);
-		return ;
-	}
+	// if (check_sorted_b(info, r))
+	// {
+	// 	if (r == 1)
+	// 		pab(info, A);
+	// 	return ;
+	// }
 
 	if (r <= 3)
 		return (sort_b(info, r));
+	if (!info->stack[B]->head->next->flag)
+		return ;
 	pivot = find_pivot(info, B, r);
+	// printf("---> B pivot[0] = %d\n", pivot[0]);
+	// printf("---> B pivot[1] = %d\n", pivot[1]);
 	while (r--)
 	{
-		if (info->stack[B]->head->next->data < pivot[0])
-		{
+		int tmp = info->stack[B]->head->next->data;
+		if (tmp < pivot[0])
+		{	
 			rab(info, B, 1);
 			rb_++;
 		}
@@ -130,12 +140,12 @@ void	b_to_a(t_info *info, int r)
 		{
 			pab(info, A);
 			pa_++;
-			if (info->stack[A]->head->next->data < pivot[1] && info->stack[A]->size > 1)
+			if (tmp < pivot[1] && info->stack[A]->size > 1)
 			{
 				rab(info, A, 1);
 				ra_++;
 			}
-			else if (info->stack[A]->head->next->data < pivot[1])
+			else if (tmp < pivot[1])
 			{
 				ra_++;
 			}
@@ -178,6 +188,6 @@ void	b_to_a(t_info *info, int r)
 				rrab(info, A, 1);
 		}
 	}
-	a_to_b(info, tmp_rb);
-	b_to_a(info, tmp_ra);
+	a_to_b(info, tmp_ra);
+	b_to_a(info, tmp_rb);
 }
