@@ -21,7 +21,7 @@ void	sab(t_info *info, int num)
 	stack = info->stack[num];
 	if (stack->size < 2)
 	{
-		printf("Error!\n");
+		write(1, "Error!\n", 7);
 		exit(0);
 	}
 	tmp1 = stack->head->next->data;
@@ -44,7 +44,7 @@ void	pab(t_info *info, int num)
 {
 	if (info->stack[!num]->size == 0)
 	{
-		printf("Error!\n");
+		write(1, "Error!\n", 7);
 		exit(0);
 	}
 	push_head(info->stack[!num]->head->next->data, info->stack[num]);
@@ -58,7 +58,7 @@ void	rab(t_info *info, int num)
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{
-		printf("Error!\n");
+		write(1, "Error!\n", 7);
 		exit(0);
 	}
 	push_tail(stack->head->next->data, stack);

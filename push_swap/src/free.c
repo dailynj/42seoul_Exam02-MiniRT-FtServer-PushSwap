@@ -20,7 +20,12 @@ void	free_box(t_box *box)
 
 void	free_info(t_info *info)
 {
-	//////////// free info 모두 하기
+	free(info->stack[A]->tail);
+	free(info->stack[B]->tail);
+	free(info->stack[B]->head);
+	free(info->stack[A]->head);
+	free(info->stack[A]);
+	free(info->stack[B]);
 	free(info);
 }
 
@@ -29,4 +34,22 @@ void	free_stack(t_stack *stack)
 	free(stack->head);
 	free(stack->tail);
 	free(stack);
+}
+
+void	free_two_list(t_info *info)
+{
+	t_list *now;
+
+	now = info->stack[A]->head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+	now = info->stack[B]->head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
 }

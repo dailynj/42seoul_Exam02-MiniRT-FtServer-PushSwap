@@ -60,7 +60,7 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!(box->arr = malloc(argc * sizeof(long long))))
 	{
-		free(info);
+		free_info(info);
 		free_box(box);
 		return (0);
 	}
@@ -69,18 +69,26 @@ int		main(int argc, char **argv)
 		box->arr[idx] = ft_atoi(argv[idx + 1]);
 		if ((box->arr[idx] == 0 && argv[idx + 1][0] != '0')
 			|| argv_check(box->arr, idx) == 0)
-			return (print_error("Error\n"));
+		{
+			free_info(info);
+			free_box(box);
+			return (print_error());
+		}
 	}
 	push_all(info->stack[A], box->arr, argc - 1);
 	while ((tmp = do_instruction(info)) == 1)
 		;
 	if (tmp == 0)
-		return (print_error("Error!\n"));
+		return (print_error());
 	if (check_sorted_a(info, argc - 1))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-	free(info); // 전부 free 해야됨
-	free(box);
+
+	// free_two_list(info);
+	// free_info(info);
+	// free_box(box);
+	// while(1)
+	// 	;
 	return (0);
 }

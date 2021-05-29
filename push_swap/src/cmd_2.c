@@ -19,7 +19,7 @@ void	rrab(t_info *info, int num)
 	stack = info->stack[num];
 	if (stack->size == 0)
 	{
-		printf("Error!\n");
+		write(1, "Error!\n", 7);
 		exit(0);
 	}
 	push_head(stack->tail->prev->data, stack);

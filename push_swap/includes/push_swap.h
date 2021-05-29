@@ -6,12 +6,12 @@
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 22:08:34 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/25 22:08:35 by najlee           ###   ########.fr       */
+/*   Updated: 2021/05/29 23:10:45 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_swap_H
-# define PUSH_swap_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # define A 0
 # define B 1
@@ -27,25 +27,21 @@
 # define RRB 9
 # define RRR 10
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h> // write, close
-
-# define max(a, b) (((a) < (b)) ? (b) : (a))
-# define min(a, b) (((a) > (b)) ? (b) : (a))
+# include <unistd.h>
 
 typedef struct	s_list {
-    int				data;
-	int				flag;
-    struct s_list*	next;
-    struct s_list*	prev;
-}				t_list;
+	int		data;
+	int		flag;
+	struct s_list*	next;
+	struct s_list*	prev;
+}		t_list;
 
 typedef struct	s_stack {
-	int				size;
+	int		size;
 	struct s_list*	head;
 	struct s_list*	tail;
-}				t_stack;
+}		t_stack;
 
 typedef struct	s_info {
 	t_stack		*stack[2];
@@ -60,7 +56,9 @@ typedef struct	s_box {
 	int			pivot2;
 }				t_box;
 
-// list.c
+/*
+** list.c
+*/
 t_list		*node(int value, t_list *prev, t_list *next);
 int			init_list(t_info *info);
 int			*find_pivot(t_info *info, int num, int r);
@@ -70,7 +68,9 @@ void		push_tail(int value, t_stack *stack);
 void		pop_head(t_stack *stack);
 void		pop_tail(t_stack *stack);
 
-// cmd.c
+/*
+** cmd.c
+*/
 void		sab(t_info *info, int num);
 void		ss(t_info *info);
 void		pab(t_info *info, int num);
@@ -79,32 +79,45 @@ void		rr(t_info *info);
 void		rrab(t_info *info, int num);
 void		rrr(t_info *info);
 
-// libft.c
+/*
+** libft.c
+*/
 long long	ft_atoi(char *str);
 void		*ft_memset(void *s, int c, size_t n);
 int			check_sorted_a(t_info *info, int r);
+int			max(int a, int b);
+int			min(int a, int b);
 
-// error_check.c
+/*
+** error_check.c
+*/
 int			argv_check(long long arr[], int num);
-int			print_error(char *str);
+int			print_error();
 
-// quick_sort.c
+/*
+** quick_sort.c
+*/
 void		quicksort(int arr[], int left, int right);
 
-// sort.c
+/*
+** sort.c
+*/
 void		a_to_b(t_info *info, int r);
-void		b_to_a(t_info * info, int r);
-void		sort_a(t_info* info, int r);
+void		b_to_a(t_info *info, int r);
+void		sort_a(t_info *info, int r);
 void		sort_aa(int a, int b, int c, t_info *info);
-void		sort_b(t_info* info, int r);
+void		sort_b(t_info *info, int r);
 void		sort_bb(int a, int b, int c, t_info *info);
 void		sort_3a(t_info *info);
 void		sort_33a(int a, int b, int c, t_info *info);
 void		sort_3b(t_info *info);
 void		sort_33b(int a, int b, int c, t_info *info);
 
-//free.c
+/*
+** free.c
+*/
 void		free_box(t_box *box);
 void		free_info(t_info *info);
 void		free_stack(t_stack *stack);
+void		free_two_list(t_info *info);
 #endif

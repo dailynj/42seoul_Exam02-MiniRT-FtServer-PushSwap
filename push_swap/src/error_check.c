@@ -27,8 +27,8 @@ int		argv_check(long long arr[], int num)
 	return (1);
 }
 
-int		print_error(char *str)
+int		print_error()
 {
-	printf("%s", str);
+	write(1, "Error!\n", 7);
 	return (0);
 }

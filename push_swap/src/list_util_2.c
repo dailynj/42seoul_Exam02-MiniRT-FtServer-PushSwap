@@ -43,14 +43,22 @@ void	push_tail(int value, t_stack *stack)
 
 void	pop_head(t_stack *stack)
 {
+	t_list *tmp;
+
+	tmp = stack->head->next;
 	stack->head->next->next->prev = stack->head;
 	stack->head->next = stack->head->next->next;
 	stack->size--;
+	free(tmp);
 }
 
 void	pop_tail(t_stack *stack)
 {
+	t_list *tmp;
+
+	tmp = stack->tail->prev;
 	stack->tail->prev->prev->next = stack->tail;
 	stack->tail->prev = stack->tail->prev->prev;
 	stack->size--;
+	free(tmp);
 }

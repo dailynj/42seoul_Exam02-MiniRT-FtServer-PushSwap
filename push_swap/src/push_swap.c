@@ -12,13 +12,9 @@
 
 #include "../includes/push_swap.h"
 
-// printf -> write 바꾸기
-
-void	cmd_zip(t_stack *stack)
+void	cmd_zip(t_list *now)
 {
-	t_list *now;
-
-	now = stack->head->next;
+	now = now->next;
 	while (now->flag == 1 && now->next->flag == 1)
 	{
 		if ((now->data == SA && now->next->data == SB) ||
@@ -27,6 +23,7 @@ void	cmd_zip(t_stack *stack)
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
 			now->next->data = SS;
+			free(now);
 		}
 		else if ((now->data == RA && now->next->data == RB) ||
 			(now->data == RB && now->next->data == RA))
@@ -34,6 +31,7 @@ void	cmd_zip(t_stack *stack)
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
 			now->next->data = RR;
+			free(now);
 		}
 		else if ((now->data == RRA && now->next->data == RRB) ||
 			(now->data == RRB && now->next->data == RRA))
@@ -41,6 +39,7 @@ void	cmd_zip(t_stack *stack)
 			now->prev->next = now->next;
 			now->next->prev = now->prev;
 			now->next->data = RRR;
+			free(now);
 		}
 		now = now->next;
 	}
@@ -49,27 +48,27 @@ void	cmd_zip(t_stack *stack)
 void	print_cmd_2(int cmd)
 {
 	if (cmd == SA)
-		printf("sa\n");
+		write(1, "sa\n", 3);
 	else if (cmd == SB)
-		printf("sb\n");
+		write(1, "sb\n", 3);
 	else if (cmd == SS)
-		printf("ss\n");
+		write(1, "ss\n", 3);
 	else if (cmd == PA)
-		printf("pa\n");
+		write(1, "pa\n", 3);
 	else if (cmd == PB)
-		printf("pb\n");
+		write(1, "pb\n", 3);
 	else if (cmd == RA)
-		printf("ra\n");
+		write(1, "ra\n", 3);
 	else if (cmd == RB)
-		printf("rb\n");
+		write(1, "rb\n", 3);
 	else if (cmd == RR)
-		printf("rr\n");
+		write(1, "rr\n", 3);
 	else if (cmd == RRA)
-		printf("rra\n");
+		write(1, "rra\n", 4);
 	else if (cmd == RRB)
-		printf("rrb\n");
+		write(1, "rrb\n", 4);
 	else if (cmd == RRR)
-		printf("rrr\n");
+		write(1, "rrr\n", 4);
 }
 
 void	print_cmd(t_stack *stack)
@@ -77,7 +76,7 @@ void	print_cmd(t_stack *stack)
 	t_list *now;
 
 	now = stack->head->next;
-	cmd_zip(stack);
+	cmd_zip(stack->head);
 	while (now->flag == 1)
 	{
 		print_cmd_2(now->data);
@@ -103,7 +102,7 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!(box->arr = malloc(argc * sizeof(long long))))
 	{
-		free(info);
+		free_info(info);
 		free_box(box);
 		return (0);
 	}
@@ -112,15 +111,25 @@ int		main(int argc, char **argv)
 		box->arr[idx] = ft_atoi(argv[idx + 1]);
 		if ((box->arr[idx] == 0 && argv[idx + 1][0] != '0')
 			|| argv_check(box->arr, idx) == 0)
-			return (print_error("Error\n"));
+		{
+			free_info(info);
+			free_box(box);
+			return (print_error());
+		}
 	}
 	push_all(info->stack[A], box->arr, argc - 1);
 	if (check_sorted_a(info, argc - 1))
+	{
+		free_info(info);
+		free_box(box);
 		return (0);
+	}
 	a_to_b(info, argc - 1);
 	print_cmd(&info->cmd);
-	free_info(info); // 모두 free 해야됨
-	free_box(box);
+
+	// free_two_list(info);
+	// free_info(info);
+	// free_box(box);
 	// while(1)
 	// 	;
 	return (0);
