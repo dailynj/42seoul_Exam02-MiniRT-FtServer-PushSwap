@@ -14,12 +14,14 @@ NAME1	=	push_swap
 NAME2	=	checker
 
 CC		=	gcc
-CF		=	-Wall -Wextra -Werror -I ./includes
+CF		=	-Wall -Wextra -Werror -I ./includes -fsanitize=address -g
 SRC1	=	push_swap.c list_util_1.c list_util_2.c \
 			cmd_1.c cmd_2.c libft_1.c error_check.c \
-			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c\
+			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c \
 
-SRC2	=	checker.c \
+SRC2	=	checker.c list_util_1.c list_util_2.c \
+			cmd_1.c cmd_2.c libft_1.c error_check.c \
+			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c \
 
 SRC_DIR = ./src/
 

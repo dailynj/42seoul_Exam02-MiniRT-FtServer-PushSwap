@@ -54,6 +54,8 @@ int		check_sorted_a(t_info *info, int r)
 	int		i;
 
 	i = -1;
+	if (info->stack[A]->size != r)
+		return (0);
 	now = info->stack[A]->head->next;
 	while (++i < r && now->flag)
 	{

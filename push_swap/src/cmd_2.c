@@ -18,7 +18,10 @@ void	rrab(t_info *info, int num)
 
 	stack = info->stack[num];
 	if (stack->size == 0)
-		return ;
+	{
+		printf("Error!\n");
+		exit(0);
+	}
 	push_head(stack->tail->prev->data, stack);
 	pop_tail(stack);
 }

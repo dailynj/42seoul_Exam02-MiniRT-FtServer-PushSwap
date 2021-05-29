@@ -12,6 +12,8 @@
 
 #include "../includes/push_swap.h"
 
+// printf -> write 바꾸기
+
 void	cmd_zip(t_stack *stack)
 {
 	t_list *now;
@@ -116,9 +118,9 @@ int		main(int argc, char **argv)
 	if (check_sorted_a(info, argc - 1))
 		return (0);
 	a_to_b(info, argc - 1);
+	print_cmd(&info->cmd);
 	free_info(info); // 모두 free 해야됨
 	free_box(box);
-	print_cmd(&info->cmd);
 	// while(1)
 	// 	;
 	return (0);
