@@ -84,7 +84,7 @@ void	print_cmd(t_stack *stack)
 	}
 }
 
-int		main(int argc, char **argv)
+int		test(int argc, char **argv)
 {
 	int		idx;
 	t_info	*info;
@@ -128,9 +128,15 @@ int		main(int argc, char **argv)
 	print_cmd(&info->cmd);
 
 	// free_two_list(info);
-	// free_info(info);
-	// free_box(box);
-	// while(1)
-	// 	;
+	free_info(info);
+	free_box(box);
+	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+	test(argc, argv);
+	while(1)
+		;
 	return (0);
 }

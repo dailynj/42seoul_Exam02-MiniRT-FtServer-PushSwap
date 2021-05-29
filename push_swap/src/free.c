@@ -20,10 +20,10 @@ void	free_box(t_box *box)
 
 void	free_info(t_info *info)
 {
-	free(info->stack[A]->tail);
-	free(info->stack[B]->tail);
-	free(info->stack[B]->head);
 	free(info->stack[A]->head);
+	free(info->stack[A]->tail);
+	free(info->stack[B]->head);
+	free(info->stack[B]->tail);
 	free(info->stack[A]);
 	free(info->stack[B]);
 	free(info);
