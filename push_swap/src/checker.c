@@ -1,26 +1,8 @@
 #include "../includes/push_swap.h"
 
-int	do_instruction(t_info *info)
+int	do_instruction_2(t_info *info, char line[])
 {
-	int		ret;
-	char	line[5];
-
-	// ft_bzero(line, 4); 
-	// if (line[0] == EOF)
-	// 	return (2);
-	if ((ret = read(0, line, 4)) <= 0)
-		return (2);
-	if(line[0] == 's' && line[1] == 'a' && line[2] == '\n')
-		sab(info, A);
-	else if(line[0] == 's' && line[1] == 'b' && line[2] == '\n')
-		sab(info, B);
-	else if(line[0] == 's' && line[1] == 's' && line[2] == '\n')
-		ss(info);
-	else if(line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
-		pab(info, A);
-	else if(line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
-		pab(info, B);
-	else if(line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
+	if(line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
 		rab(info, A);
 	else if(line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
 		rab(info, B);
@@ -37,30 +19,25 @@ int	do_instruction(t_info *info)
 	return (1);
 }
 
-int		check_sorted(t_info *info, int r)
+int	do_instruction(t_info *info)
 {
-	int		tmp_arr[r];
-	t_list	*now;
-	int		i;
+	int		ret;
+	char	line[5];
 
-	i = -1;
-	if (info->stack[A]->size != r)
-		return (0);
-	now = info->stack[A]->head->next;
-	while (++i < r && now->flag)
-	{
-		tmp_arr[i] = now->data;
-		now = now->next;
-	}
-	quicksort(tmp_arr, 0, r - 1);
-	i = -1;
-	now = info->stack[A]->head->next;
-	while (++i < r && now->flag)
-	{
-		if (tmp_arr[i] != now->data)
-			return (0);
-		now = now->next;
-	}
+	if ((ret = read(0, line, 4)) <= 0)
+		return (2);
+	if(line[0] == 's' && line[1] == 'a' && line[2] == '\n')
+		sab(info, A);
+	else if(line[0] == 's' && line[1] == 'b' && line[2] == '\n')
+		sab(info, B);
+	else if(line[0] == 's' && line[1] == 's' && line[2] == '\n')
+		ss(info);
+	else if(line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
+		pab(info, A);
+	else if(line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
+		pab(info, B);
+	else
+		return (do_instruction_2(info, line));
 	return (1);
 }
 
@@ -69,6 +46,7 @@ int		main(int argc, char **argv)
 	int		idx;
 	t_info	*info;
 	t_box	*box;
+	int		tmp;
 
 	idx = -1;
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
@@ -94,12 +72,11 @@ int		main(int argc, char **argv)
 			return (print_error("Error\n"));
 	}
 	push_all(info->stack[A], box->arr, argc - 1);
-	int tmp;
 	while ((tmp = do_instruction(info)) == 1)
 		;
 	if (tmp == 0)
 		return (print_error("Error!\n"));
-	if (check_sorted(info, argc - 1))
+	if (check_sorted_a(info, argc - 1))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
