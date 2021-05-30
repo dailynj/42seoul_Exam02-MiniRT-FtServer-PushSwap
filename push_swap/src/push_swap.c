@@ -84,7 +84,7 @@ void	print_cmd(t_stack *stack)
 	}
 }
 
-int		test(int argc, char **argv)
+int		push_swap(int argc, char **argv)
 {
 	int		idx;
 	t_info	*info;
@@ -127,16 +127,16 @@ int		test(int argc, char **argv)
 	a_to_b(info, argc - 1);
 	print_cmd(&info->cmd);
 
-	// free_two_list(info);
+	free_two_list(info);
 	free_info(info);
+	free_cmd(info);
+	free(info);
 	free_box(box);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	test(argc, argv);
-	while(1)
-		;
+	push_swap(argc, argv);
 	return (0);
 }

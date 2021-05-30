@@ -120,4 +120,5 @@ void		free_box(t_box *box);
 void		free_info(t_info *info);
 void		free_stack(t_stack *stack);
 void		free_two_list(t_info *info);
+void		free_cmd(t_info *info);
 #endif

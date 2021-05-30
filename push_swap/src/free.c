@@ -26,7 +26,6 @@ void	free_info(t_info *info)
 	free(info->stack[B]->tail);
 	free(info->stack[A]);
 	free(info->stack[B]);
-	free(info);
 }
 
 void	free_stack(t_stack *stack)
@@ -52,4 +51,18 @@ void	free_two_list(t_info *info)
 		now = now->next;
 		free(now->prev);
 	}
+}
+
+void	free_cmd(t_info *info)
+{
+	t_list *now;
+
+	now = info->cmd.head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+	free(info->cmd.head);
+	free(info->cmd.tail);
 }

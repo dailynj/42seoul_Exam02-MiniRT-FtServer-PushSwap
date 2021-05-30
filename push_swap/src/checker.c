@@ -41,7 +41,7 @@ int	do_instruction(t_info *info)
 	return (1);
 }
 
-int		main(int argc, char **argv)
+int		checker(int argc, char **argv)
 {
 	int		idx;
 	t_info	*info;
@@ -85,10 +85,16 @@ int		main(int argc, char **argv)
 	else
 		write(1, "KO\n", 3);
 
-	// free_two_list(info);
-	// free_info(info);
-	// free_box(box);
-	// while(1)
-	// 	;
+	free_two_list(info);
+	free_info(info);
+	free_cmd(info);
+	free(info);
+	free_box(box);
+	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+	checker(argc, argv);
 	return (0);
 }
