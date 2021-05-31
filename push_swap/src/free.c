@@ -18,6 +18,13 @@ void	free_box(t_box *box)
 	free(box);
 }
 
+void	free_stack(t_stack *stack)
+{
+	free(stack->head);
+	free(stack->tail);
+	free(stack);
+}
+
 void	free_info(t_info *info)
 {
 	free(info->stack[A]->head);
@@ -28,14 +35,21 @@ void	free_info(t_info *info)
 	free(info->stack[B]);
 }
 
-void	free_stack(t_stack *stack)
+void	free_cmd(t_info *info)
 {
-	free(stack->head);
-	free(stack->tail);
-	free(stack);
+	t_list *now;
+
+	now = info->cmd.head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+	free(info->cmd.head);
+	free(info->cmd.tail);
 }
 
-void	free_two_list(t_info *info)
+void	free_two_stack(t_info *info)
 {
 	t_list *now;
 
@@ -51,18 +65,4 @@ void	free_two_list(t_info *info)
 		now = now->next;
 		free(now->prev);
 	}
-}
-
-void	free_cmd(t_info *info)
-{
-	t_list *now;
-
-	now = info->cmd.head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
-	free(info->cmd.head);
-	free(info->cmd.tail);
 }

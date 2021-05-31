@@ -12,203 +12,69 @@
 
 #include "../includes/push_swap.h"
 
+void	init_idx(t_idx *idx)
+{
+	idx->ra = 0;
+	idx->rb = 0;
+	idx->pa = 0;
+	idx->pb = 0;
+	idx->sa = 0;
+	idx->sb = 0;
+	idx->tmp = 0;
+}
+
 void	a_to_b(t_info *info, int r)
 {
-	int ra_;
-	int pb_;
-	int rb_;
-	int i;
-	int *pivot;
+	t_idx	*idx;
+	int		i;
+	int		*pivot;
+	int		tmp[3];
 
-	ra_ = 0;
-	pb_ = 0;
-	rb_ = 0;
 	i = -1;
-
+	if (!(idx = (t_idx *)malloc(sizeof(t_idx))))
+		return ;
+	init_idx(idx);
 	if (r <= 3)
-		return (sort_a(info, r));
+		return (sort_short_a(info, r));
 	if (!info->stack[A]->head->next->flag)
 		return ;
 	pivot = find_pivot(info, A, r);
-	while (r--)
-	{
-		if (info->stack[A]->head->next->data >= pivot[1])
-		{
-			push_tail(RA, &info->cmd);
-			rab(info, A);
-			ra_++;
-		}
-		else
-		{
-			push_tail(PB, &info->cmd);
-			pab(info, B);
-			pb_++;
-			if (info->stack[B]->head->next->data >= pivot[0] && info->stack[B]->size > 1)
-			{
-				push_tail(RB, &info->cmd);
-				rab(info, B);
-				rb_++;
-			}
-			else if (info->stack[B]->head->next->data >= pivot[0])
-			{
-				rb_++;
-			}
-		}
-	}
-	int tmp_ra = ra_;
-	int tmp_rb = rb_;
-	int tmp_pb = pb_;
-	if (ra_ == info->stack[A]->size)
-		ra_ = 0;
-	if (rb_ == info->stack[B]->size)
-		rb_ = 0;
-	if ((info->stack[B]->size - rb_) < rb_)
-	{
-		if ((ra_ + info->stack[B]->size - rb_) < max(ra_, rb_))
-		{
-			rb_ = info->stack[B]->size - rb_;
-			i = -1;
-			while (++i < ra_)
-			{
-				push_tail(RRA, &info->cmd);
-				rrab(info, A);
-			}
-			i = -1;
-			while (++i < rb_)
-			{
-				push_tail(RB, &info->cmd);
-				rab(info, B);
-			}
-		}
-	}
-	else{
-		i = -1;
-		while (++i < min(ra_, rb_))
-		{
-			push_tail(RRR, &info->cmd);
-			rrr(info);
-		}
-		i = -1;
-		if (ra_ > rb_)
-		{
-			while (++i < (ra_ - rb_))
-			{
-				push_tail(RRA, &info->cmd);
-				rrab(info, A);
-			}
-		}
-		else
-		{
-			while (++i < (rb_ - ra_))
-			{
-				push_tail(RRB, &info->cmd);
-				rrab(info, B);
-			}
-		}
-	}
+	classification_ab(info, r, pivot, idx);
+	tmp[0] = idx->ra;
+	tmp[1] = idx->rb;
+	tmp[2] = idx->rb;
+	optimization_ab(idx, info, 0);
+	free(idx);
 	free(pivot);
-	a_to_b(info, tmp_ra);
-	b_to_a(info, tmp_rb);
-	b_to_a(info, tmp_pb - tmp_rb);
+	a_to_b(info, tmp[0]);
+	b_to_a(info, tmp[1]);
+	b_to_a(info, tmp[2] - tmp[1]);
 }
 
 void	b_to_a(t_info *info, int r)
 {
-	int rb_;
-	int pa_;
-	int ra_;
-	int	i;
-	int	*pivot;
+	int		i;
+	int		*pivot;
+	t_idx	*idx;
+	int		tmp[3];
 
-	rb_ = 0;
-	pa_ = 0;
-	ra_ = 0;
 	i = -1;
-
+	if (!(idx = (t_idx *)malloc(sizeof(t_idx))))
+		return ;
+	init_idx(idx);
 	if (r <= 3)
-		return (sort_b(info, r));
+		return (sort_short_b(info, r));
 	if (!info->stack[B]->head->next->flag)
 		return ;
 	pivot = find_pivot(info, B, r);
-	while (r--)
-	{
-		int tmp = info->stack[B]->head->next->data;
-		if (tmp < pivot[0])
-		{	
-			push_tail(RB, &info->cmd);
-			rab(info, B);
-			rb_++;
-		}
-		else
-		{
-			push_tail(PA, &info->cmd);
-			pab(info, A);
-			pa_++;
-			if (tmp < pivot[1] && info->stack[A]->size > 1)
-			{
-				push_tail(RA, &info->cmd);
-				rab(info, A);
-				ra_++;
-			}
-			else if (tmp < pivot[1])
-			{
-				ra_++;
-			}
-		}
-	}
+	classification_ba(info, r, pivot, idx);
 	free(pivot);
-	int tmp_ra = ra_;
-	int tmp_rb = rb_;
-	int tmp_pa = pa_;
-	a_to_b(info, tmp_pa - tmp_ra);
-	if (ra_ == info->stack[A]->size)
-		ra_ = 0;
-	if (rb_ == info->stack[B]->size)
-		rb_ = 0;
-	if ((info->stack[A]->size - ra_) < ra_)
-	{
-		if ((rb_ + info->stack[A]->size - ra_) < max(rb_, ra_))
-		{
-			ra_ = info->stack[A]->size - ra_;
-			i = -1;
-			while (++i < rb_)
-			{
-				push_tail(RRB, &info->cmd);
-				rrab(info, B);
-			}
-			i = -1;
-			while (++i < ra_)
-			{
-				push_tail(RA, &info->cmd);
-				rab(info, A);
-			}
-		}
-	}
-	else{
-		i = -1;
-		while (++i < min(ra_, rb_))
-		{
-			push_tail(RRR, &info->cmd);
-			rrr(info);
-		}
-		i = -1;
-		if (rb_ > ra_)
-		{
-			while (++i < (rb_ - ra_))
-			{
-				push_tail(RRB, &info->cmd);
-				rrab(info, B);
-			}
-		}
-		else
-		{
-			while (++i < (ra_ - rb_))
-			{
-				push_tail(RRA, &info->cmd);
-				rrab(info, A);
-			}
-		}
-	}
-	a_to_b(info, tmp_ra);
-	b_to_a(info, tmp_rb);
+	tmp[0] = idx->pa;
+	tmp[1] = idx->ra;
+	tmp[2] = idx->pb;
+	free(idx);
+	a_to_b(info, tmp[0] - tmp[1]);
+	optimization_ba(idx, info, 0);
+	a_to_b(info, tmp[1]);
+	b_to_a(info, tmp[2]);
 }

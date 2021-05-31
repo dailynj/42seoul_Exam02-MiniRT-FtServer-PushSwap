@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_check.c                                      :+:      :+:    :+:   */
+/*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 22:11:45 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/25 22:11:46 by najlee           ###   ########.fr       */
+/*   Created: 2021/05/28 18:01:46 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/28 18:01:47 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		argv_check(long long arr[], int num)
+int		free_info_box(t_info *info, t_box *box)
 {
-	int idx;
-
-	idx = -1;
-	if (arr[num] > 2147483647 || arr[num] < -2147483647)
-		return (0);
-	while (++idx < num)
-	{
-		if (arr[idx] == arr[num])
-			return (0);
-	}
-	return (1);
+	free_info(info);
+	free_box(box);
+	return (0);
 }
 
-int		print_error(void)
+void	final_free(t_info *info, t_box *box)
 {
-	write(1, "Error!\n", 7);
-	return (0);
+	free_two_stack(info);
+	free_info(info);
+	free_cmd(info);
+	free(info);
+	free_box(box);
+}
+
+void	free_3_list(t_list *list1, t_list *list2, t_list *list3)
+{
+	free(list1);
+	free(list2);
+	free(list3);
+}
+
+void	free_2_list(t_list *list1, t_list *list2)
+{
+	free(list1);
+	free(list2);
 }

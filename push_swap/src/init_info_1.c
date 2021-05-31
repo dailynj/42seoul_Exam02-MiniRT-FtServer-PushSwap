@@ -12,46 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-t_list	*node(int value, t_list *prev, t_list *next)
-{
-	t_list	*new_list;
-
-	if (!(new_list = (t_list *)malloc(sizeof(t_list))))
-		return (0);
-	new_list->prev = prev;
-	new_list->next = next;
-	new_list->data = value;
-	new_list->flag = 1;
-	return (new_list);
-}
-
-int init_cmd(t_info *info)
-{
-	if (!(info->cmd.head = (t_list *)malloc(sizeof(t_list))))
-	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
-		free(info);
-		return (0);
-	}
-	if (!(info->cmd.tail = (t_list *)malloc(sizeof(t_list))))
-	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
-		free(info->cmd.head);
-		free(info);
-		return (0);
-	}
-	info->cmd.head->next = info->cmd.tail;
-	info->cmd.head->prev = NULL;
-	info->cmd.tail->prev = info->cmd.head;
-	info->cmd.tail->next = NULL;
-	info->cmd.head->flag = 0;
-	info->cmd.tail->flag = 0;
-	return (1);
-}
-
-int fill_info(t_info *info)
+int		fill_info(t_info *info)
 {
 	info->stack[A]->size = 0;
 	info->stack[B]->size = 0;
@@ -66,7 +27,7 @@ int fill_info(t_info *info)
 	return (init_cmd(info));
 }
 
-int	init_list(t_info *info)
+int		init_list(t_info *info)
 {
 	if (!(info->stack[A] = (t_stack *)malloc(sizeof(t_stack))))
 	{
@@ -86,54 +47,36 @@ int	init_list(t_info *info)
 		free(info);
 		return (0);
 	}
+	if (init_list_2(info) == 0)
+		return (0);
+	return (fill_info(info));
+}
+
+int		init_list_2(t_info *info)
+{
 	if (!(info->stack[B]->head = (t_list *)malloc(sizeof(t_list))))
 	{
 		free(info->stack[A]->head);
 		free(info->stack[A]);
 		free(info->stack[B]);
 		free(info);
-		return (0);
 	}
 	if (!(info->stack[A]->tail = (t_list *)malloc(sizeof(t_list))))
 	{
-		free(info->stack[B]->head);
-		free(info->stack[A]->head);
+		free_2_list(info->stack[B]->head, info->stack[A]->head);
 		free(info->stack[A]);
 		free(info->stack[B]);
 		free(info);
-		return (0);
 	}
 	if (!(info->stack[B]->tail = (t_list *)malloc(sizeof(t_list))))
 	{
-		free(info->stack[A]->tail);
-		free(info->stack[B]->head);
-		free(info->stack[A]->head);
+		free_3_list(info->stack[A]->tail, info->stack[B]->head,
+								info->stack[A]->head);
 		free(info->stack[A]);
 		free(info->stack[B]);
 		free(info);
-		return (0);
 	}
-	return (fill_info(info));
-	return (1);
-}
-
-int		*find_pivot(t_info *info, int num, int r)
-{
-	int		tmp_arr[r];
-	t_list	*now;
-	int		i;
-	int		*pivot;
-
-	i = -1;
-	pivot = malloc(2 * sizeof(int));
-	now = info->stack[num]->head->next;
-	while (++i < r && now->flag)
-	{
-		tmp_arr[i] = now->data;
-		now = now->next;
-	}
-	quicksort(tmp_arr, 0, r - 1);
-	pivot[1] = tmp_arr[2 * r / 3];
-	pivot[0] = tmp_arr[r / 3];
-	return (pivot);
+	else
+		return (1);
+	return (0);
 }
