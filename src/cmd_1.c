@@ -17,7 +17,7 @@ void	sab(t_info *info, int num)
 	int		tmp1;
 	int		tmp2;
 	t_stack	*stack;
-
+	
 	stack = info->stack[num];
 	if (stack->size < 2)
 	{

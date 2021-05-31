@@ -15,17 +15,13 @@ NAME2	=	checker
 
 CC		=	gcc
 CF		=	-Wall -Wextra -Werror -I ./includes
-SRC1	=	push_swap.c init_info_1.c init_info_2.c pop_push.c \
-			instruction_1.c instruction_2.c libft.c error_check.c \
-			quick_sort.c  sort_1.c sort_2.c sort_3.c sort_4.c free.c \
-			free_2.c cmd.c classification.c optimization.c \
-			push_tail_srp_1.c push_tail_srp_2.c \
+SRC1	=	push_swap.c list_util_1.c list_util_2.c \
+			cmd_1.c cmd_2.c libft_1.c error_check.c \
+			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c \
 
-SRC2	=	checker.c init_info_1.c init_info_2.c pop_push.c\
-			instruction_1.c instruction_2.c libft.c error_check.c \
-			quick_sort.c  sort_1.c sort_2.c sort_3.c sort_4.c free.c \
-			free_2.c cmd.c  classification.c optimization.c \
-			push_tail_srp_1.c push_tail_srp_2.c \
+SRC2	=	checker.c list_util_1.c list_util_2.c \
+			cmd_1.c cmd_2.c libft_1.c error_check.c \
+			quick_sort.c  sort_1.c sort_2.c sort_3.c free.c \
 
 SRC_DIR = ./src/
 

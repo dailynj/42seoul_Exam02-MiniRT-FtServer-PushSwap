@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_2.c                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,57 @@
 
 #include "../includes/push_swap.h"
 
-int		free_info_box(t_info *info, t_box *box)
+void	free_box(t_box *box)
 {
-	free_info(info);
-	free_box(box);
-	return (0);
+	free(box->arr);
+	free(box);
 }
 
-void	final_free(t_info *info, t_box *box)
+void	free_info(t_info *info)
 {
-	free_two_stack(info);
-	free_info(info);
-	free_cmd(info);
-	free(info);
-	free_box(box);
+	free(info->stack[A]->head);
+	free(info->stack[A]->tail);
+	free(info->stack[B]->head);
+	free(info->stack[B]->tail);
+	free(info->stack[A]);
+	free(info->stack[B]);
 }
 
-void	free_3_list(t_list *list1, t_list *list2, t_list *list3)
+void	free_stack(t_stack *stack)
 {
-	free(list1);
-	free(list2);
-	free(list3);
+	free(stack->head);
+	free(stack->tail);
+	free(stack);
 }
 
-void	free_2_list(t_list *list1, t_list *list2)
+void	free_two_list(t_info *info)
 {
-	free(list1);
-	free(list2);
+	t_list *now;
+
+	now = info->stack[A]->head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+	now = info->stack[B]->head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+}
+
+void	free_cmd(t_info *info)
+{
+	t_list *now;
+
+	now = info->cmd.head->next;
+	while (now->flag)
+	{
+		now = now->next;
+		free(now->prev);
+	}
+	free(info->cmd.head);
+	free(info->cmd.tail);
 }
