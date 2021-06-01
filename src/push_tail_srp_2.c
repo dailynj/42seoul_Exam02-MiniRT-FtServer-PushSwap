@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_check.c                                      :+:      :+:    :+:   */
+/*   push_tail_srp_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 22:11:45 by najlee            #+#    #+#             */
-/*   Updated: 2021/05/25 22:11:46 by najlee           ###   ########.fr       */
+/*   Created: 2021/05/31 15:58:28 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/31 15:58:29 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		argv_check(long long arr[], int num)
+void	push_tail_pa(t_info *info)
 {
-	int idx;
-
-	idx = -1;
-	if (arr[num] > 2147483647 || arr[num] < -2147483647)
-		return (0);
-	while (++idx < num)
-	{
-		if (arr[idx] == arr[num])
-			return (0);
-	}
-	return (1);
+	push_tail(PA, &info->cmd);
+	pab(info, A);
 }
 
-int		print_error(void)
+void	push_tail_pb(t_info *info)
 {
-	write(1, "Error!\n", 7);
-	return (0);
+	push_tail(PB, &info->cmd);
+	pab(info, B);
+}
+
+void	push_tail_rra(t_info *info)
+{
+	push_tail(RRA, &info->cmd);
+	rrab(info, A);
+}
+
+void	push_tail_rrb(t_info *info)
+{
+	push_tail(RRB, &info->cmd);
+	rrab(info, B);
 }

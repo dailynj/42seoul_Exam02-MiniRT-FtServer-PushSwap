@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,57 +12,37 @@
 
 #include "../includes/push_swap.h"
 
-void	free_box(t_box *box)
+int		free_info_box(t_info *info, t_box *box)
 {
-	free(box->arr);
-	free(box);
+	free_info(info);
+	free_box(box);
+	return (0);
 }
 
-void	free_info(t_info *info)
+void	final_free(t_info *info, t_box *box)
 {
-	free(info->stack[A]->head);
-	free(info->stack[A]->tail);
-	free(info->stack[B]->head);
-	free(info->stack[B]->tail);
-	free(info->stack[A]);
-	free(info->stack[B]);
+	free_two_list(info);
+	free_info(info);
+	free_cmd(info);
+	free(info);
+	free_box(box);
 }
 
-void	free_stack(t_stack *stack)
+void	free_3_list(t_list *list1, t_list *list2, t_list *list3)
 {
-	free(stack->head);
-	free(stack->tail);
-	free(stack);
+	free(list1);
+	free(list2);
+	free(list3);
 }
 
-void	free_two_list(t_info *info)
+void	free_2_list(t_list *list1, t_list *list2)
 {
-	t_list *now;
-
-	now = info->stack[A]->head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
-	now = info->stack[B]->head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
+	free(list1);
+	free(list2);
 }
 
-void	free_cmd(t_info *info)
+void	free_2_stack(t_stack *stack1, t_stack *stack2)
 {
-	t_list *now;
-
-	now = info->cmd.head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
-	free(info->cmd.head);
-	free(info->cmd.tail);
+	free(stack1);
+	free(stack2);
 }

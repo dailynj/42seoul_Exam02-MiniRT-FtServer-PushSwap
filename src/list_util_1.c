@@ -25,33 +25,7 @@ t_list	*node(int value, t_list *prev, t_list *next)
 	return (new_list);
 }
 
-int init_cmd(t_info *info)
-{
-	if (!(info->cmd.head = (t_list *)malloc(sizeof(t_list))))
-	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
-		free(info);
-		return (0);
-	}
-	if (!(info->cmd.tail = (t_list *)malloc(sizeof(t_list))))
-	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
-		free(info->cmd.head);
-		free(info);
-		return (0);
-	}
-	info->cmd.head->next = info->cmd.tail;
-	info->cmd.head->prev = NULL;
-	info->cmd.tail->prev = info->cmd.head;
-	info->cmd.tail->next = NULL;
-	info->cmd.head->flag = 0;
-	info->cmd.tail->flag = 0;
-	return (1);
-}
-
-int fill_info(t_info *info)
+int		fill_info(t_info *info)
 {
 	info->stack[A]->size = 0;
 	info->stack[B]->size = 0;
@@ -66,7 +40,34 @@ int fill_info(t_info *info)
 	return (init_cmd(info));
 }
 
-int	init_list(t_info *info)
+int		init_list_2(t_info *info)
+{
+	if (!(info->stack[B]->head = (t_list *)malloc(sizeof(t_list))))
+	{
+		free(info->stack[A]->head);
+		free_2_stack(info->stack[A], info->stack[B]);
+		free(info);
+		return (0);
+	}
+	if (!(info->stack[A]->tail = (t_list *)malloc(sizeof(t_list))))
+	{
+		free_2_list(info->stack[B]->head, info->stack[A]->head);
+		free_2_stack(info->stack[A], info->stack[B]);
+		free(info);
+		return (0);
+	}
+	if (!(info->stack[B]->tail = (t_list *)malloc(sizeof(t_list))))
+	{
+		free_3_list(info->stack[A]->tail, info->stack[B]->head,
+							info->stack[A]->head);
+		free_2_stack(info->stack[A], info->stack[B]);
+		free(info);
+		return (0);
+	}
+	return (1);
+}
+
+int		init_list(t_info *info)
 {
 	if (!(info->stack[A] = (t_stack *)malloc(sizeof(t_stack))))
 	{
@@ -81,40 +82,13 @@ int	init_list(t_info *info)
 	}
 	if (!(info->stack[A]->head = (t_list *)malloc(sizeof(t_list))))
 	{
-		free(info->stack[A]);
-		free(info->stack[B]);
+		free_2_stack(info->stack[A], info->stack[B]);
 		free(info);
 		return (0);
 	}
-	if (!(info->stack[B]->head = (t_list *)malloc(sizeof(t_list))))
-	{
-		free(info->stack[A]->head);
-		free(info->stack[A]);
-		free(info->stack[B]);
-		free(info);
+	if (!init_list_2(info))
 		return (0);
-	}
-	if (!(info->stack[A]->tail = (t_list *)malloc(sizeof(t_list))))
-	{
-		free(info->stack[B]->head);
-		free(info->stack[A]->head);
-		free(info->stack[A]);
-		free(info->stack[B]);
-		free(info);
-		return (0);
-	}
-	if (!(info->stack[B]->tail = (t_list *)malloc(sizeof(t_list))))
-	{
-		free(info->stack[A]->tail);
-		free(info->stack[B]->head);
-		free(info->stack[A]->head);
-		free(info->stack[A]);
-		free(info->stack[B]);
-		free(info);
-		return (0);
-	}
 	return (fill_info(info));
-	return (1);
 }
 
 int		*find_pivot(t_info *info, int num, int r)

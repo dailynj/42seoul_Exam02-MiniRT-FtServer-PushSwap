@@ -1,52 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_3.c                                           :+:      :+:    :+:   */
+/*   sort_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najlee <najlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/01 15:39:19 by najlee            #+#    #+#             */
-/*   Updated: 2021/06/01 15:39:20 by najlee           ###   ########.fr       */
+/*   Created: 2021/05/26 21:32:39 by najlee            #+#    #+#             */
+/*   Updated: 2021/05/26 21:32:40 by najlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sort_3a(t_info *info)
-{
-	int a;
-	int b;
-	int c;
-
-	a = info->stack[A]->head->next->data;
-	b = info->stack[A]->head->next->next->data;
-	c = info->stack[A]->head->next->next->next->data;
-	if (a < c && c < b)
-	{
-		push_tail_ra(info);
-		push_tail_sa(info);
-		push_tail_rra(info);
-	}
-	else if (b < c && c < a)
-		push_tail_ra(info);
-	else
-		sort_33a(a, b, c, info);
-}
-
-void	sort_33a(int a, int b, int c, t_info *info)
-{
-	if (b < a && a < c)
-		push_tail_sa(info);
-	else if (c < a && a < b)
-		push_tail_rra(info);
-	else if (c < b && b < a)
-	{
-		push_tail_sa(info);
-		push_tail_rra(info);
-	}
-}
-
-void	sort_3b(t_info *info)
+void	sort_3elements_b(t_info *info)
 {
 	int a;
 	int b;
@@ -56,25 +22,58 @@ void	sort_3b(t_info *info)
 	b = info->stack[B]->head->next->next->data;
 	c = info->stack[B]->head->next->next->next->data;
 	if (b < a && a < c)
+	{
+		push_tail_rb(info);
+		push_tail_sb(info);
 		push_tail_rrb(info);
+		push_tail_sb(info);
+	}
 	else if (c < a && a < b)
 		push_tail_sb(info);
 	else
-		sort_33b(a, b, c, info);
+	{
+		sort_bb(a, b, c, info);
+	}
 	push_tail_pa(info);
 	push_tail_pa(info);
 	push_tail_pa(info);
 }
 
-void	sort_33b(int a, int b, int c, t_info *info)
+void	sort_b(t_info *info, int r)
+{
+	if (r == 1)
+		push_tail_pa(info);
+	else if (r == 2)
+	{
+		if (info->stack[B]->head->next->data <
+				info->stack[B]->head->next->next->data)
+			push_tail_sb(info);
+		push_tail_pa(info);
+		push_tail_pa(info);
+	}
+	else if (r == 3 && info->stack[B]->size == 3)
+		sort_3b(info);
+	else if (r == 3)
+		sort_3elements_b(info);
+}
+
+void	sort_bb(int a, int b, int c, t_info *info)
 {
 	if (a < b && b < c)
 	{
 		push_tail_sb(info);
+		push_tail_rb(info);
+		push_tail_sb(info);
 		push_tail_rrb(info);
+		push_tail_sb(info);
 	}
 	else if (a < c && c < b)
+	{
+		push_tail_sb(info);
 		push_tail_rb(info);
+		push_tail_sb(info);
+		push_tail_rrb(info);
+	}
 	else if (b < c && c < a)
 	{
 		push_tail_rb(info);
