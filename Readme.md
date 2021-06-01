@@ -31,10 +31,12 @@ Run `make`.
 ```
 ./checker 4 3 2 1
 sa
-KO
+// ctrl + D 를 통해 EOF 입력
+//정렬됬으면 KO 
 ```
 ```
 ./checker 2 1
 sa
-OK
+// ctrl + D 를 통해 EOF 입력
+// 정렬됬으면 OK 출력
 ```
