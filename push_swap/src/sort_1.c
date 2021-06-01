@@ -63,6 +63,7 @@ void	b_to_a(t_info *info, int r)
 	tmp[2] = idx->pa;
 	a_to_b(info, tmp[2] - tmp[0]);
 	optimization_b(idx, info);
+	free(idx);
 	a_to_b(info, tmp[0]);
 	b_to_a(info, tmp[1]);
 }

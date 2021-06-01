@@ -37,32 +37,23 @@ void	free_stack(t_stack *stack)
 
 void	free_two_list(t_info *info)
 {
-	t_list *now;
+	int a;
 
-	now = info->stack[A]->head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
-	now = info->stack[B]->head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
+	a = info->stack[A]->size;
+	while(a--)
+		pop_head(info->stack[A]);
+	a = info->stack[B]->size;
+	while(a--)
+		pop_head(info->stack[B]);
 }
 
 void	free_cmd(t_info *info)
 {
-	t_list *now;
+	int a;
 
-	now = info->cmd.head->next;
-	while (now->flag)
-	{
-		now = now->next;
-		free(now->prev);
-	}
+	a = info->cmd.size;
+	while(a--)
+		pop_head(&info->cmd);
 	free(info->cmd.head);
 	free(info->cmd.tail);
 }

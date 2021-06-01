@@ -29,7 +29,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <stdio.h>   ///지우기
 typedef struct		s_list {
 	int				data;
 	int				flag;

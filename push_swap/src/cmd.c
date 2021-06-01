@@ -26,15 +26,17 @@ int		init_cmd(t_info *info)
 {
 	if (!(info->cmd.head = (t_list *)malloc(sizeof(t_list))))
 	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
+		free_2_list(info->stack[A]->head, info->stack[B]->head);
+		free_2_list(info->stack[A]->tail, info->stack[B]->tail);
+		free_2_stack(info->stack[A], info->stack[B]);
 		free(info);
 		return (0);
 	}
 	if (!(info->cmd.tail = (t_list *)malloc(sizeof(t_list))))
 	{
-		free_stack(info->stack[A]);
-		free_stack(info->stack[B]);
+		free_2_list(info->stack[A]->head, info->stack[B]->head);
+		free_2_list(info->stack[A]->tail, info->stack[B]->tail);
+		free_2_stack(info->stack[A], info->stack[B]);
 		free(info->cmd.head);
 		free(info);
 		return (0);

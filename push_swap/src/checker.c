@@ -64,12 +64,14 @@ void	print_result(t_info *info, int argc)
 		write(1, "KO\n", 3);
 }
 
-int		checker(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_info	*info;
 	t_box	*box;
 	int		tmp;
 
+	if (argc == 1)
+		return (0);
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (0);
 	if (!(box = (t_box *)malloc(sizeof(t_box))))
@@ -78,22 +80,18 @@ int		checker(int argc, char **argv)
 		return (0);
 	}
 	if (init_list(info) == 0)
-		return (0);
+		return (free_info_box(info, box));
 	if (!(box->arr = malloc(argc * sizeof(long long))))
 		return (free_info_box(info, box));
 	fill_arr(argc, argv, box, info);
 	push_all(info->stack[A], box->arr, argc - 1);
+	if (check_sorted_a(info, argc - 1))
+		return (free_info_box(info, box));
 	while ((tmp = do_instruction(info)) == 1)
 		;
 	if (tmp == 0)
 		return (print_error());
 	print_result(info, argc);
 	final_free(info, box);
-	return (0);
-}
-
-int		main(int argc, char **argv)
-{
-	checker(argc, argv);
 	return (0);
 }
