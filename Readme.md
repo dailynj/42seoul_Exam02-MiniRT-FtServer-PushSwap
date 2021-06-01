@@ -22,7 +22,19 @@ Code	| Instruction			| Action
 ### Compiling
 Run `make`.
 
-### Running
+### Push_Swap Running
 ```
 ./push_swap 4 3 2 1
+```
+
+### Checker Running
+```
+./checker 4 3 2 1
+sa
+KO
+```
+```
+./checker 2 1
+sa
+OK
 ```
