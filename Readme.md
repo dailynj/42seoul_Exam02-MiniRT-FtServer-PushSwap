@@ -22,7 +22,21 @@ Code	| Instruction			| Action
 ### Compiling
 Run `make`.
 
-### Running
+### Push_Swap Running
 ```
 ./push_swap 4 3 2 1
+```
+
+### Checker Running
+```
+./checker 4 3 2 1
+sa
+# ctrl + D 를 통해 EOF 입력
+# 정렬됬으면 KO 
+```
+```
+./checker 2 1
+sa
+# ctrl + D 를 통해 EOF 입력
+# 정렬됬으면 OK 출력
 ```
