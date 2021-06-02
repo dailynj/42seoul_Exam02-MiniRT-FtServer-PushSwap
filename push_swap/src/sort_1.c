@@ -15,18 +15,19 @@
 void	a_to_b(t_info *info, int r)
 {
 	t_idx	*idx;
-	int		i;
 	int		*pivot;
 	int		tmp[5];
 
-	if (!(idx = malloc(sizeof(t_idx))))
-		return ;
-	init_idx(idx);
-	i = -1;
 	if (r <= 3)
 		return (sort_a(info, r));
+	if (!(idx = malloc(sizeof(t_idx))))
+		exit(-1);
+	init_idx(idx);
 	if (!info->stack[A]->head->next->flag)
+	{
+		free(idx);
 		return ;
+	}
 	pivot = find_pivot(info, A, r);
 	classification_a(info, r, pivot, idx);
 	tmp[0] = idx->ra;
@@ -43,18 +44,19 @@ void	a_to_b(t_info *info, int r)
 void	b_to_a(t_info *info, int r)
 {
 	t_idx	*idx;
-	int		i;
 	int		*pivot;
 	int		tmp[3];
 
-	if (!(idx = malloc(sizeof(t_idx))))
-		return ;
-	init_idx(idx);
-	i = -1;
 	if (r <= 3)
 		return (sort_b(info, r));
+	if (!(idx = malloc(sizeof(t_idx))))
+		exit(-1);
+	init_idx(idx);
 	if (!info->stack[B]->head->next->flag)
+	{
+		free(idx);
 		return ;
+	}
 	pivot = find_pivot(info, B, r);
 	classification_b(info, r, pivot, idx);
 	free(pivot);
